@@ -1,1 +1,6 @@
-helo gg
+#include "stdio.h"
+
+int main()
+{
+	printf("helo gg");
+}
