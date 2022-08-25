@@ -2,5 +2,5 @@
 
 int main()
 {
-	printf("helo gg");
+	printf("helo cub3d\n");
 }
