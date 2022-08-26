@@ -6,13 +6,14 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/08/25 12:17:22 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/08/26 11:15:38 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
-SRC = main.c
+SRC = main.c\
+	utils/utils.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -21,10 +22,10 @@ CFLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	cc $(OBJ) $(NAME)
+	cc $(CFLAGS) $(OBJ) $(NAME)
 
 %.o: %.c
-	cc -Wall -Wextra -Werror -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 clean:
 		rm -f $(OBJ)
