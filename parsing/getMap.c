@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/27 19:56:31 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/08/27 20:45:31 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ char	**render_new_map(t_game *my_game)
 				y++;
 			}
 			zyada[y] = '\0';
-			// t[i] = ft_strcat(t[i], zyada);
-			
 			t[i] = ft_strjoin(t[i], zyada);
 			int w=y;
 			// y = 0;
@@ -112,6 +110,7 @@ char	**render_new_map(t_game *my_game)
 				printf("y %d\n", y);
 				y++;
 			}
+			zyada[y] = '\0';
 			// t[i][j] = '\0';
 			// t[i] = ft_strcat(t[i], zyada);
 			t[i] = ft_strjoin(t[i], zyada);
