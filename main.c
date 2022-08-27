@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:00:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/26 11:12:00 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:57:44 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
+	if (ac == 2)
 	{
-		if (ft_strncmp(av[1], "NO", 2))
+		if (!ft_strncmp(av[1], "NO", 2))
 			printf("NO\n");
-		else if (ft_strncmp(av[1], "SO", 2))
+		else if (!ft_strncmp(av[1], "SO", 2))
 			printf("SO\n");
-		else if (ft_strncmp(av[1], "WE", 2))
+		else if (!ft_strncmp(av[1], "WE", 2))
 			printf("WE\n");
-		else if (ft_strncmp(av[1], "EA", 2))
+		else if (!ft_strncmp(av[1], "EA", 2))
 			printf("EA\n");
+		t_game tg;
+		get_map(av[1], &tg);
 	}
 	else
-		perror("invalid number of arguments!\n");
+		printf("invalid number of arguments!\n");
 	return (0);
 }
