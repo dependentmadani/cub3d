@@ -12,6 +12,11 @@
 
 #include "../cub3d.h"
 
+// int	ft_check_entourage_space(char **array, int pos_x, int pos_y)
+// {
+
+// }
+
 void	check_map(t_game *my_game)
 {
 	int	i;
@@ -53,6 +58,7 @@ void	check_map(t_game *my_game)
 				{
 					printf("invalid map i+1\n");
 					exit(1);
+					// return ;
 				}
 			}
 			if (my_game->newmap[i+1] == NULL)

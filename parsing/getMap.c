@@ -16,6 +16,7 @@ char	*getmaplines(char *s, int fd)
 {
 	char	*t;
 	char	*temp;
+	int		i = 0;
 
 	temp = ft_strdup("");
 	if (!temp)
@@ -25,17 +26,19 @@ char	*getmaplines(char *s, int fd)
 		s = get_next_line(fd);
 		if (!s)
 			break ;
-	// printf("yo\n");
 		t = temp;
 		temp = ft_strjoin(t, s);
 		if (!temp)
 			exit(1);
 		free(s);
 		free(t);
+		i++;
 	}
-	// if (temp[0] == 0)
-	// 	ft_putstr_error_exit("invalid map\n");
-	// printf("map %s\n", temp);
+	if (!s && !i)
+	{
+		free(temp);
+		exit(EXIT_FAILURE);
+	}
 	return (temp);
 }
 
@@ -53,7 +56,7 @@ int	check_rev_file(char *s)
 
 char	**render_new_map(t_game *my_game)
 {
-	int i = 0, j=0;
+	int i = 0;
 	int x=0,y=0;
 	char **t;
 
@@ -75,8 +78,6 @@ char	**render_new_map(t_game *my_game)
 	{
 		if (ft_strlen(my_game->map[x]) != my_game->longestWidth)
 		{
-			j = 0;
-			y = 0;
 			while (my_game->map[x][y] == ' ' && my_game->map[x][y] != '\0')
 			{
 				zyada[y] = '#';
@@ -90,21 +91,22 @@ char	**render_new_map(t_game *my_game)
 				y++;
 			}
 			t[i] = ft_strjoin(t[i], ft_substrzwina(my_game->map[x], w, y));
-			y = 0;
-			while ((ft_strlen(t[i]) + y) < (my_game->longestWidth_end))
+			// y = 0;
+			while ((ft_strlen(t[i]) + y) < (my_game->longestWidth_end) && my_game->map[x][y] == ' ')
 			{
 				zyada[y] = '#';
 				// printf("y %d\n", y);
 				y++;
 			}
-			zyada[y] = '\0';
+			if (!my_game->map[x][y])
+				zyada[y] = '\0';
 			t[i] = ft_strjoin(t[i], zyada);
 			// printf("final %s\n", t[i]);
 		}
 		else
 		{
-			j = 0;
-			y = 0;
+			// j = 0;
+			// y = 0;
 			while (my_game->map[x][y] == ' ' && my_game->map[x][y] != '\0')
 			{
 				zyada[y] = '#';
@@ -119,9 +121,43 @@ char	**render_new_map(t_game *my_game)
 			}
 			t[i] = ft_strjoin(t[i], ft_substrzwina(my_game->map[x], w, y));
 		}
-		i++;
-		x++;
+		if (my_game->map[x][y] == '\0')
+		{
+			i++;
+			x++;
+			j = 0;
+			y = 0;
+		}
 	}
+	// int w = 0;
+	// while (my_game->map[x])
+	// {
+	// 	y = 0;
+	// 	while (my_game->map[x][y])
+	// 	{
+	// 		while (my_game->map[x][y] == ' ' && my_game->map[x][y] != '\0')
+	// 		{
+	// 			zyada[y] = '#';
+	// 			y++;
+	// 		}
+	// 		zyada[y] = '\0';
+	// 		t[i] = ft_strjoin(t[i], zyada);
+	// 		if (y != 0)
+	// 			w = y ;
+	// 		// printf("the value of w = {%d}\n",w);
+	// 		while (y && my_game->map[x][y] != ' ' && my_game->map[x][y] != '\0')
+	// 			y++;
+	// 		if (y && w != y)
+	// 		{
+	// 			t[i] = ft_strjoin(t[i], ft_substr(my_game->map[x], w, y));
+	// 			y--;
+	// 		}
+	// 		// printf("the value if string:t={%s}\n",t[i]);
+	// 		y++;
+	// 	}
+	// 	x++;
+	// 	i++;
+	// }
 	i=0;
 	while (my_game->map[i])
 	{
@@ -129,11 +165,6 @@ char	**render_new_map(t_game *my_game)
 		my_game->map[i] = NULL;
 		i++;
 	}
-	i = 0;
-	printf("*********\n");
-	printf("*********\n");
-	printf("*********\n\n\n");
-	
 	return (t);
 }
 
@@ -180,7 +211,7 @@ void get_longestWidth(t_game *my_game)
 	my_game->longestWidth = temp;
 }
 
-void	get_map(char *av, t_game *my_game)
+void	get_map(char *av, t_game *my_game, t_player *player)
 {
 	int		fd;
 	char	*s;
@@ -195,8 +226,6 @@ void	get_map(char *av, t_game *my_game)
 	temp = getmaplines(s, fd);
 	if (!temp)
 		exit(1);
-	// if (temp[ft_strlen(temp) - 1] == '\n')
-	// 	ft_putstr_error_exit("invalid map\n");
 	my_game->map = ft_split(temp, '\n');
 	if (!my_game->map)
 		exit(1);
@@ -205,6 +234,8 @@ void	get_map(char *av, t_game *my_game)
 	for(int i=0;i<14;i++)
 		printf("%s\n", my_game->newmap[i]);
 	check_map(my_game);
+	my_game->gamer = player;
+	creation_window(my_game);
 	free(temp);
 	close(fd);
 }

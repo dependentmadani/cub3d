@@ -25,7 +25,9 @@ int	main(int ac, char **av)
 		else if (!ft_strncmp(av[1], "EA", 2))
 			printf("EA\n");
 		t_game tg;
-		get_map(av[1], &tg);
+		t_player *py;
+		py = ft_calloc(sizeof(t_player), 1);
+		get_map(av[1], &tg, py);
 	}
 	else
 		printf("invalid number of arguments!\n");

@@ -20,6 +20,7 @@ SRC = main.c\
 		utils/ft_split.c\
 		utils/gnl/get_next_line.c\
 		utils/gnl/get_next_line_utils.c\
+		window/starter.c
 
 OBJ = $(SRC:.c=.o)
 

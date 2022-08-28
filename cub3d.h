@@ -18,6 +18,14 @@
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
 
+typedef struct	s_player
+{
+	int	pos_x;
+	int	pos_y;
+	int	speed;
+	int	angle_view;
+}				t_player;
+
 typedef struct s_game
 {
 	void	*mlx;
@@ -34,8 +42,6 @@ typedef struct s_game
 	void	*collect;
 	void	*enemy;
 	void	*exit;
-	int		x_player;
-	int		y_player;
 	int		nb_collect;
 	int		moves;
 	int		frame;
@@ -44,12 +50,13 @@ typedef struct s_game
 	int		longestWidth;
 	int		longestWidth_start;
 	int		longestWidth_end;
+	t_player *gamer;
 }	t_game;
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game);
+void	get_map(char *av, t_game *my_game, t_player *player);
 
 // check map
 void	check_map(t_game *my_game);
@@ -74,5 +81,10 @@ int		ft_strlcpy(char *dst, char *src, int dstsize);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
+
+
+// window
+void    initializer(t_game *game);
+void    creation_window(t_game *game);
 
 #endif
