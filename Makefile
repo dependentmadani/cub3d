@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/08/27 13:46:49 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/08/28 10:28:42 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = cub3D
 
 SRC = main.c\
 		parsing/getMap.c\
+		parsing/checkMap.c\
 		utils/utils.c\
 		utils/utils2.c\
 		utils/ft_split.c\

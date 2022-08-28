@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/27 19:26:32 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:46:43 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ typedef struct s_game
 }	t_game;
 
 //// -------------- map
+
+// get map
 void	get_map(char *av, t_game *my_game);
 
+// check map
+void	check_map(t_game *my_game);
 
 
 int	ft_strncmp(char *s1, char *s2, int n);
@@ -66,7 +70,7 @@ void	ft_putnbr(int n);
 void	ft_putchar(char c);
 char	*ft_itoa(int n);
 void	free_map(t_game *my_game);
-int	ft_strlcpy(char *dst, char *src, int	dstsize);
+int		ft_strlcpy(char *dst, char *src, int dstsize);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
