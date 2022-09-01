@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/28 10:52:41 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:49:24 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_map(t_game *my_game)
 			{
 				if (my_game->newmap[i][j - 1] != '1' && my_game->newmap[i][j - 1] != 'S' && my_game->newmap[i][j - 1] != 'N' && my_game->newmap[i][j - 1] != '0')
 				{
-					printf("invalid map j-1\n");
+					printf("invalid map j-1 %d %d\n", i, j);
 					exit(1);
 				}
 				if (my_game->newmap[i][j + 1] != '1' && my_game->newmap[i][j + 1] != 'S' && my_game->newmap[i][j + 1] != 'N' && my_game->newmap[i][j + 1] != '0')
@@ -49,7 +49,7 @@ void	check_map(t_game *my_game)
 					printf("invalid map j+1\n");
 					exit(1);
 				}
-				if (my_game->newmap[i - 1][j] != '1' && my_game->newmap[i - 1][j] != 'S' && my_game->newmap[i - 1][j] != 'N'&& my_game->newmap[i - 1][j] != '0')
+				if (my_game->newmap[i - 1][j] != '1' && my_game->newmap[i - 1][j] != 'S' && my_game->newmap[i - 1][j] != 'N' && my_game->newmap[i - 1][j] != '0')
 				{
 					printf("invalid map i-1\n");
 					exit(1);
@@ -61,7 +61,7 @@ void	check_map(t_game *my_game)
 					// return ;
 				}
 			}
-			if (my_game->newmap[i+1] == NULL)
+			if (my_game->newmap[i + 1] == NULL)
 			{
 				if (my_game->newmap[i][j] == '0')
 				{
