@@ -18,9 +18,20 @@
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
 # include <mlx.h>
+# include <math.h>
 
 # define IMG_H 64
 # define IMG_W 64
+
+typedef struct	s_map
+{
+	int map_x;
+	int map_y;
+	int	dx;
+	int dy;
+	int theta;
+	int len_wall;
+} 				t_map;
 
 typedef struct	s_player
 {
@@ -53,12 +64,13 @@ typedef struct s_game
 	int		longestWidth_start;
 	int		longestWidth_end;
 	t_player *gamer;
+	t_map    *mapp;
 }	t_game;
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game, t_player *player);
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
 
 // check map
 void	check_map(t_game *my_game);

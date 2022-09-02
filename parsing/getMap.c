@@ -307,7 +307,7 @@ void get_longestWidth(t_game *my_game)
 	my_game->longestWidth = temp;
 }
 
-void	get_map(char *av, t_game *my_game, t_player *player)
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 {
 	int		fd;
 	char	*s;
@@ -335,7 +335,9 @@ void	get_map(char *av, t_game *my_game, t_player *player)
 	for(int i=0;i<6;i++)
 		printf("-%s-\n", my_game->newmap[i]);
 	check_map(my_game);
+	// assign lists
 	my_game->gamer = player;
+	my_game->mapp = map;
 	creation_window(my_game);
 	free(temp);
 	close(fd);

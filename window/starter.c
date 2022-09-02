@@ -20,6 +20,8 @@ void    initializer(t_game *game)
     game->gamer->player_posy = 0; /// depends on his position in the map
     game->map_w = 320; /// 320 units means 320 pixels
     game->map_h = 200;
+    game->mapp->map_x = 0;
+    game->mapp->map_y = 0;
 }
 
 void    creation_window(t_game *game)

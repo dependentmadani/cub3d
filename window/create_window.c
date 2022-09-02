@@ -12,13 +12,17 @@
 
 #include "../cub3d.h"
 
+void put_map(t_game *game)
+{
+    (void)game;
+}
+
 void create_window(t_game *game)
 {
-    void *mlx;
-    void *mlx_win;
     (void)game;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 3200, 2000, "cub3d");
-    mlx_loop(mlx);
+    game->mlx = mlx_init();
+    game->win = mlx_new_window(game->mlx, 3200, 2000, "cub3d");
+    put_map(game);
+    mlx_loop(game->mlx);
 }
