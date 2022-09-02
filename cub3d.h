@@ -17,13 +17,17 @@
 # include "stdio.h"
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
+# include <mlx.h>
+
+# define IMG_H 64
+# define IMG_W 64
 
 typedef struct	s_player
 {
-	int	pos_x;
-	int	pos_y;
+	int	player_posx;
+	int	player_posy;
 	int	speed;
-	int	angle_view;
+	int	fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -34,8 +38,6 @@ typedef struct s_game
 	char	**newmap;
 	int		map_w;
 	int		map_h;
-	int		img_w;
-	int		img_h;
 	void	*background;
 	void	*wall;
 	void	*player;
@@ -86,5 +88,6 @@ char	*ft_substrzwina(char	*s, int start, int end);
 // window
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
+void 	create_window(t_game *game);
 
 #endif
