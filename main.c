@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:00:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/27 14:57:44 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:00:55 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int	main(int ac, char **av)
 			printf("EA\n");
 		t_game tg;
 		t_player *py;
-		t_map *mp;
 		py = ft_calloc(sizeof(t_player), 1);
-		mp = ft_calloc(sizeof(t_map), 1);
-		get_map(av[1], &tg, py, mp);
+		get_map(av[1], &tg, py);
+		for(int i=0;tg.newmap[i];i++)
+			printf("-%s-\n", tg.newmap[i]);
+		printf("yo?\n");
 	}
 	else
 		printf("invalid number of arguments!\n");

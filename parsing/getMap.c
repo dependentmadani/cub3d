@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/01 13:48:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/03 23:40:01 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**render_new_map(t_game *my_game)
 	int		start;
 	// int		y;
 
-	i = 0;
+	i = 6;
 	j = 0;
 	x = 0;
 	start = 0;
@@ -307,7 +307,7 @@ void get_longestWidth(t_game *my_game)
 	my_game->longestWidth = temp;
 }
 
-void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
+void	get_map(char *av, t_game *my_game, t_player *player)
 {
 	int		fd;
 	char	*s;
@@ -322,22 +322,21 @@ void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 	temp = getmaplines(s, fd);
 	if (!temp)
 		exit(1);
+	printf("%s\n", temp);
 	my_game->map = ft_split(temp, '\n');
 	if (!my_game->map)
 		exit(1);
 	// raw map
-	for(int i=0;i<6;i++)
-		printf("*%s*\n", my_game->map[i]);
+	for(int i=0;i<20;i++)
+		printf("*%s*", my_game->map[i]);
+	check_map_paths(my_game);
 	get_longestWidth(my_game);
 	my_game->newmap = render_new_map(my_game);
 	// new map
+	printf("yo\n");
 	printf("\n\n\n");
-	for(int i=0;i<6;i++)
-		printf("-%s-\n", my_game->newmap[i]);
 	check_map(my_game);
-	// assign lists
 	my_game->gamer = player;
-	my_game->mapp = map;
 	creation_window(my_game);
 	free(temp);
 	close(fd);

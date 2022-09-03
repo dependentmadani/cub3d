@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/31 22:36:46 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/03 23:46:07 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,44 @@ static char	**chek_and_fill(char **t, char *s, char c)
 	int	i;
 	int	count;
 	int	temp;
+	int	p_valid=0;
 
 	i = 0;
 	count = 0;
 	while (s[i])
 	{
 		temp = i;
-		if (s[i] == c)
+		if (s[i] == c && p_valid < 6)
 		{
 			i++;
 			continue ;
 		}
+		else if (s[i] == c && p_valid == 6)
+		{
+			i++;
+		}
 		while (s[i] != c && s[i])
 			i++;
-		if (check_only_spaces(ft_substr(s, temp, i - temp)))
-		{
+		// if (check_only_spaces(ft_substr(s, temp, i - temp)))
+		// {
 			t[count] = ft_substr(s, temp, i - temp);
 			if (t[count] == NULL)
 				return (ft_del(t, count));
+			// if (t[count][0] == 'C' && t[count][1] == ' ')
+			if (!ft_strncmp(t[count], "NO ", 3))
+				p_valid++;
+			else if (!ft_strncmp(t[count], "SO ", 3))
+				p_valid++;
+			else if (!ft_strncmp(t[count], "WE ", 3))
+				p_valid++;
+			else if (!ft_strncmp(t[count], "EA ", 3))
+				p_valid++;
+			else if (!ft_strncmp(t[count], "F ", 2))
+				p_valid++;
+			else if (!ft_strncmp(t[count], "C ", 2))
+				p_valid++;
 			count++;
-		}
+		// }
 	}
 	t[count] = 0;
 	return (t);

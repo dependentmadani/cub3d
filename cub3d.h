@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/28 10:46:43 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/03 23:35:28 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,13 @@
 # include "stdio.h"
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
-# include <mlx.h>
-# include <math.h>
-
-# define IMG_H 64
-# define IMG_W 64
-
-typedef struct	s_map
-{
-	int map_x;
-	int map_y;
-	int	dx;
-	int dy;
-	int theta;
-	int len_wall;
-} 				t_map;
 
 typedef struct	s_player
 {
-	int	player_posx;
-	int	player_posy;
+	int	pos_x;
+	int	pos_y;
 	int	speed;
-	int	fov; ///field of view
+	int	angle_view;
 }				t_player;
 
 typedef struct s_game
@@ -49,6 +34,8 @@ typedef struct s_game
 	char	**newmap;
 	int		map_w;
 	int		map_h;
+	int		img_w;
+	int		img_h;
 	void	*background;
 	void	*wall;
 	void	*player;
@@ -63,14 +50,18 @@ typedef struct s_game
 	int		longestWidth;
 	int		longestWidth_start;
 	int		longestWidth_end;
+	int		paths_valid;
+	int		colors_valid;
 	t_player *gamer;
-	t_map    *mapp;
 }	t_game;
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
+void	get_map(char *av, t_game *my_game, t_player *player);
+
+// check paths of the map
+void	check_map_paths(t_game *my_game);
 
 // check map
 void	check_map(t_game *my_game);
@@ -100,6 +91,5 @@ char	*ft_substrzwina(char	*s, int start, int end);
 // window
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
-void 	create_window(t_game *game);
 
 #endif
