@@ -22,7 +22,9 @@ SRC = main.c\
 		utils/gnl/get_next_line.c\
 		utils/gnl/get_next_line_utils.c\
 		window/starter.c \
-		window/create_window.c
+		window/create_window.c \
+		movement/keymovement.c \
+		movement/movement_fun.c \
 
 OBJ = $(SRC:.c=.o)
 

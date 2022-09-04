@@ -329,13 +329,13 @@ void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 	// raw map
 	// for(int i=0;i<20;i++)
 	// 	printf("*%s*", my_game->map[i]);
-	check_map_paths(my_game); // hang here
-	get_longestWidth(my_game);
-	my_game->newmap = render_new_map(my_game);
-	// new map
-	printf("yo\n");
-	printf("\n\n\n");
-	check_map(my_game);
+	// check_map_paths(my_game); // hang here
+	// get_longestWidth(my_game);
+	// my_game->newmap = render_new_map(my_game);
+	// // new map
+	// printf("yo\n");
+	// printf("\n\n\n");
+	// check_map(my_game);
 	// assign lists
 	my_game->gamer = player;
 	my_game->mapp = map;

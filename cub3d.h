@@ -22,6 +22,15 @@
 
 # define IMG_H 64
 # define IMG_W 64
+# define ESC 53
+# define W 13
+# define S 1
+# define D 2
+# define A 0
+# define UP 1
+# define DOWN -1
+# define RIGHT 1
+# define LEFT -1
 
 typedef struct	s_map
 {
@@ -110,5 +119,12 @@ char	*ft_substrzwina(char	*s, int start, int end);
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
 void 	create_window(t_game *game);
+
+// movement of player
+
+int		keyword_move(int keyword, t_game *game);
+void    movement_fun(t_game *game, int axis, int direction);
+int		exit_function(t_game *game);
+int		winning_function(void);
 
 #endif

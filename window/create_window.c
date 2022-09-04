@@ -52,13 +52,6 @@ int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
 
 int draw_horiz_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
 {
-    // int pixels;
-    // double delta_x;
-    // double delta_y;
-
-    // delta_x = end_x - begin_x;
-    // delta_y = end_y - begin_y;
-    // pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
     int i;
     int j;
 
