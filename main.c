@@ -26,8 +26,10 @@ int	main(int ac, char **av)
 			printf("EA\n");
 		t_game tg;
 		t_player *py;
+		t_map *mp;
 		py = ft_calloc(sizeof(t_player), 1);
-		get_map(av[1], &tg, py);
+		mp = ft_calloc(sizeof(t_map), 1);
+		get_map(av[1], &tg, py, mp);
 		for(int i=0;tg.newmap[i];i++)
 			printf("-%s-\n", tg.newmap[i]);
 		printf("yo?\n");

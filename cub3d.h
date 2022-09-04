@@ -17,13 +17,31 @@
 # include "stdio.h"
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
+# include <mlx.h>
+# include <math.h>
+
+# define IMG_H 64
+# define IMG_W 64
+
+typedef struct	s_map
+{
+	int win_width;
+	int win_height;
+	int map_size;
+	int map_x;
+	int map_y;
+	int	dx;
+	int dy;
+	int theta;
+	int len_wall;
+} 				t_map;
 
 typedef struct	s_player
 {
-	int	pos_x;
-	int	pos_y;
+	int	player_posx;
+	int	player_posy;
 	int	speed;
-	int	angle_view;
+	int	fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -53,12 +71,13 @@ typedef struct s_game
 	int		paths_valid;
 	int		colors_valid;
 	t_player *gamer;
+	t_map    *mapp;
 }	t_game;
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game, t_player *player);
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
 
 // check paths of the map
 void	check_map_paths(t_game *my_game);
@@ -87,9 +106,9 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
 
-
 // window
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
+void 	create_window(t_game *game);
 
 #endif
