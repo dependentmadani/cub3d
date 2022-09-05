@@ -89,12 +89,17 @@ void put_map(t_game *game)
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H / 3;
                 game->gamer->player_posy = IMG_W * i + IMG_W / 3;
-                put_player(game);
+                put_player(game, 0xffffff);
             }
             j++;
         }
         i++;
     }
+    draw_2d_map(game);
+}
+
+void draw_2d_map(t_game * game)
+{
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
 }

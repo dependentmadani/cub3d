@@ -12,7 +12,7 @@
 
 # include "../cub3d.h"
 
-void    circle(t_game *game)
+void    circle(t_game *game, int color)
 {
     int i;
     int j;
@@ -34,7 +34,7 @@ void    circle(t_game *game)
             a=((i-x)*(i-x))+((j-y)*(j-y));
             d=sqrt(a);
             if(r>=d)
-                mlx_pixel_put(game->mlx, game->win, game->gamer->player_posx + i,game->gamer->player_posy + j, 0xfffff);
+                mlx_pixel_put(game->mlx, game->win, game->gamer->player_posx + i,game->gamer->player_posy + j, color);
             j++;
         }
         i++;
@@ -51,7 +51,12 @@ void    put_floor(t_game *game)
     (void)game;
 }
 
-void    put_player(t_game *game)
+void    put_player(t_game *game, int color)
 {
-    circle(game);
+    if (game->gamer->moved)
+    {
+        mlx_clear_window(game->mlx, game->win);
+        draw_2d_map(game);
+    }
+    circle(game, color);
 }

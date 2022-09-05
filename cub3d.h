@@ -47,6 +47,7 @@ typedef struct	s_map
 
 typedef struct	s_player
 {
+	int moved;
 	int	player_posx;
 	int	player_posy;
 	int	speed;
@@ -116,9 +117,11 @@ char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
 
 // window
+
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
 void 	create_window(t_game *game);
+void	draw_2d_map(t_game * game);
 
 // movement of player
 
@@ -131,6 +134,6 @@ int		winning_function(void);
 
 void    put_wall(t_game *game);
 void    put_floor(t_game *game);
-void    put_player(t_game *game);
+void    put_player(t_game *game, int color);
 
 #endif

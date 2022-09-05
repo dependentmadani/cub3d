@@ -15,9 +15,10 @@
 void    initializer(t_game *game)
 {
     game->gamer->fov = 60;
-    game->gamer->speed = 20; ///20 pixels per second
+    game->gamer->speed = 10; ///20 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
+    game->gamer->moved = 0;
     game->map_w = 320; /// 320 units means 320 pixels
     game->map_h = 200;
     game->mapp->win_width = 2800;

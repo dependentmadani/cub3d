@@ -19,8 +19,52 @@ void    movement_fun(t_game *game, char axis, int direction)
         && game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
         && game->gamer->player_posy < game->mapp->map_y*IMG_W)
     {
-        printf("i was here\n");
-        game->gamer->player_posy -= 3;
-        put_player(game);
+        // if (game->gamer->moved)
+        // {
+        //     mlx_clear_window(game->mlx, game->win);
+        //     draw_2d_map(game);
+        // }
+        game->gamer->player_posy -= game->gamer->speed;
+        game->gamer->moved++;
+        put_player(game, 0xffffff);
+    }
+    else if (axis == 'y' && direction == DOWN && game->gamer->player_posx >0
+        && game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
+        && game->gamer->player_posy < game->mapp->map_y*IMG_W)
+    {
+        // if (game->gamer->moved)
+        // {
+        //     mlx_clear_window(game->mlx, game->win);
+        //     draw_2d_map(game);
+        // }
+        game->gamer->player_posy += game->gamer->speed;
+        game->gamer->moved++;
+        put_player(game, 0xffffff);
+    }
+    else if (axis == 'x' && direction == LEFT && game->gamer->player_posx >0
+        && game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
+        && game->gamer->player_posy < game->mapp->map_y*IMG_W) /// will be removed
+    {
+        // if (game->gamer->moved)
+        // {
+        //     mlx_clear_window(game->mlx, game->win);
+        //     draw_2d_map(game);
+        // }
+        game->gamer->player_posx -= game->gamer->speed;
+        game->gamer->moved++;
+        put_player(game, 0xffffff);
+    }
+    else if (axis == 'x' && direction == RIGHT && game->gamer->player_posx >0
+        && game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
+        && game->gamer->player_posy < game->mapp->map_y*IMG_W) /// will be removed
+    {
+        // if (game->gamer->moved)
+        // {
+        //     mlx_clear_window(game->mlx, game->win);
+        //     draw_2d_map(game);
+        // }
+        game->gamer->player_posx += game->gamer->speed;
+        game->gamer->moved++;
+        put_player(game, 0xffffff);
     }
 }
