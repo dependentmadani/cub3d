@@ -27,8 +27,8 @@
 # define S 1
 # define D 2
 # define A 0
-# define UP 1
-# define DOWN -1
+# define UP -1
+# define DOWN 1
 # define RIGHT 1
 # define LEFT -1
 
@@ -123,8 +123,14 @@ void 	create_window(t_game *game);
 // movement of player
 
 int		keyword_move(int keyword, t_game *game);
-void    movement_fun(t_game *game, int axis, int direction);
+void    movement_fun(t_game *game, char axis, int direction);
 int		exit_function(t_game *game);
 int		winning_function(void);
+
+// creation of elements
+
+void    put_wall(t_game *game);
+void    put_floor(t_game *game);
+void    put_player(t_game *game);
 
 #endif

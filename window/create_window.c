@@ -69,17 +69,6 @@ int draw_horiz_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y
     return (0);
 }
 
-void    put_wall(t_game *game)
-{
-    (void)game;
-}
-
-void    put_floor(t_game *game)
-{
-    (void)game;
-
-}
-
 void put_map(t_game *game)
 {
     int i;
@@ -95,6 +84,13 @@ void put_map(t_game *game)
                 put_floor(game);
             else if (game->map[i][j] == '1')
                 put_wall(game);
+            else if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
+                || game->map[i][j] == 'E'|| game->map[i][j] == 'W') 
+            {
+                game->gamer->player_posx = IMG_H * j + IMG_H / 3;
+                game->gamer->player_posy = IMG_W * i + IMG_W / 3;
+                put_player(game);
+            }
             j++;
         }
         i++;
@@ -107,7 +103,14 @@ void create_window(t_game *game)
 {
     count_the_map(game);
     game->mlx = mlx_init();
-    game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x, IMG_W *game->mapp->map_y, "cub3d");
+    if (!game->mlx)
+	{
+		perror("Error\nFailed to create connection of display and software\n");
+		exit(EXIT_FAILURE);
+	}
+    game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
     put_map(game);
+    mlx_hook(game->win, 17, 1L<<0, exit_function, game);
+	mlx_key_hook(game->win, keyword_move, game);
     mlx_loop(game->mlx);
 }

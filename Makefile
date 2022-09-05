@@ -25,6 +25,7 @@ SRC = main.c\
 		window/create_window.c \
 		movement/keymovement.c \
 		movement/movement_fun.c \
+		creation/put_elements.c \
 
 OBJ = $(SRC:.c=.o)
 
