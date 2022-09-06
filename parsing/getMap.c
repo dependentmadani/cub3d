@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/28 11:02:52 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:41:04 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*getmaplines(char *s, int fd)
 		exit(1);
 	while (1)
 	{
-		s = get_next_line(fd);
+		s = get_next_line(fd); 
 		if (!s)
 			break ;
 		t = temp;
@@ -54,6 +54,110 @@ int	check_rev_file(char *s)
 	return (0);
 }
 
+char	*creat_fill(int x)
+{
+	char	*s;
+	int		i;
+
+	i = 0;
+	s = ft_strdup("");
+	while (i < x)
+	{
+		s = ft_strjoin(s, "#");
+		i++;
+	}
+	// printf("#s %s", s);
+	return (s);
+}
+
+void	fill_em(char *s, int *i)
+{
+	while ((s[*i] == '0' || s[*i] == '1' || s[*i] == 'S' || s[*i] == 'N') && s[*i] != '\n')
+		(*i)++;
+}
+
+void	skip_em(char *s, int *i)
+{
+	while (s[*i] == ' ' && s[*i] != '\n')
+	{
+		// t = ft_strjoin2(t, "#");
+		(*i)++;
+	}
+}
+
+char	**render_new_map(t_game *my_game)
+{
+	char	**t;
+	int		i;
+	int		j;
+	int		x;
+	int		start;
+	// int		y;
+
+	i = 6;
+	j = 0;
+	x = 0;
+	start = 0;
+	t = (char **)ft_calloc(sizeof(char *), 999);
+	// y = 0;
+	// while (my_game->map[i][0] == '\n')
+	// {
+	// 	i++;
+	// 	printf("hi %d time\n", i);
+	// }
+	// printf("\nb %s\n", my_game->newmap[i]);
+	while (my_game->newmap[i] != '\0')
+	{
+		j = 0;
+		while (my_game->newmap[i][j] != '\0')
+		{
+			// printf("c %c\n", my_game->map[i][j]);
+			if (my_game->newmap[i][j] == ' ')
+			{
+				start = j;
+				skip_em(my_game->newmap[i], &j);
+				// printf("start %d j %d\n", start, j);
+				t[x] = ft_strjoin(t[x], creat_fill(j - start));
+			// printf("yya %s\n", t[x]);
+				// printf("t %s\n", t[x]);
+				// t[x] = ft_strjoin(t[x], ft_substr(my_game->map[i], start, j));
+				// printf("yo space %s >>%d\n", t[x], j);
+				// x++;
+			}
+			else if (my_game->newmap[i][j] == '1' || my_game->newmap[i][j] == '0' || my_game->newmap[i][j] == 'S' || my_game->newmap[i][j] == 'N')
+			{
+				start = j;
+				fill_em(my_game->newmap[i], &j);
+				// printf("j %d, start %d\n", j, start);
+				t[x] = ft_strjoin(t[x], ft_substr(my_game->newmap[i], start, j-start));
+				// printf("yo valid char %s >>%d\n", t[x], j);
+			}
+			// else
+			// {
+			// 	// printf("invalid syntax\n");
+			// 	// exit(1);
+			// 	j++;
+			// }
+			// j++;
+		}
+		// printf("strl %d, longest %d, j %d, libina %d\n", ft_strlen(t[x]), my_game->longestWidth, j, (j - my_game->longestWidth));
+		if (j < my_game->longestWidth)
+		{
+			// printf("y\n");
+			start = j;
+			while (j < my_game->longestWidth)
+				j++;
+			t[x] = ft_strjoin(t[x], creat_fill(j - start));
+		}
+		// my_game->map[i][j] = '\0';
+		// printf("check strln %d\n", ft_strlen(t[x]));
+		i++;
+		x++;
+	}
+	t[x] = 0;
+	return (t);
+}
+/*
 char	**render_new_map(t_game *my_game)
 {
 	int i = 0;
@@ -125,7 +229,7 @@ char	**render_new_map(t_game *my_game)
 		{
 			i++;
 			x++;
-			j = 0;
+			// j = 0;
 			y = 0;
 		}
 	}
@@ -167,7 +271,7 @@ char	**render_new_map(t_game *my_game)
 	}
 	return (t);
 }
-
+*/
 int ft_realstrlen(char *s)
 {
 	int	i;
@@ -187,24 +291,24 @@ int ft_realstrlen(char *s)
 void get_longestWidth(t_game *my_game)
 {
 	int	i;
-	int start=0;
-	int end=0;
+	// int start=0;
+	// int end=0;
 	int	temp;
 
 	i = 0;
-	temp = ft_realstrlen(my_game->map[i]);
+	temp = ft_strlen(my_game->map[i]);
 	while (my_game->map[i])
 	{
-		if (temp < ft_realstrlen(my_game->map[i]))
+		if (temp < ft_strlen(my_game->map[i]))
 		{
-			temp = ft_realstrlen(my_game->map[i]);
+			temp = ft_strlen(my_game->map[i]);
 			int x=0;
 			while (my_game->map[i][x] != '1')
 				x++;
 			my_game->longestWidth_start = x;
 			my_game->longestWidth_end = temp;
-			printf("start %d, end %d\n", start, end);
-			printf("*%s*\n", my_game->map[i]);
+			// printf("start %d, end %d\n", start, end);
+			// printf("*%s*\n", my_game->map[i]);
 		}
 		i++;
 	}
@@ -226,15 +330,28 @@ void	get_map(char *av, t_game *my_game, t_player *player)
 	temp = getmaplines(s, fd);
 	if (!temp)
 		exit(1);
-	my_game->map = ft_split(temp, '\n');
+	printf("%s\n", temp);
+	my_game->map = ft_split(my_game, temp, '\n');
 	if (!my_game->map)
 		exit(1);
+	// for(int i=0;my_game->map[i];i++)
+	// 	printf("+%s+\n", my_game->map[i]);
+	// raw map
+	// for(int i=0;i<20;i++)
+	// 	printf("-%s-", my_game->newmap[i]);
+	// check_map_paths(my_game);
+	my_game->newmap = check_map_map(my_game);
 	get_longestWidth(my_game);
-	my_game->newmap = render_new_map(my_game);
-	for(int i=0;i<14;i++)
-		printf("%s\n", my_game->newmap[i]);
+	// exit(1);
+	my_game->newestmap = render_new_map(my_game);
+	for(int i=0;my_game->newestmap[i];i++)
+		printf("-%s-\n", my_game->newestmap[i]);
+	// new map
+	printf("\n\n\n");
 	check_map(my_game);
+	
 	my_game->gamer = player;
+	printf("sh is good\n");
 	creation_window(my_game);
 	free(temp);
 	close(fd);
