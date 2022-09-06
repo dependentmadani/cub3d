@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 17:43:07 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:54:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 					while (s[i] == c)
 						i++;
 				}
-				p_valid++;
+				p_valid+=1;
 			}
 		//	printf("t[%d] -%s-\n", count, t[count]);
 			if (!ft_strncmp(t[count], "NO ", 3))
