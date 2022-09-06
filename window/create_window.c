@@ -18,17 +18,35 @@ void    count_the_map(t_game *game)
     int j;
 
     i = 0;
-    while (game->map[i])
+    while (game->newestmap[i])
     {
         j = 0;
-        while (!i && game->map[i][j] && game->map[i][j] != '\n')
+        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
             j++;
-            game->mapp->map_x = j;
+            if (game->newestmap[i][j-1] != '#' && j > game->mapp->map_x)
+                game->mapp->map_x = j;
         }
         i++;
     }
-    game->mapp->map_y = i;
+    i = 0;
+    while (game->newestmap[i])
+    {
+        j = 0;
+        while (!i && game->newestmap[i][j] && game->newestmap[i][j] != '\n')
+        {
+            j++;
+            if (game->newestmap[i][j-1] != '#')
+            {
+                j = -1;
+                break;
+            }
+        }
+        if (j != -1)
+            game->mapp->map_y +=1;
+        i++;
+    }
+    printf("the value of map_x {%d} and map_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
@@ -75,21 +93,21 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
-    while (game->map[i])
+    while (game->newestmap[i])
     {
         j = 0;
-        while (game->map[i][j] && game->map[i][j] != '\n')
+        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
-            if (game->map[i][j] == '0')
+            if (game->newestmap[i][j] == '0')
                 put_floor(game);
-            else if (game->map[i][j] == '1')
+            else if (game->newestmap[i][j] == '1')
                 put_wall(game);
-            else if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
-                || game->map[i][j] == 'E'|| game->map[i][j] == 'W') 
+            else if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
+                || game->newestmap[i][j] == 'E'|| game->newestmap[i][j] == 'W') 
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H/2;
                 game->gamer->player_posy = IMG_W * i + IMG_W/2;
-                put_player(game, game->map[i][j], 0x00ff00, 0);
+                put_player(game, game->newestmap[i][j], 0x00ff00, 0);
             }
             j++;
         }

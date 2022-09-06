@@ -315,7 +315,7 @@ void get_longestWidth(t_game *my_game)
 	my_game->longestWidth = temp;
 }
 
-void	get_map(char *av, t_game *my_game, t_player *player)
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 {
 	int		fd;
 	char	*s;
@@ -349,7 +349,7 @@ void	get_map(char *av, t_game *my_game, t_player *player)
 	// new map
 	printf("\n\n\n");
 	check_map(my_game);
-	
+	my_game->mapp = map;
 	my_game->gamer = player;
 	printf("sh is good\n");
 	creation_window(my_game);

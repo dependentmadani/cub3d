@@ -64,6 +64,7 @@ typedef struct s_game
 	void	*win;
 	char	**map;
 	char	**newmap;
+	char	**newestmap;
 	int		map_w;
 	int		map_h;
 	int		img_w;
@@ -84,6 +85,12 @@ typedef struct s_game
 	int		longestWidth_end;
 	int		paths_valid;
 	int		colors_valid;
+	int		is_no;
+	int		is_so;
+	int		is_we;
+	int		is_ea;
+	int		is_f;
+	int		is_c;
 	t_player *gamer;
 	t_map    *mapp;
 }	t_game;
@@ -98,7 +105,7 @@ void	check_map_paths(t_game *my_game);
 
 // check map
 void	check_map(t_game *my_game);
-
+char	**check_map_map(t_game *my_game);
 
 int	ft_strncmp(char *s1, char *s2, int n);
 
