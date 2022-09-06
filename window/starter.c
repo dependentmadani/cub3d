@@ -19,6 +19,9 @@ void    initializer(t_game *game)
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
     game->gamer->moved = 0;
+    game->gamer->player_angle = 0;
+    game->gamer->player_dx = 0;
+    game->gamer->player_dy = 0;
     game->map_w = 320; /// 320 units means 320 pixels
     game->map_h = 200;
     game->mapp->win_width = 2800;

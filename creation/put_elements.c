@@ -23,12 +23,12 @@ void    circle(t_game *game, int color)
     int a;
 
     r = 5;
-    x = 10;
-    y = 10;
-    i = 0;
+    x = 0;
+    y = 0;
+    i = -r;
     while(i<IMG_H)
     {
-        j = 0;
+        j = -r;
         while(j<IMG_W)
         {
             a=((i-x)*(i-x))+((j-y)*(j-y));
@@ -51,7 +51,7 @@ void    put_floor(t_game *game)
     (void)game;
 }
 
-void    put_player(t_game *game, char direction_player, int color)
+void    put_player(t_game *game, int direction_player, int color, char axis)
 {
     if (game->gamer->moved)
     {
@@ -59,5 +59,5 @@ void    put_player(t_game *game, char direction_player, int color)
         draw_2d_map(game);
     }
     circle(game, color);
-    spread_rays(game, direction_player);
+    spread_rays(game, direction_player, axis);
 }

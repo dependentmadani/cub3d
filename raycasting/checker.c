@@ -17,8 +17,8 @@ int collision_with_wall(t_game *game, int pos_x, int pos_y)
     int estimation_posx;
     int estimation_posy;
 
-    estimation_posx = pos_x / IMG_H;
-    estimation_posy = pos_y / IMG_W;
+    estimation_posx = (pos_x) / IMG_H;
+    estimation_posy = (pos_y) / IMG_W;
     if (estimation_posx > game->mapp->map_x || estimation_posy > game->mapp->map_y)
         return (0);
     if (game->map[estimation_posy][estimation_posx] == '1')
@@ -35,13 +35,31 @@ void    rays_until_wall_north(t_game* game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i+IMG_H/6, j, 0xff0000);
+        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
         j--;
     }
 }
 
-void    spread_rays(t_game *game, char direction_player)
+void    rays_until_wall_west(t_game* game)
 {
-    if (direction_player == 'N')
+    int i;
+    int j;
+
+    i = game->gamer->player_posx;
+    j = game->gamer->player_posy;
+    while (!collision_with_wall(game, i, j))
+    {
+        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        i -= 1;
+        j -= 1;
+    }
+}
+
+void    spread_rays(t_game *game, int direction_player, char axis)
+{
+    (void)direction_player;
+    if (direction_player == UP && axis == 'y')
         rays_until_wall_north(game);
+    else if (direction_player == LEFT && axis == 'x')
+        rays_until_wall_west(game);
 }

@@ -87,9 +87,9 @@ void put_map_2d(t_game *game)
             else if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
                 || game->map[i][j] == 'E'|| game->map[i][j] == 'W') 
             {
-                game->gamer->player_posx = IMG_H * j + IMG_H / 3;
-                game->gamer->player_posy = IMG_W * i + IMG_W / 3;
-                put_player(game, game->map[i][j], 0x00ff00);
+                game->gamer->player_posx = IMG_H * j + IMG_H/2;
+                game->gamer->player_posy = IMG_W * i + IMG_W/2;
+                put_player(game, game->map[i][j], 0x00ff00, 0);
             }
             j++;
         }

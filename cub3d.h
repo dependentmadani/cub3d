@@ -31,6 +31,7 @@
 # define DOWN 1
 # define RIGHT 1
 # define LEFT -1
+# define PI 3.141592653589793238
 
 typedef struct	s_map
 {
@@ -50,6 +51,9 @@ typedef struct	s_player
 	int moved;
 	int	player_posx;
 	int	player_posy;
+	int player_angle;
+	int player_dx;
+	int player_dy;
 	int	speed;
 	int	fov; ///field of view
 }				t_player;
@@ -134,11 +138,11 @@ int		winning_function(void);
 
 void    put_wall(t_game *game);
 void    put_floor(t_game *game);
-void    put_player(t_game *game, char direction_player, int color);
+void    put_player(t_game *game, int direction_player, int color, char axis);
 
 // check functions for raycasting
 
 int 	collision_with_wall(t_game *game, int pos_x, int pos_y);
-void    spread_rays(t_game *game, char direction_player);
+void    spread_rays(t_game *game, int direction_player, char axis);
 
 #endif
