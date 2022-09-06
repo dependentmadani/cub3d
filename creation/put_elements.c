@@ -51,7 +51,7 @@ void    put_floor(t_game *game)
     (void)game;
 }
 
-void    put_player(t_game *game, int color)
+void    put_player(t_game *game, char direction_player, int color)
 {
     if (game->gamer->moved)
     {
@@ -59,4 +59,5 @@ void    put_player(t_game *game, int color)
         draw_2d_map(game);
     }
     circle(game, color);
+    spread_rays(game, direction_player);
 }

@@ -42,7 +42,7 @@ int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
         j = begin_y;
         while (j < end_y)
         {
-            mlx_pixel_put(game->mlx, game->win, i, j, 0x0000FF);
+            mlx_pixel_put(game->mlx, game->win, i, j, 0xffffff);
             j++;
         }
         i += IMG_H;
@@ -61,7 +61,7 @@ int draw_horiz_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y
         i = begin_x;
         while (i < end_x)
         {
-            mlx_pixel_put(game->mlx, game->win, i, j, 0x0000FF);
+            mlx_pixel_put(game->mlx, game->win, i, j, 0xffffff);
             i++;
         }
         j += IMG_W;
@@ -69,7 +69,7 @@ int draw_horiz_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y
     return (0);
 }
 
-void put_map(t_game *game)
+void put_map_2d(t_game *game)
 {
     int i;
     int j;
@@ -89,7 +89,7 @@ void put_map(t_game *game)
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H / 3;
                 game->gamer->player_posy = IMG_W * i + IMG_W / 3;
-                put_player(game, 0xffffff);
+                put_player(game, game->map[i][j], 0x00ff00);
             }
             j++;
         }
@@ -114,7 +114,7 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
-    put_map(game);
+    put_map_2d(game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);
     mlx_loop(game->mlx);

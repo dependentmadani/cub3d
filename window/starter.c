@@ -25,6 +25,7 @@ void    initializer(t_game *game)
     game->mapp->win_height = 1500;
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
+    game->mapp->theta = 0;
     game->mapp->map_size = 0; /// To update: calculate number of rows * number of columns
 }
 
