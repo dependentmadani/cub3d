@@ -17,6 +17,7 @@ SRC = main.c\
 		parsing/checkMap.c\
 		parsing/checkMapMap.c\
 		parsing/checkPaths.c\
+		parsing/checkMapMap.c\
 		utils/utils.c\
 		utils/utils2.c\
 		utils/ft_split.c\

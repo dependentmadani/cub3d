@@ -362,7 +362,7 @@ void	get_rgb_values(t_game *my_game)
 	// 	printf("c rgb value %d\n", my_game->c_rgb[r]);
 }
 
-void	get_map(char *av, t_game *my_game, t_player *player)
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 {
 	int		fd;
 	char	*s;
@@ -398,6 +398,7 @@ void	get_map(char *av, t_game *my_game, t_player *player)
 	check_map(my_game);
 	check_map_paths(my_game);
 	get_rgb_values(my_game);
+	my_game->mapp = map;
 	my_game->gamer = player;
 	printf("sh is good\n");
 	exit(1);
