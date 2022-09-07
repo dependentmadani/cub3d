@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/03 23:35:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:10:59 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ typedef struct s_game
 	int		is_ea;
 	int		is_f;
 	int		is_c;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	char	*f_path;
+	char	*c_path;
+	char	**char_f_rgb;
+	char	**char_c_rgb;
+	int		*f_rgb;
+	int		*c_rgb;
 	t_player *gamer;
 	t_map    *mapp;
 }	t_game;
@@ -110,12 +120,13 @@ char	**check_map_map(t_game *my_game);
 int	ft_strncmp(char *s1, char *s2, int n);
 
 //// -------------- utils
-char	**ft_split(char *s, char c);
+char	**ft_split(t_game *my_game, char *s, char c);
 int		ft_strlen(char *s);
 char	*ft_substr(char	*s, int start, int len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(char *s1, char *s2, int n);
+int		ft_rev_strncmp(char *s1, char *s2);
 void	ft_putstr(char *s);
 void	ft_putstr_error_exit(char *s);
 void	ft_putnbr(int n);
@@ -123,9 +134,11 @@ void	ft_putchar(char c);
 char	*ft_itoa(int n);
 void	free_map(t_game *my_game);
 int		ft_strlcpy(char *dst, char *src, int dstsize);
+char	*ft_sstrcpy(char *dst, char *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
+int	ft_atoi(const char	*str);
 
 // window
 

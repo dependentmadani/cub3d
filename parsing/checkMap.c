@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 12:29:46 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:35:01 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	check_map(t_game *my_game)
 	j = 0;
 	// for(int x=0;my_game->newestmap[x];x++)
 	// 	printf("x%s-\n", my_game->newestmap[x]);
+	// printf("iwa zbl%d\n", i);
 	while (my_game->newestmap[i] != 0)
 	{
 		j = 0;
@@ -75,5 +76,4 @@ void	check_map(t_game *my_game)
 		}
 		i++;
 	}
-	printf("iwa zbl%d\n", i);
 }
