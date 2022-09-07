@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 17:54:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:47:39 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,21 +104,45 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 					while (s[i] == c)
 						i++;
 				}
-				p_valid+=1;
+				p_valid++;
 			}
 		//	printf("t[%d] -%s-\n", count, t[count]);
 			if (!ft_strncmp(t[count], "NO ", 3))
+			{
+				// my_game->no_path = ft_sstrcpy(my_game->no_path, t[count]);
+				my_game->no_path = ft_substr(t[count], 3, ft_strlen(t[count]));
 				my_game->is_no = 1;
+			}
 			else if (!ft_strncmp(t[count], "SO ", 3))
+			{
+				// my_game->so_path = ft_sstrcpy(my_game->so_path, t[count]);
+				my_game->so_path = ft_substr(t[count], 3, ft_strlen(t[count]));
 				my_game->is_so = 1;
+			}
 			else if (!ft_strncmp(t[count], "WE ", 3))
+			{
+				// my_game->we_path = ft_sstrcpy(my_game->we_path, t[count]);
+				my_game->we_path = ft_substr(t[count], 3, ft_strlen(t[count]));
 				my_game->is_we = 1;
+			}
 			else if (!ft_strncmp(t[count], "EA ", 3))
+			{
+				// my_game->ea_path = ft_sstrcpy(my_game->ea_path, t[count]);
+				my_game->ea_path = ft_substr(t[count], 3, ft_strlen(t[count]));
 				my_game->is_ea = 1;
+			}
 			else if (!ft_strncmp(t[count], "F ", 2))
+			{
+				// ft_sstrcpy(my_game->no_path, t[count]);
+				my_game->f_path = ft_substr(t[count], 2, ft_strlen(t[count]));
 				my_game->is_f = 1;
+			}
 			else if (!ft_strncmp(t[count], "C ", 2))
+			{
+				// ft_sstrcpy(my_game->no_path, t[count]);
+				my_game->c_path = ft_substr(t[count], 2, ft_strlen(t[count]));
 				my_game->is_c = 1;
+			}
 			count++;
 		// }
 	}
@@ -129,6 +153,12 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 		printf("missing pathes or colors!\n");
 		exit(1);
 	}
+	printf("no %s\n", my_game->no_path);
+	printf("so %s\n", my_game->so_path);
+	printf("we %s\n", my_game->we_path);
+	printf("ea %s\n", my_game->ea_path);
+	printf("f %s\n", my_game->f_path);
+	printf("c %s\n", my_game->c_path);
 	// for(int i=0;t[i];i++)
 	// 	printf("~%s+\n", t[i]);
 	// exit(1);

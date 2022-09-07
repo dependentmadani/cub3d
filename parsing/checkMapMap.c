@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:41:47 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 12:12:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:43:00 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ char	**check_map_map(t_game *my_game)
 	}
 	while (my_game->map[i])
 	{
-		// if (my_game->map[i][0] != '\n')
+		if (my_game->map[i][0] == '\n')
 			t[i] = ft_substr(my_game->map[i], 1, ft_strlen(my_game->map[i])-1);
+		else
+			t[i] = ft_substr(my_game->map[i], 0, ft_strlen(my_game->map[i]));
 			// printf("t[%d]: %s", i, t[i]);
 		i++;
 	}
