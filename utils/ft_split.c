@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/03 23:46:07 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:54:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	check_only_spaces(char *s)
 	return (0);
 }
 
-static char	**chek_and_fill(char **t, char *s, char c)
+static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 {
 	int	i;
 	int	count;
 	int	temp;
-	int	p_valid=0;
+	int	p_valid=0;//, lock = 0;
 
 	i = 0;
 	count = 0;
@@ -75,13 +75,20 @@ static char	**chek_and_fill(char **t, char *s, char c)
 		temp = i;
 		if (s[i] == c && p_valid < 6)
 		{
+			// printf("hi %d\n", i);
 			i++;
 			continue ;
 		}
-		else if (s[i] == c && p_valid == 6)
+		else if (s[i] == c && p_valid >= 6/* && !lock*/)
 		{
-			i++;
+			// while (s[i] == c)
+				i+=2;
+		//	lock = 1;
 		}
+		// else if (s[i] == c && p_valid == 6 && lock)
+		// {
+		// 	i++;
+		// }
 		while (s[i] != c && s[i])
 			i++;
 		// if (check_only_spaces(ft_substr(s, temp, i - temp)))
@@ -90,26 +97,45 @@ static char	**chek_and_fill(char **t, char *s, char c)
 			if (t[count] == NULL)
 				return (ft_del(t, count));
 			// if (t[count][0] == 'C' && t[count][1] == ' ')
+			if (!ft_strncmp(t[count], "NO ", 3) || !ft_strncmp(t[count], "SO ", 3) || !ft_strncmp(t[count], "WE ", 3) || !ft_strncmp(t[count], "EA ", 3) || !ft_strncmp(t[count], "F ", 2) || !ft_strncmp(t[count], "C ", 2))
+			{
+				if (p_valid == 5)
+				{
+					while (s[i] == c)
+						i++;
+				}
+				p_valid+=1;
+			}
+		//	printf("t[%d] -%s-\n", count, t[count]);
 			if (!ft_strncmp(t[count], "NO ", 3))
-				p_valid++;
+				my_game->is_no = 1;
 			else if (!ft_strncmp(t[count], "SO ", 3))
-				p_valid++;
+				my_game->is_so = 1;
 			else if (!ft_strncmp(t[count], "WE ", 3))
-				p_valid++;
+				my_game->is_we = 1;
 			else if (!ft_strncmp(t[count], "EA ", 3))
-				p_valid++;
+				my_game->is_ea = 1;
 			else if (!ft_strncmp(t[count], "F ", 2))
-				p_valid++;
+				my_game->is_f = 1;
 			else if (!ft_strncmp(t[count], "C ", 2))
-				p_valid++;
+				my_game->is_c = 1;
 			count++;
 		// }
 	}
+	// count++;
 	t[count] = 0;
+	if (my_game->is_no != 1 || my_game->is_so != 1 || my_game->is_we != 1 || my_game->is_ea != 1 || my_game->is_f != 1 || my_game->is_c != 1)
+	{
+		printf("missing pathes or colors!\n");
+		exit(1);
+	}
+	// for(int i=0;t[i];i++)
+	// 	printf("~%s+\n", t[i]);
+	// exit(1);
 	return (t);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split(t_game *my_game, char *s, char c)
 {
 	char	**t;
 	int		count;
@@ -120,5 +146,5 @@ char	**ft_split(char *s, char c)
 	t = (char **)malloc(sizeof(char *) * (count + 1));
 	if (t == NULL)
 		return (0);
-	return (chek_and_fill(t, s, c));
+	return (chek_and_fill(my_game, t, s, c));
 }
