@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/09/05 11:48:43 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/09/07 11:11:03 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,21 +22,16 @@ SRC = main.c\
 		utils/ft_split.c\
 		utils/gnl/get_next_line.c\
 		utils/gnl/get_next_line_utils.c\
-		window/starter.c \
-		window/create_window.c \
-		movement/keymovement.c \
-		movement/movement_fun.c \
-		creation/put_elements.c \
-		raycasting/checker.c \
+		window/starter.c
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx
+FLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	cc $(FLAGS) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cc $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.c
 	cc $(FLAGS) -c $< -o $@

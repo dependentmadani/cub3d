@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 17:41:04 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:14:01 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*creat_fill(int x)
 
 void	fill_em(char *s, int *i)
 {
+	// printf("dghl %s\n", s);
 	while ((s[*i] == '0' || s[*i] == '1' || s[*i] == 'S' || s[*i] == 'N') && s[*i] != '\n')
 		(*i)++;
 }
@@ -295,15 +296,15 @@ void get_longestWidth(t_game *my_game)
 	// int end=0;
 	int	temp;
 
-	i = 0;
-	temp = ft_strlen(my_game->map[i]);
-	while (my_game->map[i])
+	i = 6;
+	temp = ft_strlen(my_game->newmap[i]);
+	while (my_game->newmap[i])
 	{
-		if (temp < ft_strlen(my_game->map[i]))
+		if (temp < ft_strlen(my_game->newmap[i]))
 		{
-			temp = ft_strlen(my_game->map[i]);
+			temp = ft_strlen(my_game->newmap[i]);
 			int x=0;
-			while (my_game->map[i][x] != '1')
+			while (my_game->newmap[i][x] != '1')
 				x++;
 			my_game->longestWidth_start = x;
 			my_game->longestWidth_end = temp;
@@ -313,6 +314,52 @@ void get_longestWidth(t_game *my_game)
 		i++;
 	}
 	my_game->longestWidth = temp;
+}
+
+void	get_rgb_values(t_game *my_game)
+{
+	int	t;
+	int	i;
+	int	x;
+
+	i = 0;
+	x = 0;
+	my_game->f_rgb = malloc(sizeof(int) * 99);
+	my_game->c_rgb = malloc(sizeof(int) * 99);
+	while (my_game->char_f_rgb[i])
+	{
+		t = ft_atoi(my_game->char_f_rgb[i]);
+		// printf("yoo %d\n", t);
+		if (t < 0 || t > 255)
+		{
+			printf("invalid rgb value!/n");
+			exit(1);
+		}
+		my_game->f_rgb[x] = t;
+		x++;
+		i++;
+	}
+	my_game->f_rgb[x] = '\0';
+	// for (int r=0; r<3;r++)
+	// 	printf("f rgb value %d\n", my_game->f_rgb[r]);
+	i = 0;
+	x = 0;
+	while (my_game->char_c_rgb[i])
+	{
+		t = ft_atoi(my_game->char_c_rgb[i]);
+		if (t < 0 || t > 255)
+		{
+			printf("invalid rgb value!/n");
+			exit(1);
+		}
+		// printf("yoo %d\n", t);
+		my_game->c_rgb[x] = t;
+		x++;
+		i++;
+	}
+	my_game->c_rgb[x] = '\0';
+	// for (int r=0; r<3;r++)
+	// 	printf("c rgb value %d\n", my_game->c_rgb[r]);
 }
 
 void	get_map(char *av, t_game *my_game, t_player *player)
@@ -334,24 +381,26 @@ void	get_map(char *av, t_game *my_game, t_player *player)
 	my_game->map = ft_split(my_game, temp, '\n');
 	if (!my_game->map)
 		exit(1);
-	// for(int i=0;my_game->map[i];i++)
-	// 	printf("+%s+\n", my_game->map[i]);
 	// raw map
 	// for(int i=0;i<20;i++)
 	// 	printf("-%s-", my_game->newmap[i]);
 	// check_map_paths(my_game);
 	my_game->newmap = check_map_map(my_game);
+	for(int i=0;my_game->newmap[i];i++)
+		printf("+%s+\n", my_game->newmap[i]);
 	get_longestWidth(my_game);
 	// exit(1);
 	my_game->newestmap = render_new_map(my_game);
 	for(int i=0;my_game->newestmap[i];i++)
 		printf("-%s-\n", my_game->newestmap[i]);
 	// new map
-	printf("\n\n\n");
+	// printf("www\n\n\n");
 	check_map(my_game);
-	
+	check_map_paths(my_game);
+	get_rgb_values(my_game);
 	my_game->gamer = player;
 	printf("sh is good\n");
+	exit(1);
 	creation_window(my_game);
 	free(temp);
 	close(fd);
