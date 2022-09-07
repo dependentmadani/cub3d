@@ -46,7 +46,7 @@ void    count_the_map(t_game *game)
             game->mapp->map_y +=1;
         i++;
     }
-    printf("the value of map_x {%d} and map_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
+    // printf("the value of map_x {%d} and map_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)

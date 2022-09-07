@@ -19,9 +19,9 @@ int collision_with_wall(t_game *game, int pos_x, int pos_y)
 
     estimation_posx = (pos_x) / IMG_H;
     estimation_posy = (pos_y) / IMG_W;
-    if (estimation_posx > game->mapp->map_x || estimation_posy > game->mapp->map_y)
+    if (estimation_posx >= game->mapp->map_x*IMG_H || estimation_posy >= game->mapp->map_y*IMG_W)
         return (0);
-    if (game->newestmap[estimation_posy][estimation_posx] == '1')
+    if (game->newestmap[estimation_posy] && game->newestmap[estimation_posy][estimation_posx] == '1')
         return (1);
     return (0);
 }
