@@ -42,7 +42,7 @@ void    count_the_map(t_game *game)
                 break;
             }
         }
-        // if (j != -1)
+        if (j != -1)
             game->mapp->map_y +=1;
         i++;
     }
@@ -100,19 +100,18 @@ void put_map_2d(t_game *game)
         {
             if (game->newestmap[i][j] == '0')
                 put_floor(game);
-            else if (game->newestmap[i][j] == '1')
-                put_wall(game);
             else if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
                 || game->newestmap[i][j] == 'E'|| game->newestmap[i][j] == 'W') 
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H/2;
                 game->gamer->player_posy = IMG_W * i + IMG_W/2;
-                put_player(game, game->newestmap[i][j], 0x00ff00, 0);
+                put_player(game, 0x00ff00);
             }
             j++;
         }
         i++;
     }
+    put_wall(game);
     draw_2d_map(game);
 }
 
@@ -120,7 +119,6 @@ void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
-    // printf("the size of map_x {%f} and mapp_y {%f}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 void create_window(t_game *game)

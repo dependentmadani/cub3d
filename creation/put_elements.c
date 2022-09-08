@@ -43,7 +43,27 @@ void    circle(t_game *game, int color)
 
 void    put_wall(t_game *game)
 {
-    (void)game;
+    int i;
+    int j;
+    int width;
+    int height;
+    void *wall;
+
+    i = 0;
+    while (game->newestmap[i])
+    {
+        j = 0;
+        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
+        {
+            if (game->newestmap[i][j] == '1')
+            {
+                wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
+                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 void    put_floor(t_game *game)
@@ -51,15 +71,14 @@ void    put_floor(t_game *game)
     (void)game;
 }
 
-void    put_player(t_game *game, int direction_player, int color, char axis)
+void    put_player(t_game *game, int color)
 {
-    (void)direction_player;
-    (void)axis;
     if (game->gamer->moved)
     {
         mlx_clear_window(game->mlx, game->win);
+        put_wall(game);
         draw_2d_map(game);
     }
     circle(game, color);
-    spread_rays(game, direction_player, axis);
+    spread_rays(game);
 }

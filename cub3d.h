@@ -158,11 +158,11 @@ int		winning_function(void);
 
 void    put_wall(t_game *game);
 void    put_floor(t_game *game);
-void    put_player(t_game *game, int direction_player, int color, char axis);
+void    put_player(t_game *game, int color);
 
 // check functions for raycasting
 
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
-void    spread_rays(t_game *game, int direction_player, char axis);
+void    spread_rays(t_game *game);
 
 #endif

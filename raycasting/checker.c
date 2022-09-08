@@ -75,20 +75,63 @@ void    rays_until_west_north(t_game *game)
     }
 }
 
-void    spread_rays(t_game *game, int direction_player, char axis)
+void    rays_until_north_east(t_game *game)
 {
-    (void)direction_player;
-    (void)axis;
+    double i;
+    double j;
+
+    i = game->gamer->player_posx;
+    j = game->gamer->player_posy;
+    while (!collision_with_wall(game, i, j))
+    {
+        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        i += 0.1 + game->gamer->player_dx;
+        j -= 0.1 + game->gamer->player_dy;
+    }
+}
+
+void    rays_until_east_south(t_game *game)
+{
+    double i;
+    double j;
+
+    i = game->gamer->player_posx;
+    j = game->gamer->player_posy;
+    while (!collision_with_wall(game, i, j))
+    {
+        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        i += 0.1 + game->gamer->player_dx;
+        j += 0.1 + game->gamer->player_dy;
+    }
+}
+
+void    rays_until_south_west(t_game *game)
+{
+    double i;
+    double j;
+
+    i = game->gamer->player_posx;
+    j = game->gamer->player_posy;
+    while (!collision_with_wall(game, i, j))
+    {
+        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        i -= 0.1 + game->gamer->player_dx;
+        j += 0.1 + game->gamer->player_dy;
+    }
+}
+
+void    spread_rays(t_game *game)
+{
     if (game->gamer->player_angle == PI/2 || game->gamer->player_angle == (3*PI/2))
         rays_until_wall_north_or_south(game);
     else if (game->gamer->player_angle == 0 || game->gamer->player_angle == 2*PI)
         rays_until_west_or_east(game);
     else if (game->gamer->player_angle > 0 || game->gamer->player_angle < (PI / 2))
         rays_until_west_north(game);
-    // else if (game->gamer->player_angle > (PI/2) || game->gamer->player_angle < (PI))
-    //     rays_until_north_east(game);
-    // else if (game->gamer->player_angle > PI || game->gamer->player_angle < (3*PI/2))
-    //     rays_until_east_south(game);
-    // else if (game->gamer->player_angle > (3*PI/2) || game->gamer->player_angle < (2*PI))
-    //     rays_until_south_west(game);
+    else if (game->gamer->player_angle > (PI/2) || game->gamer->player_angle < (PI))
+        rays_until_north_east(game);
+    else if (game->gamer->player_angle > PI || game->gamer->player_angle < (3*PI/2))
+        rays_until_east_south(game);
+    else if (game->gamer->player_angle > (3*PI/2) || game->gamer->player_angle < (2*PI))
+        rays_until_south_west(game);
 }
