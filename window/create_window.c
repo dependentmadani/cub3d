@@ -42,11 +42,10 @@ void    count_the_map(t_game *game)
                 break;
             }
         }
-        if (j != -1)
+        // if (j != -1)
             game->mapp->map_y +=1;
         i++;
     }
-    // printf("the value of map_x {%d} and map_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
@@ -93,14 +92,14 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
+    put_floor(game);
+    put_wall(game);
     while (game->newestmap[i])
     {
         j = 0;
         while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
-            if (game->newestmap[i][j] == '0')
-                put_floor(game);
-            else if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
+            if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
                 || game->newestmap[i][j] == 'E'|| game->newestmap[i][j] == 'W') 
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H/2;
@@ -111,8 +110,7 @@ void put_map_2d(t_game *game)
         }
         i++;
     }
-    put_wall(game);
-    draw_2d_map(game);
+    // draw_2d_map(game);
 }
 
 void draw_2d_map(t_game * game)
