@@ -93,13 +93,11 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
-    printf("was here\n");
     while (game->newestmap[i])
     {
         j = 0;
         while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
-            printf("%c", game->newestmap[i][j]);
             if (game->newestmap[i][j] == '0')
                 put_floor(game);
             else if (game->newestmap[i][j] == '1')
@@ -113,7 +111,6 @@ void put_map_2d(t_game *game)
             }
             j++;
         }
-        printf("\n");
         i++;
     }
     draw_2d_map(game);
@@ -123,7 +120,7 @@ void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
-    printf("the size of map_x {%d} and mapp_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
+    // printf("the size of map_x {%f} and mapp_y {%f}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 void create_window(t_game *game)

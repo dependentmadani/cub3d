@@ -35,25 +35,25 @@
 
 typedef struct	s_map
 {
-	int win_width;
-	int win_height;
+	double win_width;
+	double win_height;
 	int map_size;
-	int map_x;
-	int map_y;
-	int	dx;
-	int dy;
-	int theta;
+	double map_x;
+	double map_y;
+	double	dx;
+	double	dy;
+	double theta;
 	int len_wall;
 } 				t_map;
 
 typedef struct	s_player
 {
 	int moved;
-	int	player_posx;
-	int	player_posy;
-	int player_angle;
-	int player_dx;
-	int player_dy;
+	double	player_posx;
+	double	player_posy;
+	double player_angle;
+	double player_dx;
+	double player_dy;
 	int	speed;
 	int	fov; ///field of view
 }				t_player;
@@ -162,7 +162,7 @@ void    put_player(t_game *game, int direction_player, int color, char axis);
 
 // check functions for raycasting
 
-int 	collision_with_wall(t_game *game, int pos_x, int pos_y);
+int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game, int direction_player, char axis);
 
 #endif

@@ -53,6 +53,8 @@ void    put_floor(t_game *game)
 
 void    put_player(t_game *game, int direction_player, int color, char axis)
 {
+    (void)direction_player;
+    (void)axis;
     if (game->gamer->moved)
     {
         mlx_clear_window(game->mlx, game->win);
