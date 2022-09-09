@@ -164,5 +164,6 @@ void    put_player(t_game *game, int color);
 
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game);
+void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
 
 #endif

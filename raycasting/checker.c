@@ -33,6 +33,7 @@ void    rays_until_wall_north_or_south(t_game* game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
@@ -50,6 +51,7 @@ void    rays_until_west_or_east(t_game* game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
@@ -67,6 +69,7 @@ void    rays_until_west_north(t_game *game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
@@ -82,6 +85,7 @@ void    rays_until_north_east(t_game *game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
@@ -97,6 +101,7 @@ void    rays_until_east_south(t_game *game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
@@ -112,6 +117,7 @@ void    rays_until_south_west(t_game *game)
 
     i = game->gamer->player_posx;
     j = game->gamer->player_posy;
+    // update_putting_floor(game, i, j);
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
