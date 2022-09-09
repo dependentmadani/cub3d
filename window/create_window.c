@@ -129,6 +129,9 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
+    game->mapp->img = mlx_new_image(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1);
+	game->mapp->addr = mlx_get_data_addr(game->mapp->img, &game->mapp->bits_per_pixel, &game->mapp->line_length,
+								&game->mapp->endian);
     put_map_2d(game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);

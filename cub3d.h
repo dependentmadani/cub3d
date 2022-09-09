@@ -44,6 +44,11 @@ typedef struct	s_map
 	double	dy;
 	double theta;
 	int len_wall;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 } 				t_map;
 
 typedef struct	s_player
@@ -164,5 +169,9 @@ void    put_player(t_game *game, int color);
 
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game);
+
+// mlx_function
+
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 
 #endif
