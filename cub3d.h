@@ -17,13 +17,45 @@
 # include "stdio.h"
 # include "fcntl.h"
 # include "utils/gnl/get_next_line.h"
+# include <mlx.h>
+# include <math.h>
+
+# define IMG_H 64
+# define IMG_W 64
+# define ESC 53
+# define W 13
+# define S 1
+# define D 2
+# define A 0
+# define UP -1
+# define DOWN 1
+# define RIGHT 1
+# define LEFT -1
+# define PI 3.141592653589793238
+
+typedef struct	s_map
+{
+	double win_width;
+	double win_height;
+	int map_size;
+	double map_x;
+	double map_y;
+	double	dx;
+	double	dy;
+	double theta;
+	int len_wall;
+} 				t_map;
 
 typedef struct	s_player
 {
-	int	pos_x;
-	int	pos_y;
+	int moved;
+	double	player_posx;
+	double	player_posy;
+	double player_angle;
+	double player_dx;
+	double player_dy;
 	int	speed;
-	int	angle_view;
+	int	fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -70,12 +102,13 @@ typedef struct s_game
 	int		*f_rgb;
 	int		*c_rgb;
 	t_player *gamer;
+	t_map    *mapp;
 }	t_game;
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game, t_player *player);
+void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
 
 // check paths of the map
 void	check_map_paths(t_game *my_game);
@@ -108,7 +141,28 @@ char	*ft_substrzwina(char	*s, int start, int end);
 int	ft_atoi(const char	*str);
 
 // window
+
 void    initializer(t_game *game);
 void    creation_window(t_game *game);
+void 	create_window(t_game *game);
+void	draw_2d_map(t_game * game);
+
+// movement of player
+
+int		keyword_move(int keyword, t_game *game);
+void    movement_fun(t_game *game, char axis, int direction);
+int		exit_function(t_game *game);
+int		winning_function(void);
+
+// creation of elements
+
+void    put_wall(t_game *game);
+void    put_floor(t_game *game);
+void    put_player(t_game *game, int color);
+
+// check functions for raycasting
+
+int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
+void    spread_rays(t_game *game);
 
 #endif

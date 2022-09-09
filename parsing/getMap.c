@@ -401,7 +401,7 @@ void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 	my_game->mapp = map;
 	my_game->gamer = player;
 	printf("sh is good\n");
-	exit(1);
+	// exit(1);
 	creation_window(my_game);
 	free(temp);
 	close(fd);
