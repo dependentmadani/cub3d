@@ -34,7 +34,8 @@ void    circle(t_game *game, int color)
             a=((i-x)*(i-x))+((j-y)*(j-y));
             d=sqrt(a);
             if(r>=d)
-                mlx_pixel_put(game->mlx, game->win, game->gamer->player_posx + i,game->gamer->player_posy + j, color);
+                my_mlx_pixel_put(game, game->gamer->player_posx + i, game->gamer->player_posy + j, color);
+                // mlx_pixel_put(game->mlx, game->win, ,, color);
             j++;
         }
         i++;
@@ -97,11 +98,15 @@ void    put_player(t_game *game, int color)
 {
     if (game->gamer->moved)
     {
-        mlx_clear_window(game->mlx, game->win);
+        // mlx_clear_window(game->mlx, game->win);
         // draw_2d_map(game);
+        mlx_destroy_image(game->mlx, game->mapp->img);
+        game->mapp->img = mlx_new_image(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1);
+	    game->mapp->addr = mlx_get_data_addr(game->mapp->img, &game->mapp->bits_per_pixel, &game->mapp->line_length,
+								&game->mapp->endian);
     }
-    put_wall(game);
-    put_floor(game);
+    // put_wall(game);
+    // put_floor(game);
     circle(game, color);
     spread_rays(game);
 }

@@ -35,7 +35,7 @@ void    rays_until_wall_north_or_south(t_game* game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000); // to change with my_mlx_pixel_put
         if ((int)game->gamer->player_angle == 1)
             j--;
         else
@@ -52,7 +52,7 @@ void    rays_until_west_or_east(t_game* game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000);  // to change with my_mlx_pixel_put
         if (game->gamer->player_angle == 0)
             i--;
         else
@@ -69,7 +69,7 @@ void    rays_until_west_north(t_game *game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000);  // to change with my_mlx_pixel_put
         i -= 0.1 + game->gamer->player_dx;
         j -= 0.1 + game->gamer->player_dy;
     }
@@ -84,7 +84,7 @@ void    rays_until_north_east(t_game *game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000);  // to change with my_mlx_pixel_put
         i += 0.1 + game->gamer->player_dx;
         j -= 0.1 + game->gamer->player_dy;
     }
@@ -99,7 +99,7 @@ void    rays_until_east_south(t_game *game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000);  // to change with my_mlx_pixel_put
         i += 0.1 + game->gamer->player_dx;
         j += 0.1 + game->gamer->player_dy;
     }
@@ -114,7 +114,7 @@ void    rays_until_south_west(t_game *game)
     j = game->gamer->player_posy;
     while (!collision_with_wall(game, i, j))
     {
-        mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        my_mlx_pixel_put(game, i, j, 0xff0000); // to change with my_mlx_pixel_put
         i -= 0.1 + game->gamer->player_dx;
         j += 0.1 + game->gamer->player_dy;
     }
