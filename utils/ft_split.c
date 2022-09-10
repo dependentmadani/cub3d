@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 21:47:39 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:54:51 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,15 +153,16 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 		printf("missing pathes or colors!\n");
 		exit(1);
 	}
-	printf("no %s\n", my_game->no_path);
-	printf("so %s\n", my_game->so_path);
-	printf("we %s\n", my_game->we_path);
-	printf("ea %s\n", my_game->ea_path);
-	printf("f %s\n", my_game->f_path);
-	printf("c %s\n", my_game->c_path);
+	// printf("no %s\n", my_game->no_path);
+	// printf("so %s\n", my_game->so_path);
+	// printf("we %s\n", my_game->we_path);
+	// printf("ea %s\n", my_game->ea_path);
+	// printf("f %s\n", my_game->f_path);
+	// printf("c %s\n", my_game->c_path);
 	// for(int i=0;t[i];i++)
 	// 	printf("~%s+\n", t[i]);
 	// exit(1);
+	my_game->num_rows = count;
 	return (t);
 }
 

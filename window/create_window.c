@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:07:58 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/02 18:08:01 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:13:29 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    count_the_map(t_game *game)
                 break;
             }
         }
-        if (j != -1)
+        // if (j != -1)
             game->mapp->map_y +=1;
         i++;
     }
@@ -93,11 +93,13 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
+    printf("was here\n");
     while (game->newestmap[i])
     {
         j = 0;
         while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
+            printf("%c", game->newestmap[i][j]);
             if (game->newestmap[i][j] == '0')
                 put_floor(game);
             else if (game->newestmap[i][j] == '1')
@@ -111,6 +113,7 @@ void put_map_2d(t_game *game)
             }
             j++;
         }
+        printf("\n");
         i++;
     }
     draw_2d_map(game);
@@ -120,6 +123,7 @@ void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
+    printf("the size of map_x {%d} and mapp_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 void create_window(t_game *game)
@@ -131,7 +135,7 @@ void create_window(t_game *game)
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
-    game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
+    game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3D");
     put_map_2d(game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);

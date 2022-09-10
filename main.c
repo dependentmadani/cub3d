@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:00:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 17:39:31 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:35:40 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ int	main(int ac, char **av)
 		tg.is_ea = 0;
 		tg.is_f = 0;
 		tg.is_c = 0;
-		get_map(av[1], &tg, py);
+		tg.min_rad = (-1 * PI / 2) - 1500;
+		tg.min_rad = (-1 * PI / 2) + 1500;
+		t_map *mp;
+		py = ft_calloc(sizeof(t_player), 1);
+		mp = ft_calloc(sizeof(t_map), 1);
+		get_map(av[1], &tg, py, mp);
 		for(int i=0;tg.newmap[i];i++)
 			printf("-%s-\n", tg.newmap[i]);
 		printf("yo?\n");
