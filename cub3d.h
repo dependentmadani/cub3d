@@ -55,7 +55,7 @@ typedef struct	s_player
 	double player_dx;
 	double player_dy;
 	int	speed;
-	int	fov; ///field of view
+	double fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -165,5 +165,6 @@ void    put_player(t_game *game, int color);
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game);
 void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
+void    complete_rays_fov(t_game *game, double player_x, double player_y);
 
 #endif

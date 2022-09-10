@@ -42,6 +42,18 @@ void    rays_until_wall_north_or_south(t_game* game)
         else
             j++;
     }
+    i = game->gamer->player_posx;
+    j = game->gamer->player_posy;
+    update_putting_floor(game, i, j);
+    // while (!collision_with_wall(game, i, j))
+    // {
+    //     mlx_pixel_put(game->mlx, game->win, i*cos(-PI / 6), j*sin(-PI / 6), 0xff0000);
+    //     printf("the value of i {%f}\n", j*sin(-PI / 6));
+    //     if ((int)game->gamer->player_angle == 1)
+    //         j--;
+    //     else
+    //         j++;
+    // }
 }
 
 void    rays_until_west_or_east(t_game* game)
@@ -123,6 +135,35 @@ void    rays_until_south_west(t_game *game)
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
         i -= 0.1 + game->gamer->player_dx;
         j += 0.1 + game->gamer->player_dy;
+    }
+}
+
+void    complete_rays_fov(t_game *game, double player_x, double player_y)
+{
+    double i;
+    double j;
+    double vision;
+
+    i = player_x;
+    j = player_y;
+    vision = -PI / 6;
+    while (vision < (PI /6))
+    {
+        i = player_x;
+        j = player_y;
+        while (!collision_with_wall(game, i, j))
+        {
+            mlx_pixel_put(game->mlx, game->win, i*cos(vision), j*sin(vision), 0xff0000);
+            if ((int)game->gamer->player_angle == 1)
+                j--;
+            else
+                j++;
+            if (vision < 0)
+                i--;
+            else
+                i++;
+        }
+        vision += game->gamer->fov / IMG_W;
     }
 }
 

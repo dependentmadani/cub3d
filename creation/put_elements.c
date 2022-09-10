@@ -147,11 +147,11 @@ void    put_floor(t_game *game)
 
 void    put_player(t_game *game, int color)
 {
-    if (game->gamer->moved)
-    {
-        // mlx_clear_window(game->mlx, game->win);
-        // draw_2d_map(game);
-    }
+    // if (game->gamer->moved)
+    // {
+    //     // mlx_clear_window(game->mlx, game->win);
+    //     // draw_2d_map(game);
+    // }
     // put_wall(game);
     // put_floor(game);
     circle(game, color);

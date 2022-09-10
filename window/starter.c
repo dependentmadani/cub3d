@@ -14,7 +14,7 @@
 
 void    initializer(t_game *game)
 {
-    game->gamer->fov = 60;
+    game->gamer->fov = 60.0;
     game->gamer->speed = 5; ///8 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
