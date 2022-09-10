@@ -32,6 +32,9 @@
 # define RIGHT 1
 # define LEFT -1
 # define PI 3.141592653589793238
+# define P2 PI/2
+# define P3 3*PI/2
+# define DR 0.0174533
 
 typedef struct	s_map
 {
@@ -53,14 +56,14 @@ typedef struct	s_map
 
 typedef struct	s_player
 {
-	int moved;
+	int 	moved;
 	double	player_posx;
 	double	player_posy;
-	double player_angle;
-	double player_dx;
-	double player_dy;
-	int	speed;
-	int	fov; ///field of view
+	double	player_angle;
+	double	player_dx;
+	double	player_dy;
+	int		speed;
+	int		fov; ///field of view
 }				t_player;
 
 typedef struct s_game
