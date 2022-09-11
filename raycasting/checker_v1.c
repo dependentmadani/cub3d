@@ -51,10 +51,10 @@ void    spread_rays(t_game *game)
     int r, fov;
     double rx, ry, ra,xo, yo, disH, hx, hy, aTan;
 
-    // ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
+    ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
     // printf("the value of angle {%f}\n", ra);
-    ra = game->gamer->player_angle;
-    for (r=0; r< 1; r++)
+    // ra = game->gamer->player_angle;
+    for (r=0; r< 60; r++)
     {
         ///// check the horizontal lines
         fov = 0;
@@ -68,20 +68,29 @@ void    spread_rays(t_game *game)
             if (collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=8;}
             else {rx+=xo; ry+=yo;fov+=1;}
         }
+        // printf("the value of hx {%f} the value of hy {%f}\n", hx, hy);
+        
+        
+        
+        
         // /// check the vertical lines
-        fov = 0;
-        double disV=1000000, vx=game->gamer->player_posx, vy=game->gamer->player_posy;
-        double nTan = -tan(ra);
-        if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx>>6)<<6)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;}
-        if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx>>6)<<6)+64; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=64; yo=-xo*nTan;}
-        if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=8;}
-        while (fov < 8)
-        {
-            if (collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=8;}
-            else {rx+=xo; ry+=yo;fov+=1;}
-        }
-        if (disV < disH) {rx = vx; ry =vy;}
-        if (disH < disV) {rx = hx; ry =hy;}
+        
+        // fov = 0;
+        // double disV=1000000, vx=game->gamer->player_posx, vy=game->gamer->player_posy;
+        // double nTan = -1*tan(ra);
+        // if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx/64)*64)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;}
+        // if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/64)*64)+64; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=64; yo=-xo*nTan;} // problem need to be fixed here
+        // if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=8;}
+        // printf("before, the value of xo {%f} and y0 {%f}\n", xo, yo);
+        // while (fov < 8)
+        // {
+        //     if (collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=8;}
+        //     else {rx+=xo; ry+=yo;fov+=1;}
+        // }
+        // printf("the value of vx {%f} the value of vy {%f}\n", vx, vy);
+        // if (disV < disH) {rx = vx; ry =vy;}
+        // if (disH < disV) {rx = hx; ry =hy;}
+
         draw_line(game, rx, ry,0xff0000, ra);
         ra += DR;
         if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
