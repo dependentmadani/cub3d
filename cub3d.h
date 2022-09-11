@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/10 16:34:06 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:10:59 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,33 @@
 # define RIGHT 1
 # define LEFT -1
 # define PI 3.141592653589793238
+# define P2 PI/2
+# define P3 3*PI/2
+# define DR 0.0174533
 
 typedef struct	s_map
 {
-	int win_width;
-	int win_height;
+	double win_width;
+	double win_height;
 	int map_size;
-	int map_x;
-	int map_y;
-	int	dx;
-	int dy;
-	int theta;
+	double map_x;
+	double map_y;
+	double	dx;
+	double	dy;
+	double theta;
 	int len_wall;
 } 				t_map;
 
 typedef struct	s_player
 {
 	int moved;
-	int	player_posx;
-	int	player_posy;
-	int player_angle;
-	int player_dx;
-	int player_dy;
+	double	player_posx;
+	double	player_posy;
+	double player_angle;
+	double player_dx;
+	double player_dy;
 	int	speed;
-	int	fov; ///field of view
+	double fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -81,9 +84,8 @@ typedef struct s_game
 	int		loop;
 	int		gg;
 	int		longestWidth;
-	// int		longestWidth_start;
-	// int		longestWidth_end;
-	int		num_rows;
+	int		longestWidth_start;
+	int		longestWidth_end;
 	int		paths_valid;
 	int		colors_valid;
 	int		is_no;
@@ -104,15 +106,12 @@ typedef struct s_game
 	int		*c_rgb;
 	t_player *gamer;
 	t_map    *mapp;
-	double	min_rad;
-	double	max_rad;
 }	t_game;
 
 //// -------------- map
 
 // get map
 void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
-char	**render_new_map(t_game *my_game);
 
 // check paths of the map
 void	check_map_paths(t_game *my_game);
@@ -122,9 +121,6 @@ void	check_map(t_game *my_game);
 char	**check_map_map(t_game *my_game);
 
 int	ft_strncmp(char *s1, char *s2, int n);
-
-// map utils
-void	get_longestWidth(t_game *my_game);
 
 //// -------------- utils
 char	**ft_split(t_game *my_game, char *s, char c);
@@ -165,11 +161,13 @@ int		winning_function(void);
 
 void    put_wall(t_game *game);
 void    put_floor(t_game *game);
-void    put_player(t_game *game, int direction_player, int color, char axis);
+void    put_player(t_game *game, int color);
 
 // check functions for raycasting
 
-int 	collision_with_wall(t_game *game, int pos_x, int pos_y);
-void    spread_rays(t_game *game, int direction_player, char axis);
+int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
+void    spread_rays(t_game *game);
+void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
+void    complete_rays_fov(t_game *game, double player_x, double player_y);
 
 #endif

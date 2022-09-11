@@ -12,6 +12,57 @@
 
 # include "../cub3d.h"
 
+void update_putting_floor(t_game *game, int pos_x, int pos_y)
+{
+    int estimation_x;
+    int estimation_y;
+    int width;
+    int height;
+    void *wall;
+    int diff_x;
+    int diff_y;
+
+    estimation_x = (pos_x) / IMG_H;
+    estimation_y = (pos_y) / IMG_W;
+    diff_x = (pos_x + 10) / IMG_H;
+    diff_y = (pos_y + 10) / IMG_W;
+    if (game->newestmap[estimation_y] && (game->newestmap[estimation_y][estimation_x] == '0'
+        || game->newestmap[estimation_y][estimation_x] == 'N'  || game->newestmap[estimation_y][estimation_x] == 'S'
+        || game->newestmap[estimation_y][estimation_x] == 'E' || game->newestmap[estimation_y][estimation_x] == 'W'))
+    {
+        wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
+        mlx_put_image_to_window(game->mlx, game->win, wall, estimation_x*IMG_W, estimation_y*IMG_H);
+    }
+    if (diff_x != estimation_x || diff_y != estimation_y)
+    {
+        if (game->newestmap[diff_y][diff_x] == '1')
+        {
+            wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
+            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H);
+        }
+        else
+        {
+            wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
+            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H); 
+        }
+    }
+    diff_x = (pos_x - 10) / IMG_H;
+    diff_y = (pos_y - 10) / IMG_W;
+    if (diff_x != estimation_x || diff_y != estimation_y)
+    {
+        if (game->newestmap[diff_y][diff_x] == '1')
+        {
+            wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
+            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H);
+        }
+        else
+        {
+            wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
+            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H); 
+        }
+    }
+}
+
 void    circle(t_game *game, int color)
 {
     int i;
@@ -26,6 +77,7 @@ void    circle(t_game *game, int color)
     x = 0;
     y = 0;
     i = -r;
+    // update_putting_floor(game, game->gamer->player_posx, game->gamer->player_posy);
     while(i<IMG_H)
     {
         j = -r;
@@ -39,25 +91,70 @@ void    circle(t_game *game, int color)
         }
         i++;
     }
-}
+ }
 
 void    put_wall(t_game *game)
 {
-    (void)game;
+    int i;
+    int j;
+    int width;
+    int height;
+    void *wall;
+
+    i = 0;
+    while (game->newestmap[i])
+    {
+        j = 0;
+        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
+        {
+            if (game->newestmap[i][j] == '1')
+            {
+                wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
+                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 void    put_floor(t_game *game)
 {
-    (void)game;
+    int i;
+    int j;
+    int width;
+    int height;
+    void *wall;
+
+    i = 0;
+    while (game->newestmap[i])
+    {
+        j = 0;
+        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
+        {
+            if (game->newestmap[i][j] == '0' || game->newestmap[i][j] == 'N' 
+                || game->newestmap[i][j] == 'S' || game->newestmap[i][j] == 'E'
+                || game->newestmap[i][j] == 'W')
+            {
+                wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
+                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
-void    put_player(t_game *game, int direction_player, int color, char axis)
+void    put_player(t_game *game, int color)
 {
     if (game->gamer->moved)
     {
         mlx_clear_window(game->mlx, game->win);
-        draw_2d_map(game);
+        // draw_2d_map(game);
     }
+    (void)color;
+    // put_wall(game);
+    // put_floor(game);
     circle(game, color);
-    spread_rays(game, direction_player, axis);
+    spread_rays(game);
 }
