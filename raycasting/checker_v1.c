@@ -54,14 +54,14 @@ void    spread_rays(t_game *game)
     ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
     // printf("the value of angle {%f}\n", ra);
     // ra = game->gamer->player_angle;
-    for (r=0; r< 60; r++)
+    for (r=0; r< 66; r++)
     {
         ///// check the horizontal lines
         fov = 0;
         disH=1000000, hx=game->gamer->player_posx, hy=game->gamer->player_posy;
         aTan = -1/tan(ra);
-        if (ra < PI) {ry =(((int)game->gamer->player_posy/64)*64)-0.0001; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=-64; xo=-yo*aTan;}
-        if (ra > PI) {ry =(((int)game->gamer->player_posy/64)*64)+64; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=64; xo=-yo*aTan;}
+        if (ra < PI) {ry =(((int)game->gamer->player_posy / 64)*64)-0.0001; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=-64; xo=-yo*aTan;}
+        if (ra > PI) {ry =(((int)game->gamer->player_posy / 64) * 64)+64; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=64; xo=-yo*aTan;}
         if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=8;}
         while (fov < 8)
         {
@@ -72,7 +72,7 @@ void    spread_rays(t_game *game)
         
         
         
-        
+        //  draw_line(game, rx, ry,0xff0000, ra);
         // /// check the vertical lines
         
         // fov = 0;
@@ -91,9 +91,76 @@ void    spread_rays(t_game *game)
         // if (disV < disH) {rx = vx; ry =vy;}
         // if (disH < disV) {rx = hx; ry =hy;}
 
+      
+        int mx, my, mp;  
+        double vx, vy, disV, nTan;
+        fov = 0;
+        disV=1000000, vx=game->gamer->player_posx, vy=game->gamer->player_posy;
+        nTan = -tan(ra);
+        if (ra > P2 && ra < P3)
+        {
+            rx =(((int)game->gamer->player_posx / 64) * 64) - 0.0001;
+            ry = (game->gamer->player_posx - rx) * nTan + game->gamer->player_posy;
+            xo = -64;
+            yo = -xo * nTan;
+            // printf("gooooo\n");
+        } // looking left
+        if (ra < P2 || ra > P3)
+        {
+            rx =(((int)game->gamer->player_posx / 64) * 64) + 64;
+            ry = (game->gamer->player_posx - rx) * nTan + game->gamer->player_posy;
+            xo = 64;
+            yo = -xo * nTan;
+        } // looking right
+        if (ra == 0 || ra == PI)
+        {
+            rx = game->gamer->player_posx;
+            ry = game->gamer->player_posy;
+            fov = 8;
+        }
+        while (fov < 8)
+        {
+            mx = (int)(rx) / 64;  /// (ry >> 6 means that: ry / 64)
+            my = (int)(ry) / 64;
+            mp = my * game->mapp->map_x + mx;
+            if (mp > 0 && mp < game->mapp->map_x * game->mapp->map_y && game->newestmap[mx][mp] == '1')
+            {
+                vx=rx;
+                vy=ry;
+                disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra);
+                fov=8;
+            }
+            else
+            {
+                rx += xo;
+                ry += yo;
+                fov += 1;
+            }
+            draw_line(game, rx, ry,0xff0000, ra);
+        }
+        // exit(1);
+        ///////////////////////////////////////////////
+        if (disV < disH)
+        {
+            rx = vx;
+            ry = vy;
+        }
+        if (disV > disH)
+        {
+            rx = hx;
+            ry = hy;
+        }
         draw_line(game, rx, ry,0xff0000, ra);
+        // printf("yyyooooo\n");
         ra += DR;
-        if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
+        if (ra<0)
+        {
+            ra +=2*PI;
+        }
+        if (ra > 2*PI)
+        {
+            ra-=2*PI;
+        }
     }
     printf("all good and the value of the angle is {%f}\n", ra);
 }
