@@ -14,7 +14,7 @@
 
 void    initializer(t_game *game)
 {
-    game->gamer->fov = 60;
+    game->gamer->fov = 60.0;
     game->gamer->speed = 5; ///8 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
@@ -30,6 +30,8 @@ void    initializer(t_game *game)
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
     game->mapp->map_size = 0; /// To update: calculate number of rows * number of columns
+    game->mapp->win_width = 640;
+    game->mapp->win_height = 480;
 }
 
 void    creation_window(t_game *game)

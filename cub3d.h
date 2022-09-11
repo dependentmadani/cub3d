@@ -47,23 +47,18 @@ typedef struct	s_map
 	double	dy;
 	double theta;
 	int len_wall;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 } 				t_map;
 
 typedef struct	s_player
 {
-	int 	moved;
+	int moved;
 	double	player_posx;
 	double	player_posy;
-	double	player_angle;
-	double	player_dx;
-	double	player_dy;
-	int		speed;
-	int		fov; ///field of view
+	double player_angle;
+	double player_dx;
+	double player_dy;
+	int	speed;
+	double fov; ///field of view
 }				t_player;
 
 typedef struct s_game
@@ -172,9 +167,7 @@ void    put_player(t_game *game, int color);
 
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game);
-
-// mlx_function
-
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
+void    complete_rays_fov(t_game *game, double player_x, double player_y);
 
 #endif
