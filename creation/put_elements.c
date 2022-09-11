@@ -77,7 +77,7 @@ void    circle(t_game *game, int color)
     x = 0;
     y = 0;
     i = -r;
-    update_putting_floor(game, game->gamer->player_posx, game->gamer->player_posy);
+    // update_putting_floor(game, game->gamer->player_posx, game->gamer->player_posy);
     while(i<IMG_H)
     {
         j = -r;
@@ -147,11 +147,12 @@ void    put_floor(t_game *game)
 
 void    put_player(t_game *game, int color)
 {
-    // if (game->gamer->moved)
-    // {
-    //     // mlx_clear_window(game->mlx, game->win);
-    //     // draw_2d_map(game);
-    // }
+    if (game->gamer->moved)
+    {
+        mlx_clear_window(game->mlx, game->win);
+        // draw_2d_map(game);
+    }
+    (void)color;
     // put_wall(game);
     // put_floor(game);
     circle(game, color);
