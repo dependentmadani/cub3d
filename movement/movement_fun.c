@@ -45,8 +45,6 @@ void    movement_fun(t_game *game, char axis, int direction)
 		game->gamer->player_angle += 0.1;
 		if (game->gamer->player_angle > 2*PI)
 		    game->gamer->player_angle -= 2* PI;
-		if (game->gamer->player_angle < 0)
-		    game->gamer->player_angle += 2* PI;
 		game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->moved++;
@@ -57,8 +55,6 @@ void    movement_fun(t_game *game, char axis, int direction)
 		&& game->gamer->player_posy < game->mapp->map_y*IMG_W) /// will be removed
 	{
 		game->gamer->player_angle -= 0.1;
-		if (game->gamer->player_angle > 2*PI)
-		    game->gamer->player_angle -= 2* PI;
 		if (game->gamer->player_angle < 0)
 		    game->gamer->player_angle += 2* PI;
 		game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
