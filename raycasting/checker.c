@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 22:13:01 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/05 22:13:02 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/09/11 13:36:56 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ double dist(double ax, double ay, double bx, double by, double ang)
 void    spread_rays(t_game *game)
 {
     int r, mx, my,mp, fov;
-    double rx, ry, ra,xo, yo, disH, hx, hy, aTan;
+    double rx, ry, ra,xo, yo, disH, disV, hx, hy, vx, vy, aTan;
     (void)mp;
     ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
     // ra = game->gamer->player_angle;
@@ -247,6 +247,21 @@ void    spread_rays(t_game *game)
         // }
         // if (disV < disH) {rx = vx; ry =vy;}
         // if (disH < disV) {rx = hx; ry =hy;}
+        // fov = 0;
+        // disV=1000000, vx=game->gamer->player_posx, vy=game->gamer->player_posy;
+        // aTan = -tan(ra);
+        // if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx/6)*6)-0.0001; ry=(game->gamer->player_posx-rx)*aTan+game->gamer->player_posy; xo=-64; yo=-xo*aTan;} // looking left
+        // if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/6)*6)+64; ry=(game->gamer->player_posx-rx)*aTan+game->gamer->player_posy; xo=64; yo=-xo*aTan;} // looking right
+        // if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=8;}
+        // while (fov < 8)
+        // {
+        //     mx = (int)(rx)/64; my=(int)(ry)/64;  /// (ry >> 6 means that: ry / 64)
+        //     if (mx <= game->mapp->map_x && my <= game->mapp->map_y && game->newestmap[my][mx]== '1'){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=8;}
+        //     else {rx+=xo; ry+=yo;fov+=1;}
+        //     draw_line(game, rx, ry,0xff0000, ra);
+        // }
+        
+        /////////////////
         ra += DR;
     }
 }
