@@ -153,8 +153,8 @@ void    put_player(t_game *game, int color)
         // draw_2d_map(game);
     }
     (void)color;
-    put_wall(game);
-    put_floor(game);
+    // put_wall(game);
+    // put_floor(game);
     circle(game, color);
     spread_rays(game);
 }
