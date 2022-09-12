@@ -71,8 +71,8 @@ void    spread_rays(t_game *game)
         fov = 0;
         disH=1000000, hx=game->gamer->player_posx, hy=game->gamer->player_posy;
         aTan = -1/tan(ra);
-        if (ra < PI) {ry =(((int)game->gamer->player_posy/64)*64)-0.0001; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=-64; xo=-yo*aTan;}
-        if (ra > PI) {ry =(((int)game->gamer->player_posy/64)*64)+64; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=64; xo=-yo*aTan;}
+        if (ra < PI) {ry =(((int)game->gamer->player_posy / 64)*64)-0.0001; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=-64; xo=-yo*aTan;}
+        if (ra > PI) {ry =(((int)game->gamer->player_posy / 64) * 64)+64; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=64; xo=-yo*aTan;}
         if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=8;}
         // printf("before: \tpos x is {%f}\tthe value of rx {%f} and the value of ry {%f} angle nTan is {%f}\n", game->gamer->player_posx, rx, ry, aTan);
         while (fov < 8)
@@ -109,6 +109,7 @@ void    spread_rays(t_game *game)
         ra += DR;
         if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
         // printf("\n");
+
     }
     // printf("all good and the value of the angle is {%f}\n", ra);
 }
