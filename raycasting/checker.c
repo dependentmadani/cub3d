@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 22:13:01 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/05 22:13:02 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:25:24 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void    rays_until_wall_north(t_game* game)
     while (!collision_with_wall(game, i, j))
     {
         mlx_pixel_put(game->mlx, game->win, i, j, 0xff0000);
+        mlx_pixel_put(game->mlx, game->win, i+1, j, 0xff0000);
+        
+        mlx_pixel_put(game->mlx, game->win, i-1, j, 0xff0000);
+        mlx_pixel_put(game->mlx, game->win, i+2, j, 0xff0000);
+        mlx_pixel_put(game->mlx, game->win, i-2, j, 0xff0000);
         j--;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/06 21:47:39 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:54:28 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,107 +61,87 @@ int	check_only_spaces(char *s)
 	return (0);
 }
 
+void	assign_paths_rgbs(t_game *my_game, char *s)
+{
+	if (!ft_strncmp(s, "NO ", 3))
+	{
+		my_game->no_path = ft_substrzwina(s, 3, ft_strlen(s));
+		my_game->is_no = 1;
+	}
+	else if (!ft_strncmp(s, "SO ", 3))
+	{
+		my_game->so_path = ft_substrzwina(s, 3, ft_strlen(s));
+		my_game->is_so = 1;
+	}
+	else if (!ft_strncmp(s, "WE ", 3))
+	{
+		my_game->we_path = ft_substrzwina(s, 3, ft_strlen(s));
+		my_game->is_we = 1;
+	}
+	else if (!ft_strncmp(s, "EA ", 3))
+	{
+		my_game->ea_path = ft_substrzwina(s, 3, ft_strlen(s));
+		my_game->is_ea = 1;
+	}
+	else if (!ft_strncmp(s, "F ", 2))
+	{
+		my_game->f_path = ft_substrzwina(s, 2, ft_strlen(s));
+		my_game->is_f = 1;
+	}
+	else if (!ft_strncmp(s, "C ", 2))
+	{
+		my_game->c_path = ft_substrzwina(s, 2, ft_strlen(s));
+		my_game->is_c = 1;
+	}
+}
+
+int	is_path_rgb(char *s)
+{
+	if (!ft_strncmp(s, "NO ", 3) || !ft_strncmp(s, "SO ", 3)
+			|| !ft_strncmp(s, "WE ", 3) || !ft_strncmp(s, "EA ", 3)
+			|| !ft_strncmp(s, "F ", 2) || !ft_strncmp(s, "C ", 2))
+			return (1);
+	return (0);
+}
 static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 {
 	int	i;
 	int	count;
 	int	temp;
-	int	p_valid=0;//, lock = 0;
+	int	p_valid;
 
 	i = 0;
 	count = 0;
+	p_valid = 0;
 	while (s[i])
 	{
 		temp = i;
 		if (s[i] == c && p_valid < 6)
 		{
-			// printf("hi %d\n", i);
 			i++;
 			continue ;
 		}
-		else if (s[i] == c && p_valid >= 6/* && !lock*/)
-		{
-			// while (s[i] == c)
-				i+=2;
-		//	lock = 1;
-		}
-		// else if (s[i] == c && p_valid == 6 && lock)
-		// {
-		// 	i++;
-		// }
+		else if (s[i] == c && p_valid >= 6)
+			i+=2;
 		while (s[i] != c && s[i])
 			i++;
-		// if (check_only_spaces(ft_substr(s, temp, i - temp)))
-		// {
-			t[count] = ft_substr(s, temp, i - temp);
-			if (t[count] == NULL)
-				return (ft_del(t, count));
-			// if (t[count][0] == 'C' && t[count][1] == ' ')
-			if (!ft_strncmp(t[count], "NO ", 3) || !ft_strncmp(t[count], "SO ", 3) || !ft_strncmp(t[count], "WE ", 3) || !ft_strncmp(t[count], "EA ", 3) || !ft_strncmp(t[count], "F ", 2) || !ft_strncmp(t[count], "C ", 2))
-			{
-				if (p_valid == 5)
-				{
-					while (s[i] == c)
-						i++;
-				}
-				p_valid++;
-			}
-		//	printf("t[%d] -%s-\n", count, t[count]);
-			if (!ft_strncmp(t[count], "NO ", 3))
-			{
-				// my_game->no_path = ft_sstrcpy(my_game->no_path, t[count]);
-				my_game->no_path = ft_substr(t[count], 3, ft_strlen(t[count]));
-				my_game->is_no = 1;
-			}
-			else if (!ft_strncmp(t[count], "SO ", 3))
-			{
-				// my_game->so_path = ft_sstrcpy(my_game->so_path, t[count]);
-				my_game->so_path = ft_substr(t[count], 3, ft_strlen(t[count]));
-				my_game->is_so = 1;
-			}
-			else if (!ft_strncmp(t[count], "WE ", 3))
-			{
-				// my_game->we_path = ft_sstrcpy(my_game->we_path, t[count]);
-				my_game->we_path = ft_substr(t[count], 3, ft_strlen(t[count]));
-				my_game->is_we = 1;
-			}
-			else if (!ft_strncmp(t[count], "EA ", 3))
-			{
-				// my_game->ea_path = ft_sstrcpy(my_game->ea_path, t[count]);
-				my_game->ea_path = ft_substr(t[count], 3, ft_strlen(t[count]));
-				my_game->is_ea = 1;
-			}
-			else if (!ft_strncmp(t[count], "F ", 2))
-			{
-				// ft_sstrcpy(my_game->no_path, t[count]);
-				my_game->f_path = ft_substr(t[count], 2, ft_strlen(t[count]));
-				my_game->is_f = 1;
-			}
-			else if (!ft_strncmp(t[count], "C ", 2))
-			{
-				// ft_sstrcpy(my_game->no_path, t[count]);
-				my_game->c_path = ft_substr(t[count], 2, ft_strlen(t[count]));
-				my_game->is_c = 1;
-			}
-			count++;
-		// }
+		t[count] = ft_substr(s, temp, i - temp);
+		if (t[count] == NULL)
+			return (ft_del(t, count));
+		if (is_path_rgb(t[count]))
+		{
+			assign_paths_rgbs(my_game, t[count]);
+			if (p_valid == 5)
+				while (s[i] == c)
+					i++;
+			p_valid++;
+		}
+		count++;
 	}
-	// count++;
 	t[count] = 0;
 	if (my_game->is_no != 1 || my_game->is_so != 1 || my_game->is_we != 1 || my_game->is_ea != 1 || my_game->is_f != 1 || my_game->is_c != 1)
-	{
-		printf("missing pathes or colors!\n");
-		exit(1);
-	}
-	printf("no %s\n", my_game->no_path);
-	printf("so %s\n", my_game->so_path);
-	printf("we %s\n", my_game->we_path);
-	printf("ea %s\n", my_game->ea_path);
-	printf("f %s\n", my_game->f_path);
-	printf("c %s\n", my_game->c_path);
-	// for(int i=0;t[i];i++)
-	// 	printf("~%s+\n", t[i]);
-	// exit(1);
+		print_error_and_exit("missing paths or colors!");
+	my_game->num_rows = count;
 	return (t);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/07 11:10:59 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:23:19 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ typedef struct s_game
 	int		loop;
 	int		gg;
 	int		longestWidth;
-	int		longestWidth_start;
-	int		longestWidth_end;
+	// int		longestWidth_start;
+	// int		longestWidth_end;
+	int		num_rows;
 	int		paths_valid;
 	int		colors_valid;
 	int		is_no;
@@ -103,15 +104,21 @@ typedef struct s_game
 	int		*c_rgb;
 	t_player *gamer;
 	t_map    *mapp;
+	double	min_rad;
+	double	max_rad;
 }	t_game;
+
+// initializer
+void	ft_initializer(t_game *my_game);
 
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game, t_player *player, t_map *map);
+void	get_map(char *av, t_game *my_game/*, t_player *player, t_map *map*/);
+char	**render_new_map(t_game *my_game);
 
 // check paths of the map
-void	check_map_paths(t_game *my_game);
+void	check_map_paths_rgbs(t_game *my_game);
 
 // check map
 void	check_map(t_game *my_game);
@@ -119,7 +126,12 @@ char	**check_map_map(t_game *my_game);
 
 int	ft_strncmp(char *s1, char *s2, int n);
 
+// map utils
+void	get_longestWidth(t_game *my_game);
+char	**splitRgb(char *s, char c);
+
 //// -------------- utils
+int		check_rev_file(char *s);
 char	**ft_split(t_game *my_game, char *s, char c);
 int		ft_strlen(char *s);
 char	*ft_substr(char	*s, int start, int len);
@@ -138,7 +150,10 @@ char	*ft_sstrcpy(char *dst, char *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
-int	ft_atoi(const char	*str);
+int		ft_atoi(const char	*str);
+
+// errors
+void print_error_and_exit(char *s);
 
 // window
 
