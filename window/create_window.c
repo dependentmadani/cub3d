@@ -46,7 +46,6 @@ void    count_the_map(t_game *game)
             game->mapp->map_y +=1;
         i++;
     }
-    // printf("the value of map_x {%d} and map_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
@@ -93,37 +92,31 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
-    printf("was here\n");
+    put_floor(game);
+    put_wall(game);
     while (game->newestmap[i])
     {
         j = 0;
         while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
-            printf("%c", game->newestmap[i][j]);
-            if (game->newestmap[i][j] == '0')
-                put_floor(game);
-            else if (game->newestmap[i][j] == '1')
-                put_wall(game);
-            else if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
+            if (game->newestmap[i][j] == 'N' || game->newestmap[i][j] == 'S'
                 || game->newestmap[i][j] == 'E'|| game->newestmap[i][j] == 'W') 
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H/2;
                 game->gamer->player_posy = IMG_W * i + IMG_W/2;
-                put_player(game, game->newestmap[i][j], 0x00ff00, 0);
+                put_player(game, 0x00ff00);
             }
             j++;
         }
-        printf("\n");
         i++;
     }
-    draw_2d_map(game);
+    // draw_2d_map(game);
 }
 
 void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
-    printf("the size of map_x {%d} and mapp_y {%d}\n", game->mapp->map_x, game->mapp->map_y);
 }
 
 void create_window(t_game *game)
@@ -136,6 +129,9 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
+    game->mapp->img = mlx_new_image(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1);
+	game->mapp->addr = mlx_get_data_addr(game->mapp->img, &game->mapp->bits_per_pixel, &game->mapp->line_length,
+								&game->mapp->endian);
     put_map_2d(game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);
