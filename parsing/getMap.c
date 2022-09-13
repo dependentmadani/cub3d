@@ -398,9 +398,9 @@ void	get_map(char *av, t_game *my_game, t_player *player, t_map *map)
 	check_map(my_game);
 	check_map_paths(my_game);
 	get_rgb_values(my_game);
+	printf("sh is good\n");
 	my_game->mapp = map;
 	my_game->gamer = player;
-	printf("sh is good\n");
 	// exit(1);
 	creation_window(my_game);
 	free(temp);

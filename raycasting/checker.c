@@ -95,16 +95,15 @@ void    spread_rays(t_game *game)
         }
         if (disV < disH) {rx = vx; ry =vy; disT = disV; color=0x0000ff;}
         if (disH < disV) {rx = hx; ry =hy; disT = disH; color=0xff0000;}
+        // printf("the value of ");
         double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
         double lineH = (game->mapp->map_size * game->mapp->win_height)/disT; if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
         double lineOffset = (game->mapp->win_height/2) - (lineH/2);
-        // printf("the size of map is {%d} and disT = {%f}\n", game->mapp->map_size, disT);
-        // printf("the value of lineH {%f} and the value of lineOffset = {%f}\n", lineH, lineOffset);
-        // draw_line(game, (r)*game->mapp->map_x, -lineH/2 + lineOffset,0xff0000, ra);
         draw_line(game, (r)*(game->mapp->win_width/60), lineH+lineOffset ,color, ra);
         draw_line(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
-
+        // printf("the value of lineOffset = {%f}\n", lineOffset);
         ra += DR;
         if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
     }
+    // printf("the length of of map in x axis {%f} and in y axis {%f}\n", game->mapp->map_x, game->mapp->map_y);
 }

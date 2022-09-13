@@ -24,12 +24,12 @@ void    initializer(t_game *game)
     game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
     // game->map_w = 320; /// 320 units means 320 pixels
     // game->map_h = 200;
+    game->mapp->win_width = 640;
+    game->mapp->win_height = 480;
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
     game->mapp->map_size = 0; /// To update: calculate number of rows * number of columns
-    game->mapp->win_width = 640;
-    game->mapp->win_height = 480;
 }
 
 void    creation_window(t_game *game)
