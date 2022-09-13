@@ -27,7 +27,7 @@ SRC = main.c\
 		movement/keymovement.c \
 		movement/movement_fun.c \
 		creation/put_elements.c \
-		raycasting/checker_v1.c \
+		raycasting/checker.c \
 
 OBJ = $(SRC:.c=.o)
 

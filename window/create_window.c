@@ -46,6 +46,7 @@ void    count_the_map(t_game *game)
             game->mapp->map_y +=1;
         i++;
     }
+    game->mapp->map_size = game->mapp->map_x * game->mapp->map_y;
 }
 
 int draw_vert_line(t_game *game, int begin_x, int begin_y, int end_x, int end_y)
@@ -92,8 +93,8 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
-    put_floor(game);
-    put_wall(game);
+    // put_floor(game);
+    // put_wall(game);
     while (game->newestmap[i])
     {
         j = 0;
@@ -128,7 +129,7 @@ void create_window(t_game *game)
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
-    game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
+    game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
     put_map_2d(game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);
