@@ -59,12 +59,12 @@ double dist(double ax, double ay, double bx, double by, double ang)
 
 void    spread_rays(t_game *game)
 {
-    int r, fov;
+    int r, fov, mp, mx, my;
     double rx, ry, ra,xo, yo, disH, hx, hy, aTan, nTan;
 
-    // ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
+    ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
     // printf("the value of angle {%f}\n", ra);
-    ra = game->gamer->player_angle;
+    // ra = game->gamer->player_angle;
     for (r=0; r< 60; r++)
     {
         ///// check the horizontal lines
@@ -77,7 +77,8 @@ void    spread_rays(t_game *game)
         // printf("before: \tpos x is {%f}\tthe value of rx {%f} and the value of ry {%f} angle nTan is {%f}\n", game->gamer->player_posx, rx, ry, aTan);
         while (fov < 13)
         {
-            if (collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=14;}
+            mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
+            if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=14;}
             else {rx+=xo; ry+=yo;fov+=1;}
         }
         // printf("first: \tpos x is {%f}\tthe value of hx {%f} and the value of hy {%f} angle nTan is {%f}\n", game->gamer->player_posx, hx, hy, aTan);
@@ -91,7 +92,6 @@ void    spread_rays(t_game *game)
         //     nTan = 0;
         // else
         nTan = -tan(ra);
-        // nTan = 0;
         if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=13;}
         if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx/64)*64)+64; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=64; yo=-xo*nTan;}
         if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/64)*64)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;} // problem need to be fixed here
@@ -101,7 +101,8 @@ void    spread_rays(t_game *game)
         // printf("position of player in x {%f} and in y {%f}\n", game->gamer->player_posx, game->gamer->player_posy);
         while (fov < 12)
         {
-            if (collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=13;}
+            mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
+            if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=13;}
             else {rx+=xo; ry+=yo;fov+=1;}
         }
         // printf("r = {%d}\n", r);
