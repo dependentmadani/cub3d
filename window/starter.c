@@ -22,10 +22,8 @@ void    initializer(t_game *game)
     game->gamer->player_angle = PI/2; // it means 90 degree, it should be modified depends on the direction of player at starts
     game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
     game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
-    game->map_w = 320; /// 320 units means 320 pixels
-    game->map_h = 200;
-    // game->mapp->win_width = 3200;
-    // game->mapp->win_height = 2000;
+    // game->map_w = 320; /// 320 units means 320 pixels
+    // game->map_h = 200;
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
