@@ -12,6 +12,20 @@
 
 #include "../cub3d.h"
 
+int empty_line(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != '#')
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
 void    count_the_map(t_game *game)
 {
     int i;
@@ -32,17 +46,7 @@ void    count_the_map(t_game *game)
     i = 0;
     while (game->newestmap[i])
     {
-        j = 0;
-        while (!i && game->newestmap[i][j] && game->newestmap[i][j] != '\n')
-        {
-            j++;
-            if (game->newestmap[i][j-1] != '#')
-            {
-                j = -1;
-                break;
-            }
-        }
-        // if (j != -1)
+        if (empty_line(game->newestmap[i]))
             game->mapp->map_y +=1;
         i++;
     }
