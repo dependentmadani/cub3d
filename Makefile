@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/09/08 16:32:00 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/09/13 12:10:53 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ SRC = main.c\
 		parsing/getMap_utils.c\
 		parsing/checkMap.c\
 		parsing/checkMapMap.c\
-		parsing/checkPaths.c\
+		parsing/checkPathsRgbs.c\
 		parsing/renderNewMap.c\
+		parsing/splitRgb.c\
+		utils/initializer.c\
 		utils/utils.c\
 		utils/utils2.c\
 		utils/ft_split.c\

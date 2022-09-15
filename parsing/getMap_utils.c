@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:22:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/08 16:54:27 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:20:35 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void get_longestWidth(t_game *my_game)
 			int x=0;
 			while (my_game->newmap[i][x] != '1')
 				x++;
-			// my_game->longestWidth_start = x;
-			// my_game->longestWidth_end = temp;
 		}
 		i++;
 	}

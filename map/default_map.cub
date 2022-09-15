@@ -1,5 +1,5 @@
-NO ./path_to_the_north_texture.xpm
-SO ./path_to_the_south_texture.xpm
+NO ./images/wall.xpm
+SO ./images/floor.xpm
 WE ./path_to_the_west_texture.xpm
 EA ./path_to_the_east_texture.xpm
 

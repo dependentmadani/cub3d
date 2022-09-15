@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:24:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/08 16:45:11 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:04:28 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	fill_em(char *s, int *i)
 {
-	// printf("dghl %s\n", s);
 	while ((s[*i] == '0' || s[*i] == '1' || s[*i] == 'S' || s[*i] == 'N') && s[*i] != '\n')
 		(*i)++;
 }
@@ -22,10 +21,7 @@ void	fill_em(char *s, int *i)
 void	skip_em(char *s, int *i)
 {
 	while ((s[*i] == ' ' || s[*i] == '\t') && s[*i] != '\n')
-	{
-		// t = ft_strjoin2(t, "#");
 		(*i)++;
-	}
 }
 
 char	*creat_fill(int x)
@@ -40,79 +36,74 @@ char	*creat_fill(int x)
 		s = ft_strjoin(s, "#");
 		i++;
 	}
-	// printf("#s %s", s);
 	return (s);
+}
+
+char	*get_space_tab(char *t, char *s, int *j)
+{
+	int	start;
+
+	start = *j;
+	skip_em(s, j);
+	t = ft_strjoin(t, creat_fill(*j - start));
+	return (t);
+}
+
+char	*get_other_chars(char *t, char *s, int *j)
+{
+	int	start;
+
+	start = *j;
+	fill_em(s, j);
+	t = ft_strjoin(t, ft_substr(s, start, *j - start));
+	return (t);
+}
+
+int	other_chars_condition(char c)
+{
+	if (c == '1' || c == '0' || c == 'S' || c == 'N'|| c == 'A' || c == 'E')
+		return (1);
+	return (0);
+}
+
+char	*filling_countinues(char *t, int *j, int longestWidth)
+{
+	int	start;
+
+	start = *j;
+	while (*j < longestWidth)
+		(*j)++;
+	t = ft_strjoin(t, creat_fill(*j - start));
+	return (t);
 }
 
 char	**render_new_map(t_game *my_game)
 {
 	char	**t;
 	int		i;
-	int		j;
 	int		x;
-	int		start;
-	// int		y;
+	int		j;
 
 	i = 6;
 	j = 0;
 	x = 0;
-	start = 0;
 	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
-	// y = 0;
-	// while (my_game->map[i][0] == '\n')
-	// {
-	// 	i++;
-	// 	printf("hi %d time\n", i);
-	// }
-	// printf("\nb %s\n", my_game->newmap[i]);
 	while (my_game->newmap[i] != '\0')
 	{
 		j = 0;
 		while (my_game->newmap[i][j] != '\0')
 		{
-			printf("c -%c-\n", my_game->map[i][j]);
 			if (my_game->newmap[i][j] == ' ' || my_game->newmap[i][j] == '\t')
-			{
-				printf("malna\n");
-				start = j;
-				skip_em(my_game->newmap[i], &j);
-				// printf("start %d j %d\n", start, j);
-				t[x] = ft_strjoin(t[x], creat_fill(j - start));
-			// printf("yya %s\n", t[x]);
-				// printf("t %s\n", t[x]);
-				// t[x] = ft_strjoin(t[x], ft_substr(my_game->map[i], start, j));
-				// printf("yo space %s >>%d\n", t[x], j);
-				// x++;
-			}
-			else if (my_game->newmap[i][j] == '1' || my_game->newmap[i][j] == '0' || my_game->newmap[i][j] == 'S' || my_game->newmap[i][j] == 'N')
-			{
-				start = j;
-				fill_em(my_game->newmap[i], &j);
-				// printf("j %d, start %d\n", j, start);
-				t[x] = ft_strjoin(t[x], ft_substr(my_game->newmap[i], start, j-start));
-				// printf("yo valid char %s >>%d\n", t[x], j);
-			}
+				t[x] = get_space_tab(t[x], my_game->newmap[i], &j);
+			else if (other_chars_condition(my_game->newmap[i][j]))
+				t[x] = get_other_chars(t[x], my_game->newmap[i], &j);
 			else
-			{
-				printf("invalid character\n");
-				exit(1);
-				// j++;
-			}
-			// j++;
+				print_error_and_exit("invalid character!");
 		}
-		// printf("strl %d, longest %d, j %d, libina %d\n", ft_strlen(t[x]), my_game->longestWidth, j, (j - my_game->longestWidth));
 		if (j < my_game->longestWidth)
-		{
-			// printf("y\n");
-			start = j;
-			while (j < my_game->longestWidth)
-				j++;
-			t[x] = ft_strjoin(t[x], creat_fill(j - start));
-		}
-		// my_game->map[i][j] = '\0';
-		// printf("check strln %d\n", ft_strlen(t[x]));
-		i++;
+			t[x] = filling_countinues(t[x], &j, my_game->longestWidth);
 		x++;
+		i++;
 	}
 	t[x] = 0;
 	return (t);
