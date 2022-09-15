@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:24:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 13:16:33 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:04:28 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,24 @@ char	*creat_fill(int x)
 	return (s);
 }
 
-void	get_space_tab(char *t, char *s, int *j)
+char	*get_space_tab(char *t, char *s, int *j)
 {
 	int	start;
 
 	start = *j;
 	skip_em(s, j);
 	t = ft_strjoin(t, creat_fill(*j - start));
+	return (t);
 }
 
-void	get_other_chars(char *t, char *s, int *j)
+char	*get_other_chars(char *t, char *s, int *j)
 {
 	int	start;
 
 	start = *j;
 	fill_em(s, j);
 	t = ft_strjoin(t, ft_substr(s, start, *j - start));
+	return (t);
 }
 
 int	other_chars_condition(char c)
@@ -64,7 +66,7 @@ int	other_chars_condition(char c)
 	return (0);
 }
 
-void	filling_countinues(char *t, int *j, int longestWidth)
+char	*filling_countinues(char *t, int *j, int longestWidth)
 {
 	int	start;
 
@@ -72,16 +74,19 @@ void	filling_countinues(char *t, int *j, int longestWidth)
 	while (*j < longestWidth)
 		(*j)++;
 	t = ft_strjoin(t, creat_fill(*j - start));
+	return (t);
 }
 
 char	**render_new_map(t_game *my_game)
 {
 	char	**t;
 	int		i;
+	int		x;
 	int		j;
 
 	i = 6;
 	j = 0;
+	x = 0;
 	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
 	while (my_game->newmap[i] != '\0')
 	{
@@ -89,16 +94,17 @@ char	**render_new_map(t_game *my_game)
 		while (my_game->newmap[i][j] != '\0')
 		{
 			if (my_game->newmap[i][j] == ' ' || my_game->newmap[i][j] == '\t')
-				get_space_tab(t[i], my_game->newmap[i], &j);
+				t[x] = get_space_tab(t[x], my_game->newmap[i], &j);
 			else if (other_chars_condition(my_game->newmap[i][j]))
-				get_other_chars(t[i], my_game->newmap[i], &j);
+				t[x] = get_other_chars(t[x], my_game->newmap[i], &j);
 			else
 				print_error_and_exit("invalid character!");
 		}
 		if (j < my_game->longestWidth)
-			filling_countinues(t[i], &j, my_game->longestWidth);
+			t[x] = filling_countinues(t[x], &j, my_game->longestWidth);
+		x++;
 		i++;
 	}
-	t[i] = 0;
+	t[x] = 0;
 	return (t);
 }
