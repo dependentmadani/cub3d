@@ -77,7 +77,6 @@ void    circle(t_game *game, int color)
     x = 0;
     y = 0;
     i = -r;
-    // update_putting_floor(game, game->gamer->player_posx, game->gamer->player_posy);
     while(i<IMG_H)
     {
         j = -r;
@@ -155,6 +154,6 @@ void    put_player(t_game *game, int color)
     (void)color;
     // put_wall(game);
     // put_floor(game);
-    // circle(game, color);
+    circle(game, color);
     spread_rays(game);
 }
