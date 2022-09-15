@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 11:56:49 by mbadaoui          #+#    #+#             */
+/*   Updated: 2022/09/15 11:56:51 by mbadaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int collision_with_wall(t_game *game, double pos_x, double pos_y)
@@ -13,44 +25,6 @@ int collision_with_wall(t_game *game, double pos_x, double pos_y)
 		return (1);
 	return (0);
 }
-
-// int draw(t_game *game, double end_x, double end_y, int color, int angle)
-// {
-//     double d_x;
-//     double d_y;
-//     int pixel;
-//     double pixel_dx;
-//     double pixel_dy;
-//     (void)angle;
-
-//     d_x = end_x - game->gamer->player_posx;
-//     d_y = end_y - game->gamer->player_posy;
-//     pixel = sqrt((d_y * d_y));
-//     // d_x /= pixel;
-//     d_y /= pixel;
-//     // pixel_dx = game->gamer->player_posx;
-//     pixel_dx = end_x;
-//     pixel_dy = end_y;
-//     // pixel = end_y;
-//     while (pixel > 0)
-//     {
-//         // if (pixel_dx > game->mapp->map_x*IMG_H || pixel_dx < 0)
-//         // {
-//         //     pixel--;
-//         //     continue;
-//         // }
-//         // if (pixel_dy > game->mapp->map_y*IMG_W || pixel_dy < 0)
-//         // {
-//         //     pixel--;
-//         //     continue;
-//         // }
-//         mlx_pixel_put(game->mlx, game->win, pixel_dx, pixel_dy, color);
-//         // pixel_dx += d_x;
-//         pixel_dy += d_y;
-//         pixel--;
-//     }
-//     return (0);
-// }
 
 int draw(t_game *game, double end_x, double end_y, int color, int angle)
 {
@@ -136,7 +110,7 @@ void    spread_rays(t_game *game)
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		// double lineH = (game->mapp->map_size * game->mapp->win_height)/disT; if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
 		double lineH = (64*277)/(disT); //if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
-		double lineOffset = (game->mapp->win_height/2) - (lineH/2);
+		// double lineOffset = (game->mapp->win_height/2) - (lineH/2);
 		draw(game, (r)*(game->mapp->win_width/60), lineH,color, ra);
 		// draw(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
 		// printf("the value of lineOffset is {%f} and the value of lineH is {%f} and disT {%f}\n", lineOffset, lineH, disT);

@@ -135,6 +135,7 @@ void create_window(t_game *game)
 	}
     game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
     put_map_2d(game);
+    mlx_hook(game->win, 2, 1L<<0, keyword_move, game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);
     mlx_loop(game->mlx);

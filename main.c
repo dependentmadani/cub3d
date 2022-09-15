@@ -30,7 +30,6 @@ int	main(int ac, char **av)
 		tg.mapp = mp;
 		tg.gamer = py;
 		printf("sh is good\n");
-		exit(1);
 		creation_window(&tg);
 		// for(int i=0;tg.newmap[i];i++)
 		// 	printf("-%s-\n", tg.newmap[i]);
