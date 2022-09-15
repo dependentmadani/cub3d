@@ -28,38 +28,44 @@ int collision_with_wall(t_game *game, double pos_x, double pos_y)
 
 int draw(t_game *game, double end_x, double end_y, int color, int angle)
 {
-	double d_x;
-	double d_y;
-	int pixel;
 	double pixel_dx;
 	double pixel_dy;
 	(void)angle;
 
-	d_x = end_x - game->gamer->player_posx;
-	d_y = end_y - game->gamer->player_posy;
-	pixel = sqrt((d_x * d_x) + (d_y * d_y));
-	// d_x /= pixel;
-	d_y /= pixel;
-	// pixel_dx = game->gamer->player_posx;
 	pixel_dx = end_x;
 	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
-	while (pixel_dy <= (game->mapp->win_height/2) + (end_y/2))
+	while (pixel_dy <= (int)((game->mapp->win_height/2) + (end_y/2)))
 	{
-		// if (pixel_dx > game->mapp->map_x*IMG_H || pixel_dx < 0)
-		// {
-		//     pixel--;
-		//     continue;
-		// }
-		// if (pixel_dy > game->mapp->map_y*IMG_W || pixel_dy < 0)
-		// {
-		//     pixel--;
-		//     continue;
-		// }
 		mlx_pixel_put(game->mlx, game->win, pixel_dx, pixel_dy, color);
-		// pixel_dx += d_x;
 		pixel_dy += 1;
 	}
 	return (0);
+}
+
+int draw_line(t_game *game, double end_x, double end_y, int color, int angle)
+{
+    double d_x;
+    double d_y;
+    int pixel;
+    double pixel_dx;
+    double pixel_dy;
+    (void)angle;
+
+    d_x = end_x - game->gamer->player_posx;
+    d_y = end_y - game->gamer->player_posy;
+    pixel = sqrt((d_x * d_x) + (d_y * d_y));
+    d_x /= pixel;
+    d_y /= pixel;
+    pixel_dx = game->gamer->player_posx;
+    pixel_dy = game->gamer->player_posy;
+    while (pixel > 0)
+    {
+        mlx_pixel_put(game->mlx, game->win, pixel_dx, pixel_dy, color);
+        pixel_dx += d_x;
+        pixel_dy += d_y;
+        pixel--;
+    }
+    return (0);
 }
 
 double dist(double ax, double ay, double bx, double by, double ang)
@@ -90,7 +96,6 @@ void    spread_rays(t_game *game)
 			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=14;}
 			else {rx+=xo; ry+=yo;fov+=1;}
 		}
-
 		///// check the vertical lines
 		fov = 0;
 		double disV=1000000, vx=game->gamer->player_posx, vy=game->gamer->player_posy;
@@ -101,16 +106,17 @@ void    spread_rays(t_game *game)
 		while (fov < 12)
 		{
 			mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
-			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=13;}
+			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=14;}
 			else {rx+=xo; ry+=yo;fov+=1;}
 		}
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; color=0x0000ff;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; color=0xff0000;}
-		// printf("the value of ");
+		// double x = (game->mapp->win_width/(game->mapp->map_x*IMG_W));
+		// double y = (game->mapp->win_height/(game->mapp->map_y*IMG_H));
+		// draw_line(game, rx, ry,color, ra);
+		// printf("print the value of rx {%f} and ry {%f}\n", rx*x, ry*y);
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
-		// double lineH = (game->mapp->map_size * game->mapp->win_height)/disT; if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
-		double lineH = (64*277)/(disT); //if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
-		// double lineOffset = (game->mapp->win_height/2) - (lineH/2);
+		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
 		draw(game, (r)*(game->mapp->win_width/60), lineH,color, ra);
 		// draw(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
 		// printf("the value of lineOffset is {%f} and the value of lineH is {%f} and disT {%f}\n", lineOffset, lineH, disT);

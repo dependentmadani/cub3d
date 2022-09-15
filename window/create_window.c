@@ -46,7 +46,7 @@ void    count_the_map(t_game *game)
     i = 0;
     while (game->newestmap[i])
     {
-        if (empty_line(game->newestmap[i]))
+        // if (empty_line(game->newestmap[i]))
             game->mapp->map_y +=1;
         i++;
     }
@@ -97,8 +97,6 @@ void put_map_2d(t_game *game)
     int j;
 
     i = 0;
-    // put_floor(game);
-    // put_wall(game);
     while (game->newestmap[i])
     {
         j = 0;
@@ -115,7 +113,6 @@ void put_map_2d(t_game *game)
         }
         i++;
     }
-    // draw_2d_map(game);
 }
 
 void draw_2d_map(t_game * game)
@@ -134,6 +131,8 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
+    // game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
+    printf("the value of the last map is {%f}\n", game->mapp->map_y);
     put_map_2d(game);
     mlx_hook(game->win, 2, 1L<<0, keyword_move, game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
