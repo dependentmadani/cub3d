@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:00:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 16:20:52 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:58:40 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(int ac, char **av)
 		get_map(av[1], &tg/*, py, mp*/);
 		tg.mapp = mp;
 		tg.gamer = py;
-		// printf("sh is good\n");
-		// exit(1);
+		printf("sh is good\n");
 		creation_window(&tg);
 		// for(int i=0;tg.newmap[i];i++)
 		// 	printf("-%s-\n", tg.newmap[i]);

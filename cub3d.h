@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 12:23:19 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:39:55 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_game
 	char	**char_c_rgb;
 	int		*f_rgb;
 	int		*c_rgb;
+	int		c_color;
+	int		f_color;
 	t_player *gamer;
 	t_map    *mapp;
 	double	min_rad;
