@@ -1,10 +1,10 @@
 NO ./images/wall.xpm
-SO ./images/floor.xpm
-WE ./path_to_the_west_texture.xpm
-EA ./path_to_the_east_texture.xpm
+SO ./images/wall.xpm
+WE ./images/floor.xpm
+EA ./images/floor.xpm
 
-F 220,100,230
-C 225,130,230
+F 122,10,230
+C 77,200,0
 
         
         1111111111111111111111111
