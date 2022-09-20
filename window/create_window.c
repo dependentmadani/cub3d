@@ -115,6 +115,12 @@ void put_map_2d(t_game *game)
     }
 }
 
+void	rgb_converter(t_game *game)
+{
+	game->mapp->color_floor = (game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]);
+	game->mapp->color_ceiling = (game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]);
+}
+
 void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
@@ -130,8 +136,8 @@ void create_window(t_game *game)
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
+    rgb_converter(game);
     game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
-    // game->win = mlx_new_window(game->mlx, IMG_H * game->mapp->map_x +1, IMG_W *game->mapp->map_y +1, "cub3d");
     put_map_2d(game);
     mlx_hook(game->win, 2, 1L<<0, keyword_move, game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);

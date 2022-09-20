@@ -52,6 +52,35 @@ int draw_line(t_game *game, double end_x, double end_y, int color, int angle)
     return (0);
 }
 
+// void    img_pix_put(t_map *map, int x, int y, int color)
+// {
+//     char    *pixel;
+//     int     i;
+
+//     i = map->img->bpp - 8;
+//     pixel = map->img->addr + (y * map->img->line_len + x * (map->img->bpp / 8));
+//     while (i >= 0)
+//     {
+//         /* big endian, MSB is the leftmost bit */
+//         if (map->img->endian != 0)
+//             *pixel++ = (color >> i) & 0xFF;
+//         /* little endian, LSB is the leftmost bit */
+//         else
+//             *pixel++ = (color >> (map->img->bpp - 8 - i)) & 0xFF;
+//         i -= 8;
+//     }
+// }
+
+// void draw_wall_image(t_game *game, int start_pos_y, int end_pos_y, int start_pos_x)
+// {
+// 	t_img img;
+
+// 	img = *game->mapp->img;
+// 	img.mlx_img = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
+// 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+
+// }
+
 int draw(t_game *game, double end_x, double end_y, int color, int angle)
 {
 	double pixel_dx;
@@ -60,12 +89,25 @@ int draw(t_game *game, double end_x, double end_y, int color, int angle)
 	(void)angle;
 
 	pixel_dx = end_x;
-	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
-	while (pixel_dy <= (int)((game->mapp->win_height/2) + (end_y/2)))
+	pixel_dy = 0;
+	while (pixel_dy <= (int)((game->mapp->win_height)))
 	{
 		x = pixel_dx;
-		while (x < (pixel_dx + 10))
-			mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
+		if (pixel_dy < (game->mapp->win_height/2)-(end_y/2))
+		{
+			while (x < (pixel_dx + 10))
+				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, game->mapp->color_ceiling);
+		}
+		else if (pixel_dy > ((game->mapp->win_height/2)-end_y/2) && pixel_dy < ((game->mapp->win_height/2)+end_y/2))
+		{
+			while (x < (pixel_dx + 10))
+				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
+		}
+		else
+		{
+			while (x < (pixel_dx + 10))
+				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, game->mapp->color_floor);
+		}
 		pixel_dy += 1;
 	}
 	return (0);
@@ -77,10 +119,6 @@ double dist(double ax, double ay, double bx, double by, double ang)
 	return (sqrt((bx - ax)*(bx - ax) + (by - ay)* (by-ay)));
 }
 
-// void draw_wall_image(t_game *game, int *start_pos, int *end_pos)
-// {
-	
-// }
 
 void    spread_rays(t_game *game)
 {
@@ -120,7 +158,11 @@ void    spread_rays(t_game *game)
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; color=0xff0000;}
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
+		// double top_pixel_wall = game->mapp->win_height/2 - lineH/2;
+		// double end_pixel_wall = game->mapp->win_height/2 + lineH/2;
 		draw(game, (r)*(game->mapp->win_width/60), lineH,color, ra);
+		
+
 		// draw(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
 		// printf("the value of lineOffset is {%f} and the value of lineH is {%f} and disT {%f}\n", lineOffset, lineH, disT);
 		// printf("the value of lineOffset = {%f}\n", lineOffset);

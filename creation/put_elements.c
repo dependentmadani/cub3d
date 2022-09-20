@@ -154,6 +154,6 @@ void    put_player(t_game *game, int color)
     (void)color;
     // put_wall(game);
     // put_floor(game);
-    circle(game, color);
+    // circle(game, color);
     spread_rays(game);
 }
