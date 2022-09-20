@@ -52,41 +52,49 @@ int draw_line(t_game *game, double end_x, double end_y, int color, int angle)
     return (0);
 }
 
-// void    img_pix_put(t_map *map, int x, int y, int color)
-// {
-//     char    *pixel;
-//     int     i;
+void    img_pix_put(t_map *map, int x, int y, int color)
+{
+    char    *pixel;
+    int     i;
 
-//     i = map->img->bpp - 8;
-//     pixel = map->img->addr + (y * map->img->line_len + x * (map->img->bpp / 8));
-//     while (i >= 0)
-//     {
-//         /* big endian, MSB is the leftmost bit */
-//         if (map->img->endian != 0)
-//             *pixel++ = (color >> i) & 0xFF;
-//         /* little endian, LSB is the leftmost bit */
-//         else
-//             *pixel++ = (color >> (map->img->bpp - 8 - i)) & 0xFF;
-//         i -= 8;
-//     }
-// }
+    i = map->img->bpp - 8;
+    pixel = map->img->addr + (y * map->img->line_len + x * (map->img->bpp / 8));
+    while (i >= 0)
+    {
+        /* big endian, MSB is the leftmost bit */
+        if (map->img->endian != 0)
+            *pixel++ = (color >> i) & 0xFF;
+        /* little endian, LSB is the leftmost bit */
+        else
+            *pixel++ = (color >> (map->img->bpp - 8 - i)) & 0xFF;
+        i -= 8;
+    }
+}
 
-// void draw_wall_image(t_game *game, int start_pos_y, int end_pos_y, int start_pos_x)
-// {
-// 	t_img img;
+void draw_wall_image(t_game *game, int pos_x, int pos_y)
+{
+	t_img img;
+	char	*pixel;
+	int	height;
+	int	width;
 
-// 	img = *game->mapp->img;
-// 	img.mlx_img = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
-// 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-
-// }
+	img = *game->mapp->img;
+	// img.mlx_img = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
+	img.mlx_img = mlx_xpm_file_to_image(game->mlx, game->so_path,&width, &height);
+	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+	int x =-1;
+		// pixel = img.addr + (1 * img.line_len + x * (img.bpp / 8));
+	while (++x < 10)
+		mlx_put_image_to_window(game->mlx, game->win, img.mlx_img, pos_x, pos_y);
+}
 
 int draw(t_game *game, double end_x, double end_y, int color, int angle)
 {
-	double pixel_dx;
-	double pixel_dy;
+	double	pixel_dx;
+	double	pixel_dy;
 	int		x;
 	(void)angle;
+	(void)color;
 
 	pixel_dx = end_x;
 	pixel_dy = 0;
@@ -100,8 +108,10 @@ int draw(t_game *game, double end_x, double end_y, int color, int angle)
 		}
 		else if (pixel_dy > ((game->mapp->win_height/2)-end_y/2) && pixel_dy < ((game->mapp->win_height/2)+end_y/2))
 		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
+			// while (x < (pixel_dx + 10))
+				// mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
+			// {
+			draw_wall_image(game, x, pixel_dy);
 		}
 		else
 		{
