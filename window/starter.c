@@ -30,6 +30,7 @@ void    initializer(t_game *game)
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
     game->mapp->map_size = 0; /// To update: calculate number of rows * number of columns
+    game->mapp->img = ft_calloc(1, sizeof(t_img));
 }
 
 void    creation_window(t_game *game)

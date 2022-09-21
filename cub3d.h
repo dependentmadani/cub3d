@@ -36,17 +36,29 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
+typedef struct	s_img
+{
+	void    *mlx_img;
+	char    *addr;
+	int     bpp; /* bits per pixel */
+	int     line_len;
+	int     endian;
+}				t_img;
+
 typedef struct	s_map
 {
 	double win_width;
 	double win_height;
 	int map_size;
+	int color_floor;
+	int color_ceiling;
 	double map_x;
 	double map_y;
 	double	dx;
 	double	dy;
 	double theta;
 	int len_wall;
+	t_img	*img;
 } 				t_map;
 
 typedef struct	s_player
