@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:56:49 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/20 17:50:55 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:59:00 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int draw(t_game *game, double end_x, double end_y, int color, int angle, int dis
 	double		y;
 	(void)angle;
 	// (void)color;
-	(void)ry;
+	(void)rx;
 	// (void)rx;
 	// (void)distT;
 
@@ -128,20 +128,20 @@ int draw(t_game *game, double end_x, double end_y, int color, int angle, int dis
 	wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
 	int wallBottomPixel = (game->mapp->win_height / 2) + (wallStripH / 2);
 	wallBottomPixel = wallBottomPixel > game->mapp->win_height ? game->mapp->win_height : wallBottomPixel;
-	int *wallTexture;
-	wallTexture = malloc(sizeof(int)* 64*64);
-	for (int v=0; v<64; v++)
-	{
-		for (int w=0; w<64; w++)
-		{
-			wallTexture[64 * w + v] = (v%8 && w%8) ? 0xFFFFFF: 0xFF0000;
-		}
-	}
-	// void *no = mlx_xpm_to_image(game->mlx, &game->no_path, &game->img_w, &game->img_h);
-	// // void *so = mlx_xpm_to_image(game->mlx, &game->so_path, &game->img_w, &game->img_h);
-	// int bpp=0, endian=0;
-	// int *sizeLine=NULL;
-	// wallTexture = mlx_get_data_addr(no, &bpp, sizeLine, &endian);
+	char *wallTexture;
+	wallTexture = malloc(sizeof(char)* 64*64);
+	// for (int v=0; v<64; v++)
+	// {
+	// 	for (int w=0; w<64; w++)
+	// 	{
+	// 		wallTexture[64 * w + v] = (v%8 && w%8) ? 0x333333: 0x333333;
+	// 	}
+	// }
+	void *no = mlx_xpm_file_to_image(game->mlx, game->no_path, &game->img_w, &game->img_h);
+	// void *so = mlx_xpm_to_image(game->mlx, &game->so_path, &game->img_w, &game->img_h);
+	int bpp, endian, sizeLine;
+	// printf("hhh\n");
+	wallTexture = mlx_get_data_addr(no, &bpp, &sizeLine, &endian);
 	// draw the ceillin color
 	
 	game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]));
@@ -161,11 +161,12 @@ int draw(t_game *game, double end_x, double end_y, int color, int angle, int dis
 		}
 		else if (y > ((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
 		{
-			int textureOffsetX = (int)rx % 64;
+			int textureOffsetX = (int)ry % 64;
 			while (x < (pixel_dx + 10))
 			{
-				int textureOffsetY = (y - end_y) * ((float)64 / wallStripH);
+				int textureOffsetY = (y + end_y) * ((float)64 / wallStripH);
 				int texturColor = wallTexture[(64*textureOffsetY) + textureOffsetX];
+				// (void)texturColor;
 				mlx_pixel_put(game->mlx, game->win, x++, y, texturColor);
 			}
 		}
