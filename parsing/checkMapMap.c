@@ -18,9 +18,12 @@ char	**check_map_map(t_game *my_game)
 	int		i;
 
 	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
-	i = -1;
-	while (++i < 6)
+	i = 0;
+	while (i < 6)
+	{
 		t[i] = ft_substr(my_game->map[i], 0, ft_strlen(my_game->map[i]));
+		i++;
+	}
 	while (my_game->map[i])
 	{
 		if (my_game->map[i][0] == '\n' && my_game->map[i][1] == '\0')

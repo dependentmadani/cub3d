@@ -82,6 +82,8 @@ void	get_map(char *av, t_game *my_game/*, t_player *player, t_map *map*/)
 		printf("-%s-\n", my_game->newestmap[i]);
 	check_map(my_game);
 	check_map_paths_rgbs(my_game);
+	// printf("sh is good %s\n", my_game->no_path);
+	// exit(1);
 	free(temp);
 	close(fd);
 	

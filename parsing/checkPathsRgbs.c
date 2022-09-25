@@ -82,4 +82,5 @@ void	check_map_paths_rgbs(t_game *my_game)
 	paths_are_valid(my_game);
 	rgb_are_valid(my_game);
 	get_rgb_values(my_game);
+	
 }

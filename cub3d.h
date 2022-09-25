@@ -36,14 +36,27 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
-typedef struct	s_img
+typedef struct	s_texture
 {
-	void    *mlx_img;
-	char    *addr;
-	int     bpp; /* bits per pixel */
-	int     line_len;
+	void	*mlx_text;
+	char	*addr_text;
+	int	    bpp_text;
+	int		line_len_text;
+	int		endian;
+	int		img_w;
+	int		img_h;
+}				t_texture;
+
+typedef struct	s_win
+{
+	void    *mlx_win;
+	char    *addr_win;
+	int     bpp_win; /* bits per pixel */
+	int     line_len_win;
 	int     endian;
-}				t_img;
+	int		scale_resize;
+	int		offset;
+}				t_win;
 
 typedef struct	s_map
 {
@@ -58,7 +71,6 @@ typedef struct	s_map
 	double	dy;
 	double theta;
 	int len_wall;
-	t_img	*img;
 } 				t_map;
 
 typedef struct	s_player
@@ -82,8 +94,6 @@ typedef struct s_game
 	char	**newestmap;
 	int		map_w;
 	int		map_h;
-	int		img_w;
-	int		img_h;
 	void	*background;
 	void	*wall;
 	void	*player;
@@ -121,6 +131,8 @@ typedef struct s_game
 	int		f_color;
 	t_player *gamer;
 	t_map    *mapp;
+	t_win	*img;
+	t_texture *text;
 	double	min_rad;
 	double	max_rad;
 }	t_game;

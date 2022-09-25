@@ -52,220 +52,65 @@ int draw_line(t_game *game, double end_x, double end_y, int color, int angle)
     return (0);
 }
 
-// void    img_pix_put(t_map *map, int x, int y, int color)
-// {
-//     char    *pixel;
-//     int     i;
 
-//     i = map->img->bpp - 8;
-//     pixel = map->img->addr + (y * map->img->line_len + x * (map->img->bpp / 8));
-//     while (i >= 0)
-//     {
-//         /* big endian, MSB is the leftmost bit */
-//         if (map->img->endian != 0)
-//             *pixel++ = (color >> i) & 0xFF;
-//         /* little endian, LSB is the leftmost bit */
-//         else
-//             *pixel++ = (color >> (map->img->bpp - 8 - i)) & 0xFF;
-//         i -= 8;
-//     }
-// }
-
-// void draw_wall_image(t_game *game, int start_pos_y, int end_pos_y, int start_pos_x)
-// {
-// 	t_img img;
-
-// 	img = *game->mapp->img;
-// 	img.mlx_img = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
-// 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-
-// }
-/*
-int draw(t_game *game, double end_x, double end_y, int color, int angle)
+void    img_pix_put(t_game *game, int x, int y, int color)
 {
-	double pixel_dx;
-	double pixel_dy;
-	int		x;
-	(void)angle;
+    char    *pixel;
 
-	pixel_dx = end_x;
-	pixel_dy = 0;
-	while (pixel_dy <= (int)((game->mapp->win_height)))
-	{
-		x = pixel_dx;
-		if (pixel_dy < (game->mapp->win_height/2)-(end_y/2))
-		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, game->mapp->color_ceiling);
-		}
-		else if (pixel_dy > ((game->mapp->win_height/2)-end_y/2) && pixel_dy < ((game->mapp->win_height/2)+end_y/2))
-		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
-		}
-		else
-		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, game->mapp->color_floor);
-		}
-		pixel_dy += 1;
-	}
-	return (0);
+    pixel = game->img->addr_win + (y * game->img->line_len_win + x * (game->img->bpp_win / 8));
+    *(int *)pixel = color;
 }
-*/
+
+void	get_texture_info(t_game *game, int x, int y, int end_y)
+{
+	int *color;
+	int	y_start;
+	int	math = (game->mapp->win_height - end_y) *4;
+
+	y_start = game->mapp->win_height/2 - end_y/2;
+	game->img->offset = ((int)game->gamer->player_posx + x) % 64;
+	color = (int*)(game->text->addr_text + (int)(((y-y_start)*game->text->line_len_text/(game->img->line_len_win-math))*game->text->line_len_text + ((game->img->offset)*game->text->line_len_text/(game->img->line_len_win-math))*game->text->bpp_text/8));
+	//color = (int*)(game->text->addr_text + (int)(((y)*game->text->line_len_text/(game->img->line_len_win))*game->text->line_len_text + ((x)*game->text->line_len_text/(game->img->line_len_win))*game->text->bpp_text/8));
+	img_pix_put(game, x, y, *color);
+}
+
 double dist(double ax, double ay, double bx, double by, double ang)
 {
 	(void)ang;
 	return (sqrt((bx - ax)*(bx - ax) + (by - ay)* (by-ay)));
 }
-/*
-void	draw_image(t_game *my_game, double ra, int x, int y)
-{
-	int	d = ra * (my_game->img_h) / 60;
-	void *im;
-	int i = 0;
 
-	// double 
-	// while (i<10)
-	// {	
-	// 	im = mlx_xpm_to_image(my_game->mlx, &my_game->no_path, &my_game->map_w, &my_game->map_h);
-	// 	mlx_put_image_to_window(my_game->mlx, my_game->win, im, &my_game->map_w, &my_game->map_h);
-	// 	i++;
-	// }
-	void *no = mlx_xpm_to_image(my_game->mlx, &my_game->no_path, &my_game->img_w, &my_game->img_h);
-	void *so = mlx_xpm_to_image(my_game->mlx, &my_game->so_path, &my_game->img_w, &my_game->img_h);
-	int wallStripH = 0;
-	int *colorBuffer;
-	colorBuffer = (int *)malloc(sizeof(int) * my_game->mapp->win_width * my_game->mapp->win_height);
-//	for (int i=0; i < my_game->mapp->win_width; i++)
-//	{
-		int wallTopPixel = (my_game->mapp->win_height / 2) - (wallStripH / 2);
-		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-		int wallBottomPixel = (my_game->mapp->win_height / 2) + (wallStripH / 2);
-		wallBottomPixel = wallBottomPixel > my_game->mapp->win_height ? my_game->mapp->win_height : wallBottomPixel;
-		// wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-		// drawin wall
-		for (int y=0; y < wallTopPixel; y++)
-		{
-			colorBuffer[(my_game->mapp->win_width * y) + i] = 0xFF333333;
-		}
-		for (int y=wallTopPixel; y < wallBottomPixel; y++)
-		{
-			*//*int distanceFromTop = y+ (wallStripH/2) - (my_game->mapp->win_height/2);
-			int textureOffsetY = distanceFromTop * ((float)64/wallStripH);
-
-			unsigned int textColor = my_game->newestmap[][(64*textureOffsetY) + textureOffsetX] = textColor;
-			my_game->newestmap[x][my_game->mapp->win_width * y] + i = no;*/
-		/*	colorBuffer[(my_game->mapp->win_width * y) + i] = rays[i].wasHitVertical ? 0xFFFFFFFF : 0xFFCCCCCC;
-		}
-		for (int y=wallBottomPixel; y < my_game->mapp->win_height; y++)
-		{
-			colorBuffer[(my_game->mapp->win_width * y) + i] = 0xFF777777;
-		}
-//	}
-}
-*/
-int draw(t_game *game, double end_x, double end_y, int color, int angle, int distT, double rx, double ry)
+int draw(t_game *game, double end_x, double end_y, int color)
 {
 	double pixel_dx;
 	double pixel_dy=0;
 	int		x;
-	double		y;
-	(void)angle;
-	// (void)color;
-	(void)rx;
-	// (void)rx;
-	// (void)distT;
+	double	y;
 
-	float distanceProjPlan = (game->mapp->win_width / 2) / tan((60 * (PI / 180)) / 2);
-	float projectWallH = (64 / distT) * distanceProjPlan;
-	int wallStripH = (int)projectWallH;
-	int wallTopPixel = (game->mapp->win_height / 2) - (wallStripH / 2);
-	wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-	int wallBottomPixel = (game->mapp->win_height / 2) + (wallStripH / 2);
-	wallBottomPixel = wallBottomPixel > game->mapp->win_height ? game->mapp->win_height : wallBottomPixel;
-	char *wallTexture;
-	wallTexture = malloc(sizeof(char)* 64*64);
-	// for (int v=0; v<64; v++)
-	// {
-	// 	for (int w=0; w<64; w++)
-	// 	{
-	// 		wallTexture[64 * w + v] = (v%8 && w%8) ? 0x333333: 0x333333;
-	// 	}
-	// }
-	void *no = mlx_xpm_file_to_image(game->mlx, game->no_path, &game->img_w, &game->img_h);
-	// void *so = mlx_xpm_to_image(game->mlx, &game->so_path, &game->img_w, &game->img_h);
-	int bpp, endian, sizeLine;
-	// printf("hhh\n");
-	wallTexture = mlx_get_data_addr(no, &bpp, &sizeLine, &endian);
-	// draw the ceillin color
-	
+
 	game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]));
 	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]));
 	pixel_dx = end_x;
 	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
 	y = 0;
 	(void)color;
-	// for (int y=0; y < pixel_dy; y++)
 	while (y < game->mapp->win_height)
 	{
 		x = pixel_dx;
-		if (y <= (int)((game->mapp->win_height/2) - (end_y/2)))
+		while (x < (pixel_dx + 10))
 		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, y, game->c_color);
-		}
-		else if (y > ((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
-		{
-			int textureOffsetX = (int)ry % 64;
-			while (x < (pixel_dx + 10))
+			if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
+				img_pix_put(game, x, y, game->c_color);
+			else if (y >= ((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
 			{
-				int textureOffsetY = (y + end_y) * ((float)64 / wallStripH);
-				int texturColor = wallTexture[(64*textureOffsetY) + textureOffsetX];
-				// (void)texturColor;
-				mlx_pixel_put(game->mlx, game->win, x++, y, texturColor);
+				get_texture_info(game, x, y, end_y);
 			}
-		}
-		else
-		{
-			while (x < (pixel_dx + 10))
-				mlx_pixel_put(game->mlx, game->win, x++, y, game->f_color);
+			else
+				img_pix_put(game, x, y, game->f_color);
+			x++;
 		}
 		y++;
 	}
-	
-/*	while (y <= (int)((game->mapp->win_height/2) - (end_y/2)))
-	{
-		x = pixel_dx;
-		while (x < (pixel_dx + 10))
-			mlx_pixel_put(game->mlx, game->win, x++, y, 0xFF00ff);
-		y += 1;
-		printf("yoooooo\n");
-	}
-	// draw the walls color
-	printf("dyyy %f\n", pixel_dy);
-	printf("dxxx %f\n", pixel_dx);
-	pixel_dx = end_x;
-	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
-	while (pixel_dy <= (int)((game->mapp->win_height/2) + (end_y/2)))
-	{
-		x = pixel_dx;
-		while (x < (pixel_dx + 10))
-			mlx_pixel_put(game->mlx, game->win, x++, pixel_dy, color);
-		pixel_dy += 1;
-	}
-	pixel_dx = end_x;
-	// pixel_dy = (game->mapp->win_height/2) - (end_y/2);
-	y = pixel_dy;
-	// draw the floor color
-	while (y <= (game->mapp->win_height))
-	{
-		x = pixel_dx;
-		while (x < (pixel_dx + 10))
-			mlx_pixel_put(game->mlx, game->win, x++, y, 0xFF7777);
-		y += 1;
-		printf("yaaaaaa\n");
-	}*/
 	return (0);
 }
 
@@ -307,11 +152,12 @@ void    spread_rays(t_game *game)
 		}
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; color=0x0000ff;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; color=0xff0000;}
+		// game->img->offset = (int)rx;
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
 		// double top_pixel_wall = game->mapp->win_height/2 - lineH/2;
 		// double end_pixel_wall = game->mapp->win_height/2 + lineH/2;
-		draw(game, (r)*(game->mapp->win_width/60), lineH,color, ra, disT, rx, ry);
+		draw(game, (r)*(game->mapp->win_width/60), lineH,color);
 		
 
 		// draw(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
@@ -320,5 +166,6 @@ void    spread_rays(t_game *game)
 		ra += DR;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}
+	mlx_put_image_to_window(game->mlx, game->win, game->img->mlx_win, 0, 0);
 	// printf("the length of of map in x axis {%f} and in y axis {%f}\n", game->mapp->map_x, game->mapp->map_y);
 }

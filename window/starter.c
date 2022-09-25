@@ -14,6 +14,8 @@
 
 void    initializer(t_game *game)
 {
+    game->img = ft_calloc(1, sizeof(t_win));
+    game->text = ft_calloc(1, sizeof(t_texture));
     game->gamer->fov = 60.0;
     game->gamer->speed = 5; ///8 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map
@@ -29,8 +31,9 @@ void    initializer(t_game *game)
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
+    game->img->offset = 0;
+    game->img->scale_resize = 0;
     game->mapp->map_size = 0; /// To update: calculate number of rows * number of columns
-    game->mapp->img = ft_calloc(1, sizeof(t_img));
 }
 
 void    creation_window(t_game *game)
