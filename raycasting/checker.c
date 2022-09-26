@@ -65,11 +65,12 @@ void	get_texture_info(t_game *game, int x, int y, int end_y)
 {
 	int *color;
 	int	y_start;
-	int	math = (game->mapp->win_height - end_y) *4;
+	int	math = (game->img->line_len_win * end_y)/game->mapp->win_height;
 
 	y_start = game->mapp->win_height/2 - end_y/2;
 	game->img->offset = ((int)game->gamer->player_posx + x) % 64;
-	color = (int*)(game->text->addr_text + (int)(((y-y_start)*game->text->line_len_text/(game->img->line_len_win-math))*game->text->line_len_text + ((game->img->offset)*game->text->line_len_text/(game->img->line_len_win-math))*game->text->bpp_text/8));
+	// game->img->offset = (game->img->offset + x) %64;
+	color = (int*)(game->text->addr_text + (int)(((y - y_start)*game->text->line_len_text/(math))*game->text->line_len_text + ((game->img->offset)*game->text->line_len_text/(math))*game->text->bpp_text/8));
 	//color = (int*)(game->text->addr_text + (int)(((y)*game->text->line_len_text/(game->img->line_len_win))*game->text->line_len_text + ((x)*game->text->line_len_text/(game->img->line_len_win))*game->text->bpp_text/8));
 	img_pix_put(game, x, y, *color);
 }
@@ -102,9 +103,7 @@ int draw(t_game *game, double end_x, double end_y, int color)
 			if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
 				img_pix_put(game, x, y, game->c_color);
 			else if (y >= ((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
-			{
 				get_texture_info(game, x, y, end_y);
-			}
 			else
 				img_pix_put(game, x, y, game->f_color);
 			x++;
@@ -152,11 +151,12 @@ void    spread_rays(t_game *game)
 		}
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; color=0x0000ff;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; color=0xff0000;}
-		// game->img->offset = (int)rx;
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
 		// double top_pixel_wall = game->mapp->win_height/2 - lineH/2;
 		// double end_pixel_wall = game->mapp->win_height/2 + lineH/2;
+		if (r ==0)
+			game->img->offset = rx;
 		draw(game, (r)*(game->mapp->win_width/60), lineH,color);
 		
 
