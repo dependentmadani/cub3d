@@ -45,6 +45,7 @@ typedef struct	s_texture
 	int		endian;
 	int		img_w;
 	int		img_h;
+	int		text_pos_x;
 }				t_texture;
 
 typedef struct	s_win
@@ -71,6 +72,8 @@ typedef struct	s_map
 	double	dy;
 	double theta;
 	int len_wall;
+	double	intersection_wall;
+	int	side_vertical;
 } 				t_map;
 
 typedef struct	s_player
