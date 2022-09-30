@@ -24,6 +24,10 @@ int	keyword_move(int keyword, t_game *game)
 		movement_fun(game, 'x', RIGHT);
 	if (keyword == A)
 		movement_fun(game, 'x', LEFT);
+	if (keyword == LEFT_ARROW)
+		movement_fun(game, 'x', VIEW_LEFT);
+	if (keyword == RIGHT_ARROW)
+		movement_fun(game, 'x', VIEW_RIGHT);
 	// if (game->map[game->gamer->player_posy][game->gamer->player_posx] == 'E')
 	// 	win_funct(game);
 	return (0);

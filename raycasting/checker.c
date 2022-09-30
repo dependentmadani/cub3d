@@ -51,7 +51,6 @@ int draw_line(t_game *game, double end_x, double end_y, int color)
     return (0);
 }
 
-
 void    img_pix_put(t_game *game, int x, int y, int color)
 {
     char    *pixel;
@@ -144,6 +143,7 @@ void    spread_rays(t_game *game)
 			game->img->offset = (int)rx;
 		else if (game->mapp->side_vertical == 1)
 			game->img->offset = (int)ry;
+		
 		draw(game, r, lineH);
 		
 		ra += DR/10;

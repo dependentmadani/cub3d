@@ -38,9 +38,33 @@ void    movement_fun(t_game *game, char axis, int direction)
 		game->gamer->moved++;
 		put_player(game, 0x00ff00);
 	}
+	else if (axis == 'x' && direction == LEFT && game->gamer->player_posx >0
+		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
+		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)// this function need to be edited to move left
+	{
+		if (!collision_with_wall(game, game->gamer->player_posx-sin(game->gamer->player_angle)*game->gamer->speed, game->gamer->player_posy+ cos(game->gamer->player_angle)*game->gamer->speed))
+		{
+			game->gamer->player_posx -= sin(game->gamer->player_angle)*game->gamer->speed;
+			game->gamer->player_posy += cos(game->gamer->player_angle)*game->gamer->speed;
+		}
+		game->gamer->moved++;
+		put_player(game, 0x00ff00);
+	}
 	else if (axis == 'x' && direction == RIGHT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
-		&& game->gamer->player_posy < game->mapp->map_y*IMG_W) /// will be removed
+		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)// this function need to be edited to move right
+	{
+		if (!collision_with_wall(game, game->gamer->player_posx+sin(game->gamer->player_angle)*game->gamer->speed , game->gamer->player_posy- cos(game->gamer->player_angle)*game->gamer->speed))
+		{
+			game->gamer->player_posx += sin(game->gamer->player_angle)*game->gamer->speed;
+			game->gamer->player_posy -= cos(game->gamer->player_angle)*game->gamer->speed;
+		}
+		game->gamer->moved++;
+		put_player(game, 0x00ff00);
+	}
+	else if (axis == 'x' && direction == VIEW_RIGHT && game->gamer->player_posx >0
+		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
+		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)
 	{
 		game->gamer->player_angle += 0.1;
 		if (game->gamer->player_angle > 2*PI)
@@ -50,9 +74,9 @@ void    movement_fun(t_game *game, char axis, int direction)
 		game->gamer->moved++;
 		put_player(game, 0x00ff00);
 	}
-	else if (axis == 'x' && direction == LEFT && game->gamer->player_posx >0
+	else if (axis == 'x' && direction == VIEW_LEFT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
-		&& game->gamer->player_posy < game->mapp->map_y*IMG_W) /// will be removed
+		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)
 	{
 		game->gamer->player_angle -= 0.1;
 		if (game->gamer->player_angle < 0)
