@@ -1,6 +1,6 @@
 NO ./images/mait-jao.xpm
-SO ./images/wall.xpm
-WE ./images/floor.xpm
+SO ./images/hlwa.xpm
+WE ./images/elgato.xpm
 EA ./images/floor.xpm
 
 F 250,0,0

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:07:58 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/10 21:21:51 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:58:06 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,12 @@ void create_window(t_game *game)
 	}
     rgb_converter(game);
     check_direction_of_player(game);
-    game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
+    game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3D");
     put_map_2d(game);
     mlx_hook(game->win, 2, 1L<<0, keyword_move, game);
+    mlx_hook(game->win, 4, 1L<<2, mouse_move, game);
     mlx_hook(game->win, 17, 1L<<0, exit_function, game);
 	mlx_key_hook(game->win, keyword_move, game);
+    mlx_mouse_hook(game->win, mouse_move, game);
     mlx_loop(game->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/20 12:39:55 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:01:17 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void	draw_2d_map(t_game * game);
 
 int		keyword_move(int keyword, t_game *game);
 void    movement_fun(t_game *game, char axis, int direction);
+int	mouse_move(int button, int x, int y, t_game *game);
 int		exit_function(t_game *game);
 int		winning_function(void);
 
