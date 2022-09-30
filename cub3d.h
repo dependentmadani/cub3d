@@ -210,6 +210,8 @@ int		winning_function(void);
 void    put_wall(t_game *game);
 void    put_floor(t_game *game);
 void    put_player(t_game *game, int color);
+char    *image_path_finder(t_game *game, double deg_rad);
+void    information_imgs(t_game *game, char *filename);
 
 // check functions for raycasting
 

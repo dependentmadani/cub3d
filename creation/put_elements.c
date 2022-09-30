@@ -144,21 +144,44 @@ void    put_floor(t_game *game)
     }
 }
 
+char    *image_path_finder(t_game *game, double deg_rad)
+{
+    if ((deg_rad <= PI/2 || deg_rad >= 3*PI/2) && game->mapp->side_vertical == 1)
+        return (game->ea_path);
+    else if (deg_rad <= PI && game->mapp->side_vertical == 0)
+        return (game->no_path);
+    else if ((deg_rad <= 3*PI/2 || deg_rad >= PI/2) && game->mapp->side_vertical == 1)
+        return (game->we_path);
+    else if (deg_rad > PI && game->mapp->side_vertical == 0)
+        return (game->so_path);
+    // printf("the value of deg {%f} and the side {%d} and path {%s}\n", deg_rad, game->mapp->side_vertical, game->ea_path);
+    return (NULL);
+}
+
+void    information_imgs(t_game *game, char *filename)
+{
+    // if (game->text->mlx_text)
+    //     mlx_destroy_image(game->mlx, game->text->mlx_text);
+    game->text->mlx_text = mlx_xpm_file_to_image(game->mlx, filename, &game->text->img_w, &game->text->img_h);
+    if (!game->text->mlx_text)
+    {
+        perror("Error: ");
+        printf("The image path \"%s\" is not correct\n", filename);
+        exit(EXIT_FAILURE);
+    }
+	game->text->addr_text = mlx_get_data_addr(game->text->mlx_text, &game->text->bpp_text, &game->text->line_len_text, &game->text->endian);
+    
+}
+
 void    put_player(t_game *game, int color)
 {
     if (game->gamer->moved)
     {
         mlx_destroy_image(game->mlx, game->img->mlx_win);
         mlx_clear_window(game->mlx, game->win);
-        // draw_2d_map(game);
     }
     (void)color;
     game->img->mlx_win = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
     game->img->addr_win = mlx_get_data_addr(game->img->mlx_win, &game->img->bpp_win, &game->img->line_len_win, &game->img->endian);
-    game->text->mlx_text = mlx_xpm_file_to_image(game->mlx, game->no_path, &game->text->img_w, &game->text->img_h);
-	game->text->addr_text = mlx_get_data_addr(game->text->mlx_text, &game->text->bpp_text, &game->text->line_len_text, &game->text->endian);
-    // put_wall(game);
-    // put_floor(game);
-    // circle(game, color);
     spread_rays(game);
 }
