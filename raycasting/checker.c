@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:56:49 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/21 12:03:24 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:48:45 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ int collision_with_wall(t_game *game, double pos_x, double pos_y)
 	return (0);
 }
 
-int draw_line(t_game *game, double end_x, double end_y, int color, int angle)
+int draw_line(t_game *game, double end_x, double end_y, int color)
 {
     double d_x;
     double d_y;
     int pixel;
     double pixel_dx;
     double pixel_dy;
-    (void)angle;
 
     d_x = end_x - game->gamer->player_posx;
     d_y = end_y - game->gamer->player_posy;
@@ -61,21 +60,14 @@ void    img_pix_put(t_game *game, int x, int y, int color)
     *(int *)pixel = color;
 }
 
-void	get_texture_info(t_game *game, int x, int y, int end_x, int end_y)
+void	get_texture_info(t_game *game, int x, int y, int end_y)
 {
 	int *color;
-	double step;
 	int	x_start;
 	int	y_start;
 
-	(void)end_x;
-	step = 1.0 * 64.0/end_y;
 	y_start = (game->mapp->win_height/2) - (end_y/2);
-	x_start = 0;
-	if (game->mapp->side_vertical == 1)
-		x_start = x % 64;
-	else if (game->mapp->side_vertical == 0)
-		x_start = (game->img->offset) %64;
+	x_start = (game->img->offset) %64;
 	color = (int *)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
 	img_pix_put(game, x, y, *color);
 }
@@ -102,7 +94,7 @@ int draw(t_game *game, double end_x, double end_y)
 		if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
 			img_pix_put(game, x, y, game->c_color);
 		else if (y >= (int)((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
-			get_texture_info(game, x, y, end_x, end_y);
+			get_texture_info(game, x, y, end_y);
 		else if (y > (int)((game->mapp->win_height/2) + (end_y/2)))
 			img_pix_put(game, x, y, game->f_color);
 		y++;
@@ -114,7 +106,7 @@ void    spread_rays(t_game *game)
 {
 	int r, fov, mp, mx, my;
 	double rx, ry, ra,xo, yo, disH, hx, hy, aTan, nTan, disT;
-	// double ratio;
+
 	ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	for (r=0; r< game->mapp->win_width; r++)
 	{
@@ -148,8 +140,12 @@ void    spread_rays(t_game *game)
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; game->mapp->side_vertical = 0;}
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
-		game->img->offset = (int)rx;
+		if (game->mapp->side_vertical == 0)
+			game->img->offset = (int)rx;
+		else if (game->mapp->side_vertical == 1)
+			game->img->offset = (int)ry;
 		draw(game, r, lineH);
+		
 		ra += DR/10;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}
