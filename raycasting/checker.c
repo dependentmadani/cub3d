@@ -65,27 +65,18 @@ void	get_texture_info(t_game *game, int x, int y, int end_x, int end_y)
 {
 	int *color;
 	double step;
-	int	start_draw;
 	int	x_start;
 	int	y_start;
-	// double	x_len;
 
-	start_draw = (game->mapp->win_height/2) - (end_y/2);
+	(void)end_x;
 	step = 1.0 * 64.0/end_y;
-	// x_start = game->img->offset;
 	y_start = (game->mapp->win_height/2) - (end_y/2);
-	// math_width = ;
-	// game->img->offset = ((int)game->gamer->player_posx + x) % 64;
-	// x_len = x * end_y * game->mapp->win_width / game->mapp->win_height;
-	x_start = (x-end_x+game->img->offset) %64;
-	// x_start = (game->img->offset+x)%64;
-	// printf("the value of x-start = {%d}\n", x_start);
-	// x_len = game->mapp->win_height / game->mapp->win_width;
-	color = (int *)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + (x - end_x + game->text->text_pos_x)*(game->text->bpp_text/8)));
-	// color = (int *)(game->text->addr_text + (int)((y - y_start)*64/end_y* game->text->line_len_text + (x_start*game->text->line_len_text/(game->img->line_len_win))*(game->text->bpp_text/8)));
-	// color = (int*)(game->text->addr_text + (int)(((y - y_start)*game->text->line_len_text/(math))*game->text->line_len_text + ((x_start)*game->text->line_len_text/(math))*game->text->bpp_text/8));
-	//color = (int*)(game->text->addr_text + (int)(((y)*game->text->line_len_text/(game->img->line_len_win))*game->text->line_len_text + ((x)*game->text->line_len_text/(game->img->line_len_win))*game->text->bpp_text/8));
-	// printf("the value of x in texture {%d}\n", (x_start*game->text->line_len_text*64/(game->img->line_len_win *game->mapp->len_wall))*(game->text->bpp_text/8));
+	x_start = 0;
+	if (game->mapp->side_vertical == 1)
+		x_start = x % 64;
+	else if (game->mapp->side_vertical == 0)
+		x_start = (game->img->offset) %64;
+	color = (int *)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
 	img_pix_put(game, x, y, *color);
 }
 
@@ -95,33 +86,25 @@ double dist(double ax, double ay, double bx, double by, double ang)
 	return (sqrt((bx - ax)*(bx - ax) + (by - ay)*(by - ay)));
 }
 
-int draw(t_game *game, double end_x, double end_y, int color)
+int draw(t_game *game, double end_x, double end_y)
 {
-	double pixel_dx;
-	double pixel_dy=0;
+	double pixel_dy;
 	int		x;
 	double	y;
 
-	(void)color;
 	game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]));
 	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]));
-	pixel_dx = end_x;
 	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
 	y = 0;
-	(void)color;
+	x = end_x;
 	while (y < game->mapp->win_height)
 	{
-		x = pixel_dx;
-		while (x < (pixel_dx + 10))
-		{
-			if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
-				img_pix_put(game, x, y, game->c_color);
-			else if (y >= ((game->mapp->win_height/2) - (end_y/2)) && y < (int)((game->mapp->win_height/2) + (end_y/2)))
-				get_texture_info(game, x, y, end_x, end_y);
-			else
-				img_pix_put(game, x, y, game->f_color);
-			x++;
-		}
+		if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
+			img_pix_put(game, x, y, game->c_color);
+		else if (y >= (int)((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
+			get_texture_info(game, x, y, end_x, end_y);
+		else if (y > (int)((game->mapp->win_height/2) + (end_y/2)))
+			img_pix_put(game, x, y, game->f_color);
 		y++;
 	}
 	return (0);
@@ -129,11 +112,11 @@ int draw(t_game *game, double end_x, double end_y, int color)
 
 void    spread_rays(t_game *game)
 {
-	int r, fov, mp, mx, my, color;
+	int r, fov, mp, mx, my;
 	double rx, ry, ra,xo, yo, disH, hx, hy, aTan, nTan, disT;
 	// double ratio;
 	ra = game->gamer->player_angle-DR*30; if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
-	for (r=0; r< 60; r++)
+	for (r=0; r< game->mapp->win_width; r++)
 	{
 		///// check the horizontal lines
 		fov = 0;
@@ -163,44 +146,12 @@ void    spread_rays(t_game *game)
 		}
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; game->mapp->side_vertical = 1;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; game->mapp->side_vertical = 0;}
-		// double delta_x = sqrt(1 + (ry * ry)/(rx*rx));
-		// double delta_y = sqrt(1 + (rx * rx)/(ry*ry));
-		double Perp_distance = disT;
-		double planeX = 0.0, planeY=0.66;
-		double cameraX = 2*r/60.0 -1;
-		double rayDirx = -1.0+ planeX*cameraX;
-		double rayDiry = planeY*cameraX;
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
 		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
-		// ratio = game->mapp->win_width/game->mapp->win_height;
-		double Wall_x;
-		if (game->mapp->side_vertical == 0) {Wall_x = game->gamer->player_posy + Perp_distance*rayDiry;}
-		else {Wall_x = game->gamer->player_posx + Perp_distance*rayDirx;}
-		Wall_x -= floor(Wall_x);
-		game->mapp->intersection_wall =Wall_x;
-		game->text->text_pos_x = (int)(Wall_x*((double)64.0));
-		if (game->mapp->side_vertical == 0 && rayDirx > 0) {game->text->text_pos_x = 64.0 - game->text->text_pos_x - 1;}
-		if (game->mapp->side_vertical == 1 && rayDiry < 0) {game->text->text_pos_x = 64.0 - game->text->text_pos_x - 1;}
-		// printf("the value of texture position {%d} and intersection in wall {%f}\n", game->text->text_pos_x, game->mapp->intersection_wall);
-		// double top_pixel_wall = game->mapp->win_height/2 - lineH/2;
-		// double end_pixel_wall = game->mapp->win_height/2 + lineH/2;
-		
-		if (r ==0)
-		{
-			// game->mapp->len_wall = lineH;
-		}
-			game->img->offset = (int)rx;
-		color = 0;
-		draw(game, (r)*(game->mapp->win_width/60), lineH,color);
-
-		// draw(game, (r)*(game->mapp->win_width/60), lineOffset ,color, ra);
-		// printf("the value of lineOffset is {%f} and the value of lineH is {%f} and disT {%f}\n", lineOffset, lineH, disT);
-		// printf("the value of lineOffset = {%f}\n", lineOffset);
-		ra += DR;
+		game->img->offset = (int)rx;
+		draw(game, r, lineH);
+		ra += DR/10;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}
-	// float value = game->img->line_len_win / game->mapp->win_width; 
-	// printf("the value of {%f} and window width{%f} and len {%d}\n", value, game->mapp->win_width, game->img->line_len_win);
 	mlx_put_image_to_window(game->mlx, game->win, game->img->mlx_win, 0, 0);
-	// printf("the length of of map in x axis {%f} and in y axis {%f}\n", game->mapp->map_x, game->mapp->map_y);
 }
