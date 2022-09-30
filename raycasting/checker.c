@@ -143,8 +143,8 @@ void    spread_rays(t_game *game)
 			game->img->offset = (int)rx;
 		else if (game->mapp->side_vertical == 1)
 			game->img->offset = (int)ry;
-		// printf("the value of ra {%f}\n", ra);
 		information_imgs(game, image_path_finder(game, ra));
+		
 		draw(game, r, lineH);
 		
 		ra += DR/10;

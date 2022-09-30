@@ -117,13 +117,10 @@ void    put_wall(t_game *game)
     }
 }
 
-void    put_floor(t_game *game)
+void    check_direction_of_player(t_game *game)
 {
     int i;
     int j;
-    int width;
-    int height;
-    void *wall;
 
     i = 0;
     while (game->newestmap[i])
@@ -131,17 +128,37 @@ void    put_floor(t_game *game)
         j = 0;
         while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
         {
-            if (game->newestmap[i][j] == '0' || game->newestmap[i][j] == 'N' 
-                || game->newestmap[i][j] == 'S' || game->newestmap[i][j] == 'E'
-                || game->newestmap[i][j] == 'W')
+            if (game->newestmap[i][j] == 'E')
             {
-                wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
-                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
+                game->gamer->player_angle = 0;
+                i = -1;
+                break ;
+            }
+            else if (game->newestmap[i][j] == 'N')
+            {
+                game->gamer->player_angle = P2;
+                i = -1;
+                break ;
+            }
+            else if (game->newestmap[i][j] == 'W')
+            {
+                game->gamer->player_angle = PI;
+                i = -1;
+                break ;
+            }
+            else if (game->newestmap[i][j] == 'S')
+            {
+                game->gamer->player_angle = P3;
+                i = -1;
+                break ;
             }
             j++;
         }
+        if (i == -1)
+            break ;
         i++;
     }
+    printf("was here too\n");
 }
 
 char    *image_path_finder(t_game *game, double deg_rad)
@@ -154,18 +171,15 @@ char    *image_path_finder(t_game *game, double deg_rad)
         return (game->we_path);
     else if (deg_rad > PI && game->mapp->side_vertical == 0)
         return (game->so_path);
-    // printf("the value of deg {%f} and the side {%d} and path {%s}\n", deg_rad, game->mapp->side_vertical, game->ea_path);
     return (NULL);
 }
 
 void    information_imgs(t_game *game, char *filename)
 {
-    // if (game->text->mlx_text)
-    //     mlx_destroy_image(game->mlx, game->text->mlx_text);
     game->text->mlx_text = mlx_xpm_file_to_image(game->mlx, filename, &game->text->img_w, &game->text->img_h);
     if (!game->text->mlx_text)
     {
-        perror("Error: ");
+        perror("Error\n");
         printf("The image path \"%s\" is not correct\n", filename);
         exit(EXIT_FAILURE);
     }

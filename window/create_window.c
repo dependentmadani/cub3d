@@ -137,6 +137,7 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     rgb_converter(game);
+    check_direction_of_player(game);
     game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3d");
     put_map_2d(game);
     mlx_hook(game->win, 2, 1L<<0, keyword_move, game);

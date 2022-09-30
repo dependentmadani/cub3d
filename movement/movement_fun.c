@@ -42,10 +42,10 @@ void    movement_fun(t_game *game, char axis, int direction)
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
 		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)
 	{
-		if (!collision_with_wall(game, game->gamer->player_posx-sin(game->gamer->player_angle)*game->gamer->speed, game->gamer->player_posy+ cos(game->gamer->player_angle)*game->gamer->speed))
+		if (!collision_with_wall(game, game->gamer->player_posx- game->gamer->player_dy, game->gamer->player_posy+ game->gamer->player_dx))
 		{
-			game->gamer->player_posx -= sin(game->gamer->player_angle)*game->gamer->speed;
-			game->gamer->player_posy += cos(game->gamer->player_angle)*game->gamer->speed;
+			game->gamer->player_posx -=  game->gamer->player_dy;
+			game->gamer->player_posy += game->gamer->player_dx;
 		}
 		game->gamer->moved++;
 		put_player(game, 0x00ff00);
@@ -54,10 +54,10 @@ void    movement_fun(t_game *game, char axis, int direction)
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
 		&& game->gamer->player_posy < game->mapp->map_y*IMG_W)
 	{
-		if (!collision_with_wall(game, game->gamer->player_posx+sin(game->gamer->player_angle)*game->gamer->speed , game->gamer->player_posy- cos(game->gamer->player_angle)*game->gamer->speed))
+		if (!collision_with_wall(game, game->gamer->player_posx+ game->gamer->player_dy , game->gamer->player_posy- game->gamer->player_dx))
 		{
-			game->gamer->player_posx += sin(game->gamer->player_angle)*game->gamer->speed;
-			game->gamer->player_posy -= cos(game->gamer->player_angle)*game->gamer->speed;
+			game->gamer->player_posx +=  game->gamer->player_dy;
+			game->gamer->player_posy -= game->gamer->player_dx;
 		}
 		game->gamer->moved++;
 		put_player(game, 0x00ff00);
