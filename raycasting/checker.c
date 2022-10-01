@@ -21,7 +21,10 @@ int collision_with_wall(t_game *game, double pos_x, double pos_y)
 	estimation_posy = (pos_y) / IMG_W;
 	if (estimation_posx >= game->mapp->map_x || estimation_posy >= game->mapp->map_y)
 		return (0);
-	if (game->newestmap[estimation_posy] && game->newestmap[estimation_posy][estimation_posx] == '1')
+	if (estimation_posx < 0 || estimation_posy < 0)
+		return (0);
+	if (game->newestmap[estimation_posy]
+		&& game->newestmap[estimation_posy][estimation_posx] == '1')
 		return (1);
 	return (0);
 }
@@ -59,16 +62,22 @@ void    img_pix_put(t_game *game, int x, int y, int color)
     *(int *)pixel = color;
 }
 
-void	get_texture_info(t_game *game, int x, int y, int end_y)
+void	get_texture_info(t_game *game, int x, int y, double end_y)
 {
 	int *color;
 	int	x_start;
 	int	y_start;
+	int	y_value;
 
-	y_start = (game->mapp->win_height/2) - (end_y/2);
+	y_start = (int)((game->mapp->win_height/2) - (end_y/2));
 	x_start = (game->img->offset) %64;
-	color = (int*)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
-	img_pix_put(game, x, y, *color);
+	y_value = (y - y_start)*64/end_y;
+	// if (y_value >= 0 && x_start >= 0)
+	{
+		// printf("the value of x_start {%d} and y_value {%d} and x {%d} and y {%d} y_start {%d}\n", x_start, y_value,x ,y, y_start);
+		color = (int*)(game->text->addr_text + (int)(y_value* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
+		img_pix_put(game, x, y, *color);
+	}
 }
 
 double dist(double ax, double ay, double bx, double by, double ang)
@@ -79,22 +88,18 @@ double dist(double ax, double ay, double bx, double by, double ang)
 
 int draw(t_game *game, double end_x, double end_y)
 {
-	double pixel_dy;
 	int		x;
 	double	y;
 
-	game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]));
-	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]));
-	pixel_dy = (game->mapp->win_height/2) - (end_y/2);
-	y = 0;
 	x = end_x;
+	y = 0;
 	while (y < game->mapp->win_height)
 	{
 		if (y < (int)((game->mapp->win_height/2) - (end_y/2)))
 			img_pix_put(game, x, y, game->c_color);
-		else if (y >= (int)((game->mapp->win_height/2) - (end_y/2)) && y <= (int)((game->mapp->win_height/2) + (end_y/2)))
+		else if (y >= (int)((game->mapp->win_height/2) - (end_y/2)) && y < (int)((game->mapp->win_height/2) + (end_y/2)))
 			get_texture_info(game, x, y, end_y);
-		else if (y > (int)((game->mapp->win_height/2) + (end_y/2)))
+		else if (y >= (int)((game->mapp->win_height/2) + (end_y/2)))
 			img_pix_put(game, x, y, game->f_color);
 		y++;
 	}
@@ -147,9 +152,9 @@ void    spread_rays(t_game *game)
 		if (r == 0 || path != game->text->path_img)
 			information_imgs(game, path);
 		game->text->path_img = path;
-	
+
 		draw(game, r, lineH);
-		
+
 		ra += DR/10;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}

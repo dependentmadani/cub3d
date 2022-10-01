@@ -115,12 +115,6 @@ void put_map_2d(t_game *game)
     }
 }
 
-void	rgb_converter(t_game *game)
-{
-	game->mapp->color_floor = (game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]);
-	game->mapp->color_ceiling = (game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]);
-}
-
 void draw_2d_map(t_game * game)
 {
     draw_horiz_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);

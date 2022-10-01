@@ -187,6 +187,12 @@ void    information_imgs(t_game *game, char *filename)
     
 }
 
+void    rgb_converter(t_game *game)
+{
+    game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + (game->c_rgb[2]));
+	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]));
+}
+
 void    put_player(t_game *game, int color)
 {
     if (game->gamer->moved)

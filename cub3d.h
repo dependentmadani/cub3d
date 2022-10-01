@@ -203,13 +203,14 @@ void	draw_2d_map(t_game * game);
 
 int		keyword_move(int keyword, t_game *game);
 void    movement_fun(t_game *game, char axis, int direction);
-int	mouse_move(int button, int x, int y, t_game *game);
+int		mouse_move(int button, int x, int y, t_game *game);
 int		exit_function(t_game *game);
 int		winning_function(void);
 
 // creation of elements
 
 void    put_wall(t_game *game);
+void	rgb_converter(t_game *game);
 void    check_direction_of_player(t_game *game);
 void    put_player(t_game *game, int color);
 char    *image_path_finder(t_game *game, double deg_rad);
