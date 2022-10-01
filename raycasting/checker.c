@@ -67,7 +67,7 @@ void	get_texture_info(t_game *game, int x, int y, int end_y)
 
 	y_start = (game->mapp->win_height/2) - (end_y/2);
 	x_start = (game->img->offset) %64;
-	color = (int *)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
+	color = (int*)(game->text->addr_text + (int)(((y - y_start)*64/end_y)* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
 	img_pix_put(game, x, y, *color);
 }
 
@@ -116,10 +116,10 @@ void    spread_rays(t_game *game)
 		if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=14;}
 		if (ra < PI) {ry =(((int)game->gamer->player_posy/64)*64)-0.0001; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=-64; xo=-yo*aTan;}
 		if (ra > PI) {ry =(((int)game->gamer->player_posy/64)*64)+64; rx=(game->gamer->player_posy-ry)*aTan+game->gamer->player_posx; yo=64; xo=-yo*aTan;}
-		while (fov < 13)
+		while (fov < 20)
 		{
 			mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
-			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=14;}
+			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){hx=rx; hy=ry; disH=dist(game->gamer->player_posx, game->gamer->player_posy, hx, hy, ra); fov=20;}
 			else {rx+=xo; ry+=yo;fov+=1;}
 		}
 		///// check the vertical lines
@@ -129,10 +129,10 @@ void    spread_rays(t_game *game)
 		if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=13;}
 		if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx/64)*64)+64; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=64; yo=-xo*nTan;}
 		if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/64)*64)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;} // problem need to be fixed here
-		while (fov < 12)
+		while (fov < 20)
 		{
 			mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
-			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=14;}
+			if (mp > 0 && mp < game->mapp->map_x*game->mapp->map_y && collision_with_wall(game, rx, ry)){vx=rx; vy=ry; disV=dist(game->gamer->player_posx, game->gamer->player_posy, vx, vy, ra); fov=20;}
 			else {rx+=xo; ry+=yo;fov+=1;}
 		}
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; game->mapp->side_vertical = 1;}
@@ -143,8 +143,11 @@ void    spread_rays(t_game *game)
 			game->img->offset = (int)rx;
 		else if (game->mapp->side_vertical == 1)
 			game->img->offset = (int)ry;
-		information_imgs(game, image_path_finder(game, ra));
-		
+		char *path = image_path_finder(game, ra);
+		if (r == 0 || path != game->text->path_img)
+			information_imgs(game, path);
+		game->text->path_img = path;
+	
 		draw(game, r, lineH);
 		
 		ra += DR/10;

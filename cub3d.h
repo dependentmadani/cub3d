@@ -50,6 +50,7 @@ typedef struct	s_texture
 	int		img_w;
 	int		img_h;
 	int		text_pos_x;
+	char 	*path_img;
 }				t_texture;
 
 typedef struct	s_win

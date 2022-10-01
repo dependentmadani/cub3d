@@ -16,6 +16,7 @@ void    initializer(t_game *game)
 {
     game->img = ft_calloc(1, sizeof(t_win));
     game->text = ft_calloc(1, sizeof(t_texture));
+    game->text->path_img = NULL;
     game->gamer->fov = 60.0;
     game->gamer->speed = 5; ///8 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map

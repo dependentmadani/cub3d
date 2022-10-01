@@ -35,7 +35,6 @@ int	keyword_move(int keyword, t_game *game)
 
 int	mouse_move(int button, int x, int y, t_game *game)
 {
-	// printf("x: %d, y: %d\n",x,y);
 	(void)x;
 	(void)y;
 	if (button == 1)
