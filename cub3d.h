@@ -66,83 +66,103 @@ typedef struct	s_win
 
 typedef struct	s_map
 {
-	double win_width;
-	double win_height;
-	int map_size;
-	int color_floor;
-	int color_ceiling;
-	double map_x;
-	double map_y;
+	double	win_width;
+	double	win_height;
+	int		map_size;
+	int		color_floor;
+	int		color_ceiling;
+	double	map_x;
+	double	map_y;
 	double	dx;
 	double	dy;
-	double theta;
-	int len_wall;
+	double	theta;
+	int		len_wall;
 	double	intersection_wall;
-	int	side_vertical;
+	int		side_vertical;
 } 				t_map;
 
 typedef struct	s_player
 {
-	int moved;
+	int		moved;
 	double	player_posx;
 	double	player_posy;
-	double player_angle;
-	double player_dx;
-	double player_dy;
-	int	speed;
-	double fov; ///field of view
+	double	player_angle;
+	double	player_dx;
+	double	player_dy;
+	int		speed;
+	double	fov;
 }				t_player;
+
+typedef struct	s_minimap
+{
+	double	win_width;
+	double	win_height;
+	void	*new_image;
+	char	*addr_img;
+	int	    bpp_mini;
+	int		line_len_mini;
+	int		endian_mini;
+	void	*mlx_text;
+	char	*addr_text;
+	int	    bpp_text;
+	int		line_len_text;
+	int		endian_text;
+	int		img_w;
+	int		img_h;
+	int		length_square_width;
+	int		length_square_height;
+	t_map	*map;
+}				t_minimap;
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	char	**newmap;
-	char	**newestmap;
-	int		map_w;
-	int		map_h;
-	void	*background;
-	void	*wall;
-	void	*player;
-	void	*collect;
-	void	*enemy;
-	void	*exit;
-	int		nb_collect;
-	int		moves;
-	int		frame;
-	int		loop;
-	int		gg;
-	int		longestWidth;
-	// int		longestWidth_start;
-	// int		longestWidth_end;
-	int		num_rows;
-	int		paths_valid;
-	int		colors_valid;
-	int		is_no;
-	int		is_so;
-	int		is_we;
-	int		is_ea;
-	int		is_f;
-	int		is_c;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*f_path;
-	char	*c_path;
-	char	**char_f_rgb;
-	char	**char_c_rgb;
-	int		*f_rgb;
-	int		*c_rgb;
-	int		c_color;
-	int		f_color;
-	t_player *gamer;
-	t_map    *mapp;
-	t_win	*img;
-	t_texture *text;
-	double	min_rad;
-	double	max_rad;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	char		**newmap;
+	char		**newestmap;
+	int			map_w;
+	int			map_h;
+	void		*background;
+	void		*wall;
+	void		*player;
+	void		*collect;
+	void		*enemy;
+	void		*exit;
+	int			nb_collect;
+	int			moves;
+	int			frame;
+	int			loop;
+	int			gg;
+	int			longestWidth;
+	int			num_rows;
+	int			paths_valid;
+	int			colors_valid;
+	int			is_no;
+	int			is_so;
+	int			is_we;
+	int			is_ea;
+	int			is_f;
+	int			is_c;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*f_path;
+	char		*c_path;
+	char		**char_f_rgb;
+	char		**char_c_rgb;
+	int			*f_rgb;
+	int			*c_rgb;
+	int			c_color;
+	int			f_color;
+	double		min_rad;
+	double		max_rad;
+	t_player	*gamer;
+	t_map		*mapp;
+	t_win		*img;
+	t_texture	*text;
+	t_minimap	*minimap;
 }	t_game;
 
 // initializer
@@ -212,7 +232,7 @@ int		winning_function(void);
 void    put_wall(t_game *game);
 void	rgb_converter(t_game *game);
 void    check_direction_of_player(t_game *game);
-void    put_player(t_game *game, int color);
+void    put_player(t_game *game);
 char    *image_path_finder(t_game *game, double deg_rad);
 void    information_imgs(t_game *game, char *filename);
 
@@ -222,5 +242,9 @@ int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
 void    spread_rays(t_game *game);
 void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
 void    complete_rays_fov(t_game *game, double player_x, double player_y);
+
+// minimap functions
+
+void    create_minimap(t_game *game);
 
 #endif

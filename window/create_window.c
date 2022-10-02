@@ -46,8 +46,7 @@ void    count_the_map(t_game *game)
     i = 0;
     while (game->newestmap[i])
     {
-        // if (empty_line(game->newestmap[i]))
-            game->mapp->map_y +=1;
+        game->mapp->map_y +=1;
         i++;
     }
     game->mapp->map_size = game->mapp->map_x * game->mapp->map_y;
@@ -107,7 +106,7 @@ void put_map_2d(t_game *game)
             {
                 game->gamer->player_posx = IMG_H * j + IMG_H/2;
                 game->gamer->player_posy = IMG_W * i + IMG_W/2;
-                put_player(game, 0x00ff00);
+                put_player(game);
             }
             j++;
         }
@@ -121,6 +120,20 @@ void draw_2d_map(t_game * game)
     draw_vert_line(game, 0, 0, 64*game->mapp->map_x, 64*game->mapp->map_y);
 }
 
+void    texture_wall_minimap(t_game *game)
+{
+    char    *path;
+
+    path = "./images/brick.xpm";
+    game->minimap->mlx_text = mlx_xpm_file_to_image(game->mlx, path, &game->minimap->img_w, &game->minimap->img_h);
+    if (!game->minimap->mlx_text)
+    {
+        printf("Path of file not found \"%s\"\n", path);
+        exit(EXIT_FAILURE);
+    }
+    game->minimap->addr_text = mlx_get_data_addr(game->mlx, &game->minimap->bpp_text, &game->minimap->line_len_text, &game->minimap->endian_text);
+}
+
 void create_window(t_game *game)
 {
     count_the_map(game);
@@ -131,6 +144,7 @@ void create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
     rgb_converter(game);
+    texture_wall_minimap(game);
     check_direction_of_player(game);
     game->win = mlx_new_window(game->mlx, game->mapp->win_width, game->mapp->win_height, "cub3D");
     put_map_2d(game);

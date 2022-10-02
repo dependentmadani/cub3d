@@ -16,6 +16,12 @@ void    initializer(t_game *game)
 {
     game->img = ft_calloc(1, sizeof(t_win));
     game->text = ft_calloc(1, sizeof(t_texture));
+    game->minimap = ft_calloc(1, sizeof(t_minimap));
+    game->minimap->map = game->mapp;
+    game->mapp->win_width = 640;
+    game->mapp->win_height = 480;
+    game->minimap->win_width = game->mapp->win_width / 4;
+    game->minimap->win_height = game->mapp->win_height / 4;
     game->text->path_img = NULL;
     game->gamer->fov = 60.0;
     game->gamer->speed = 5; ///8 pixels per second
@@ -25,8 +31,6 @@ void    initializer(t_game *game)
     game->gamer->player_angle = 0; // it means 90 degree, it should be modified depends on the direction of player at starts
     game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
     game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
-    game->mapp->win_width = 640;
-    game->mapp->win_height = 480;
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;

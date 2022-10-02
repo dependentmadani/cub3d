@@ -63,35 +63,6 @@ void update_putting_floor(t_game *game, int pos_x, int pos_y)
     }
 }
 
-void    circle(t_game *game, int color)
-{
-    int i;
-    int j;
-    int r;
-    int x;
-    int y;
-    int d;
-    int a;
-
-    r = 5;
-    x = 0;
-    y = 0;
-    i = -r;
-    while(i<IMG_H)
-    {
-        j = -r;
-        while(j<IMG_W)
-        {
-            a=((i-x)*(i-x))+((j-y)*(j-y));
-            d=sqrt(a);
-            if(r>=d)
-                mlx_pixel_put(game->mlx, game->win, game->gamer->player_posx + i,game->gamer->player_posy + j, color);
-            j++;
-        }
-        i++;
-    }
- }
-
 void    put_wall(t_game *game)
 {
     int i;
@@ -193,15 +164,18 @@ void    rgb_converter(t_game *game)
 	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + (game->f_rgb[2]));
 }
 
-void    put_player(t_game *game, int color)
+void    put_player(t_game *game)
 {
     if (game->gamer->moved)
     {
         mlx_destroy_image(game->mlx, game->img->mlx_win);
+        mlx_destroy_image(game->mlx, game->minimap->new_image);
         mlx_clear_window(game->mlx, game->win);
     }
-    (void)color;
     game->img->mlx_win = mlx_new_image(game->mlx, game->mapp->win_width, game->mapp->win_height);
     game->img->addr_win = mlx_get_data_addr(game->img->mlx_win, &game->img->bpp_win, &game->img->line_len_win, &game->img->endian);
+    game->minimap->new_image = mlx_new_image(game->mlx, game->minimap->win_width, game->minimap->win_height);
+    game->minimap->addr_img = mlx_get_data_addr(game->minimap->new_image, &game->minimap->bpp_mini, &game->minimap->line_len_mini, &game->minimap->endian_mini);
     spread_rays(game);
+    create_minimap(game);
 }
