@@ -129,7 +129,6 @@ void    check_direction_of_player(t_game *game)
             break ;
         i++;
     }
-    printf("was here too\n");
 }
 
 char    *image_path_finder(t_game *game, double deg_rad)

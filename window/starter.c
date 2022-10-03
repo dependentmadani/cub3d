@@ -12,6 +12,21 @@
 
 #include "../cub3d.h"
 
+void    initialize_dx_dy(t_game *game)
+{
+    if (game->gamer->player_angle == 0 || game->gamer->player_angle == PI)
+    {
+        game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
+        game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
+    }
+    else if (game->gamer->player_angle == P2 || game->gamer->player_angle == P3)
+    {
+        game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
+        game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
+    }
+    printf("the value of player_dx {%f} and player_dy {%f}\n", game->gamer->player_dx, game->gamer->player_dy);
+}
+
 void    initializer(t_game *game)
 {
     game->img = ft_calloc(1, sizeof(t_win));
@@ -28,9 +43,6 @@ void    initializer(t_game *game)
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
     game->gamer->moved = 0;
-    game->gamer->player_angle = 0; // it means 90 degree, it should be modified depends on the direction of player at starts
-    game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
-    game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;

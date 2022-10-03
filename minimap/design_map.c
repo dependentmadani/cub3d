@@ -54,37 +54,38 @@ void	length_of_square_minimap(t_game *game)
 	game->minimap->length_square_height = length_height;
 }
 
-void    player_as_circle(t_game *game, int color)
+void	player_as_circle(t_game *game, int color)
 {
-    int i;
-    int j;
-    int r;
-    int x;
-    int y;
-    int d;
-    int a;
+	int i;
+	int j;
+	int r;
+	int x;
+	int y;
+	int d;
+	int a;
 
-    r = 5;
-    x = 0;
-    y = 0;
-    i = -r;
-    while(i<10)
-    {
-        j = -r;
-        while(j<10)
-        {
-            a=((i-x)*(i-x))+((j-y)*(j-y));
-            d=sqrt(a);
-            if(r>=d)
-                put_in_minimap_image(game, game->gamer->player_posx*game->minimap->win_width/(game->minimap->win_height*64) + i, game->gamer->player_posy*game->minimap->win_height/(game->minimap->win_width*64) + j, color);
-            // need to fix the position of player in minimap to resize for the width and height of the new image
+	r = 5;
+	x = 0;
+	y = 0;
+	i = -r;
+	while(i<10)
+	{
+		j = -r;
+		while(j<10)
+		{
+			a=((i-x)*(i-x))+((j-y)*(j-y));
+			d=sqrt(a);
+			if(r>=d)
+				put_in_minimap_image(game, game->minimap->win_width/2 + i,
+					game->mapp->win_width/2 + j,
+					color);
 			j++;
-        }
-        i++;
-    }
- }
+		}
+		i++;
+	}
+}
 
-void    create_minimap(t_game *game)
+void	create_minimap(t_game *game)
 {
 	int	i;
 	int	j;
@@ -93,7 +94,6 @@ void    create_minimap(t_game *game)
 	j = 0;
 	borders_of_minimap(game);
 	length_of_square_minimap(game);
-	player_as_circle(game, 0x0000ff);
-	// printf("the values width {%d} and height {%d}\n", game->minimap->length_square_width, game->minimap->length_square_height);
+	// player_as_circle(game, 0x0000ff);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap->new_image, 10,10);
 }

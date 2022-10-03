@@ -235,6 +235,7 @@ void    check_direction_of_player(t_game *game);
 void    put_player(t_game *game);
 char    *image_path_finder(t_game *game, double deg_rad);
 void    information_imgs(t_game *game, char *filename);
+void    initialize_dx_dy(t_game *game);
 
 // check functions for raycasting
 
