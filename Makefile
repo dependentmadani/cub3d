@@ -32,6 +32,7 @@ SRC = main.c\
 		movement/movement_fun.c \
 		creation/put_elements.c \
 		raycasting/checker.c \
+		minimap/design_map.c \
 
 OBJ = $(SRC:.c=.o)
 
