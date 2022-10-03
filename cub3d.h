@@ -73,6 +73,8 @@ typedef struct	s_map
 	int		color_ceiling;
 	double	map_x;
 	double	map_y;
+	double	position_map_x;
+	double	position_map_y;
 	double	dx;
 	double	dy;
 	double	theta;
@@ -111,6 +113,8 @@ typedef struct	s_minimap
 	int		img_h;
 	int		length_square_width;
 	int		length_square_height;
+	double	start_x;
+	double	start_y;
 	t_map	*map;
 }				t_minimap;
 

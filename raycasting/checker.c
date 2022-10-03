@@ -129,5 +129,7 @@ void    spread_rays(t_game *game)
 		ra += DR/10;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}
+	game->mapp->position_map_x = game->gamer->player_posx / 64;
+	game->mapp->position_map_y = game->gamer->player_posy / 64;
 	mlx_put_image_to_window(game->mlx, game->win, game->img->mlx_win, 0, 0);
 }
