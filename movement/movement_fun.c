@@ -24,7 +24,7 @@ void    movement_fun(t_game *game, char axis, int direction)
 			game->gamer->player_posy -= game->gamer->player_dy;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 	else if (axis == 'y' && direction == DOWN && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
@@ -36,7 +36,7 @@ void    movement_fun(t_game *game, char axis, int direction)
 			game->gamer->player_posy += game->gamer->player_dy;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 	else if (axis == 'x' && direction == LEFT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
@@ -48,7 +48,7 @@ void    movement_fun(t_game *game, char axis, int direction)
 			game->gamer->player_posy += game->gamer->player_dx;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 	else if (axis == 'x' && direction == RIGHT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
@@ -60,7 +60,7 @@ void    movement_fun(t_game *game, char axis, int direction)
 			game->gamer->player_posy -= game->gamer->player_dx;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 	else if (axis == 'x' && direction == VIEW_RIGHT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
@@ -72,7 +72,7 @@ void    movement_fun(t_game *game, char axis, int direction)
 		game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 	else if (axis == 'x' && direction == VIEW_LEFT && game->gamer->player_posx >0
 		&& game->gamer->player_posx < game->mapp->map_x*IMG_H && game->gamer->player_posy >0
@@ -84,6 +84,6 @@ void    movement_fun(t_game *game, char axis, int direction)
 		game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
 		game->gamer->moved++;
-		put_player(game);
+		put_player(game, 0x00ff00);
 	}
 }

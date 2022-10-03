@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 13:24:04 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:14:05 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void print_error_and_exit(char *s)
 
 void	check_surroundings(char **s, int i, int j)
 {
-	if (s[i][j - 1] != '1' && s[i][j - 1] != 'S' && s[i][j - 1] != 'N' && s[i][j - 1] != 'E' && s[i][j - 1] != 'A' && s[i][j - 1] != '0')
+	if (s[i][j - 1] != '1' && s[i][j - 1] != 'S' && s[i][j - 1] != 'N' && s[i][j - 1] != 'E' && s[i][j - 1] != 'W' && s[i][j - 1] != '0')
 		print_error_and_exit("invalid map j-1");
-	if (s[i][j + 1] != '1' && s[i][j + 1] != 'S' && s[i][j + 1] != 'N' && s[i][j + 1] != 'E' && s[i][j + 1] != 'A' && s[i][j + 1] != '0')
+	if (s[i][j + 1] != '1' && s[i][j + 1] != 'S' && s[i][j + 1] != 'N' && s[i][j + 1] != 'E' && s[i][j + 1] != 'W' && s[i][j + 1] != '0')
 		print_error_and_exit("invalid map j+1");
-	if (s[i - 1][j] != '1' && s[i - 1][j] != 'S' && s[i - 1][j] != 'N' && s[i - 1][j] != 'E' && s[i - 1][j] != 'A' && s[i - 1][j] != '0')
+	if (s[i - 1][j] != '1' && s[i - 1][j] != 'S' && s[i - 1][j] != 'N' && s[i - 1][j] != 'E' && s[i - 1][j] != 'W' && s[i - 1][j] != '0')
 		print_error_and_exit("invalid map i-1");
-	if (s[i + 1][j] != '1' && s[i + 1][j] != 'S' && s[i + 1][j] != 'N' && s[i + 1][j] != 'E' && s[i + 1][j] != 'A' && s[i + 1][j] != '0')
+	if (s[i + 1][j] != '1' && s[i + 1][j] != 'S' && s[i + 1][j] != 'N' && s[i + 1][j] != 'E' && s[i + 1][j] != 'W' && s[i + 1][j] != '0')
 		print_error_and_exit("invalid map i+1");
 }
 

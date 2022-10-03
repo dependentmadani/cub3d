@@ -29,12 +29,37 @@ int collision_with_wall(t_game *game, double pos_x, double pos_y)
 	return (0);
 }
 
+int draw_line(t_game *game, double end_x, double end_y, int color)
+{
+    double d_x;
+    double d_y;
+    int pixel;
+    double pixel_dx;
+    double pixel_dy;
+
+    d_x = end_x - game->gamer->player_posx;
+    d_y = end_y - game->gamer->player_posy;
+    pixel = sqrt((d_x * d_x) + (d_y * d_y));
+    d_x /= pixel;
+    d_y /= pixel;
+    pixel_dx = game->gamer->player_posx;
+    pixel_dy = game->gamer->player_posy;
+    while (pixel > 0)
+    {
+        mlx_pixel_put(game->mlx, game->win, pixel_dx, pixel_dy, color);
+        pixel_dx += d_x;
+        pixel_dy += d_y;
+        pixel--;
+    }
+    return (0);
+}
+
 void    img_pix_put(t_game *game, int x, int y, int color)
 {
-	char    *pixel;
+    char    *pixel;
 
-	pixel = game->img->addr_win + (y * game->img->line_len_win + x * (game->img->bpp_win / 8));
-	*(int *)pixel = color;
+    pixel = game->img->addr_win + (y * game->img->line_len_win + x * (game->img->bpp_win / 8));
+    *(int *)pixel = color;
 }
 
 void	get_texture_info(t_game *game, int x, int y, double end_y)
@@ -47,8 +72,12 @@ void	get_texture_info(t_game *game, int x, int y, double end_y)
 	y_start = (int)((game->mapp->win_height/2) - (end_y/2));
 	x_start = (game->img->offset) %64;
 	y_value = (y - y_start)*64/end_y;
-	color = (int*)(game->text->addr_text + (int)(y_value* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
-	img_pix_put(game, x, y, *color);
+	// if (y_value >= 0 && x_start >= 0)
+	{
+		// printf("the value of x_start {%d} and y_value {%d} and x {%d} and y {%d} y_start {%d}\n", x_start, y_value,x ,y, y_start);
+		color = (int*)(game->text->addr_text + (int)(y_value* game->text->line_len_text + ((x_start)*game->text->bpp_text/8)));
+		img_pix_put(game, x, y, *color);
+	}
 }
 
 double dist(double ax, double ay, double bx, double by, double ang)
