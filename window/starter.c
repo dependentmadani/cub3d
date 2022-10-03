@@ -24,7 +24,6 @@ void    initialize_dx_dy(t_game *game)
         game->gamer->player_dx = cos(game->gamer->player_angle)*game->gamer->speed;
         game->gamer->player_dy = sin(game->gamer->player_angle)*game->gamer->speed;
     }
-    printf("the value of player_dx {%f} and player_dy {%f}\n", game->gamer->player_dx, game->gamer->player_dy);
 }
 
 void    initializer(t_game *game)

@@ -101,7 +101,7 @@ void    check_direction_of_player(t_game *game)
         {
             if (game->newestmap[i][j] == 'E')
             {
-                game->gamer->player_angle = 0;
+                game->gamer->player_angle = PI;
                 i = -1;
                 break ;
             }
@@ -113,7 +113,7 @@ void    check_direction_of_player(t_game *game)
             }
             else if (game->newestmap[i][j] == 'W')
             {
-                game->gamer->player_angle = PI;
+                game->gamer->player_angle = 0;
                 i = -1;
                 break ;
             }

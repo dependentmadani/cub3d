@@ -230,12 +230,14 @@ int		winning_function(void);
 // creation of elements
 
 void    put_wall(t_game *game);
+int 	draw_line(t_game *game,  int color);
 void	rgb_converter(t_game *game);
 void    check_direction_of_player(t_game *game);
 void    put_player(t_game *game);
 char    *image_path_finder(t_game *game, double deg_rad);
 void    information_imgs(t_game *game, char *filename);
 void    initialize_dx_dy(t_game *game);
+void	put_in_minimap_image(t_game *game, int x, int y, int color);
 
 // check functions for raycasting
 

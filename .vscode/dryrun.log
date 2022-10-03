@@ -6,6 +6,7 @@ cc -Wall -Wextra -Werror -Imlx -c parsing/getMap.c -o parsing/getMap.o
 cc -Wall -Wextra -Werror -Imlx -c parsing/getMap_utils.c -o parsing/getMap_utils.o
 cc -Wall -Wextra -Werror -Imlx -c parsing/checkMap.c -o parsing/checkMap.o
 cc -Wall -Wextra -Werror -Imlx -c parsing/checkMapMap.c -o parsing/checkMapMap.o
+ 
 cc -Wall -Wextra -Werror -Imlx -c parsing/checkPathsRgbs.c -o parsing/checkPathsRgbs.o
 cc -Wall -Wextra -Werror -Imlx -c parsing/renderNewMap.c -o parsing/renderNewMap.o
 cc -Wall -Wextra -Werror -Imlx -c parsing/splitRgb.c -o parsing/splitRgb.o

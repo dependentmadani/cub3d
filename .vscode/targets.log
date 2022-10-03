@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Mon Oct  3 07:16:35 2022
+# Make data base, printed on Mon Oct  3 12:33:36 2022
 
 # Variables
 
@@ -38,7 +39,7 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.AnTr7oGAmZ/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.yzSGwJpSyw/Render
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -48,7 +49,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.zCmBGH3K1h/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.dRhNyWMY8c/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -83,7 +84,6 @@ MAKECMDGOALS := all
 SHLVL = 1
 # default
 MAKE_VERSION := 3.81
- 
 # environment
 USER = mbadaoui
 # makefile
@@ -145,7 +145,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1448
+VSCODE_PID = 1400
 # variable set hash-table stats:
 # Load=67/1024=7%, Rehash=0, Collisions=3/98=3%
 
@@ -155,9 +155,16 @@ VSCODE_PID = 1448
 
 # Directories
 
-# . (device 16777227, inode 2614751): 22 files, no impossibilities.
+# raycasting (device 16777227, inode 2614883): 3 files, no impossibilities so far.
+# creation (device 16777227, inode 2614827): 3 files, no impossibilities so far.
+# utils (device 16777227, inode 2614886): 10 files, no impossibilities so far.
+# . (device 16777227, inode 2614751): 24 files, no impossibilities.
+# parsing (device 16777227, inode 2614871): 19 files, no impossibilities so far.
+# movement (device 16777227, inode 2614868): 5 files, no impossibilities so far.
+# utils/gnl (device 16777227, inode 2614888): 6 files, no impossibilities so far.
+# window (device 16777227, inode 2614895): 5 files, no impossibilities so far.
 
-# 22 files, no impossibilities in 1 directories.
+# 75 files, no impossibilities in 8 directories.
 
 # Implicit Rules
 
@@ -170,11 +177,26 @@ VSCODE_PID = 1448
 
 # Files
 
+parsing/splitRgb.o: parsing/splitRgb.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/splitRgb'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
 # Not a target:
-parsing/splitRgb.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+movement/movement_fun.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-03 09:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 all: cub3D
 #  Phony target (prerequisite of .PHONY).
@@ -186,26 +208,91 @@ all: cub3D
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
+# Not a target:
+parsing/getMap.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+window/starter.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-03 10:37:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 .PHONY: all clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-parsing/renderNewMap.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/renderNewMap.o: parsing/renderNewMap.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/renderNewMap'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
-raycasting/checker.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+utils/ft_split.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+raycasting/checker.o: raycasting/checker.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `raycasting/checker'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := raycasting/checker.o
+# automatic
+# % := 
+# automatic
+# * := raycasting/checker
+# automatic
+# + := raycasting/checker.c
+# automatic
+# | := 
+# automatic
+# < := raycasting/checker.c
+# automatic
+# ^ := raycasting/checker.c
+# automatic
+# ? := raycasting/checker.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+# Not a target:
+window/create_window.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-03 10:07:20
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+ 
 cub3D: main.o parsing/getMap.o parsing/getMap_utils.o parsing/checkMap.o parsing/checkMapMap.o parsing/checkPathsRgbs.o parsing/renderNewMap.o parsing/splitRgb.o utils/initializer.o utils/utils.o utils/utils2.o utils/ft_split.o utils/gnl/get_next_line.o utils/gnl/get_next_line_utils.o window/starter.o window/create_window.o movement/keymovement.o movement/movement_fun.o creation/put_elements.o raycasting/checker.o minimap/design_map.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-10-03 11:52:24
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -215,16 +302,40 @@ cub3D: main.o parsing/getMap.o parsing/getMap_utils.o parsing/checkMap.o parsing
 	
 
 # Not a target:
-parsing/checkMap.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/checkPathsRgbs.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parsing/checkMap.o: parsing/checkMap.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/checkMap'
+#  Last modified 2022-10-03 11:52:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+# Not a target:
+utils/utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 Makefile:
@@ -236,40 +347,94 @@ Makefile:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-utils/gnl/get_next_line.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+utils/gnl/get_next_line_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+utils/gnl/get_next_line.o: utils/gnl/get_next_line.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/gnl/get_next_line'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+utils/initializer.o: utils/initializer.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/initializer'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+utils/utils2.o: utils/utils2.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/utils2'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+parsing/getMap_utils.o: parsing/getMap_utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/getMap_utils'
+#  Last modified 2022-10-03 11:52:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
-utils/initializer.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/splitRgb.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-utils/utils2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+movement/keymovement.o: movement/keymovement.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `movement/keymovement'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
-# Not a target:
-parsing/getMap_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-movement/keymovement.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-parsing/checkPathsRgbs.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/checkPathsRgbs.o: parsing/checkPathsRgbs.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/checkPathsRgbs'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
 main.c:
@@ -290,10 +455,25 @@ fclean: clean
 	
 
 # Not a target:
-parsing/checkMapMap.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/renderNewMap.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parsing/checkMapMap.o: parsing/checkMapMap.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/checkMapMap'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
 minimap/design_map.o:
@@ -302,10 +482,25 @@ minimap/design_map.o:
 #  File has not been updated.
 
 # Not a target:
-creation/put_elements.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+raycasting/checker.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-03 11:52:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+creation/put_elements.o: creation/put_elements.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `creation/put_elements'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
 .DEFAULT:
@@ -313,11 +508,29 @@ creation/put_elements.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+parsing/checkMap.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
+
+# Not a target:
+utils/gnl/get_next_line.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 clean:
 #  Phony target (prerequisite of .PHONY).
@@ -329,77 +542,158 @@ clean:
 	
 
 # Not a target:
-movement/movement_fun.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-parsing/getMap.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-window/starter.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-utils/ft_split.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-main.o: main.c
+utils/initializer.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `main'
-#  File does not exist.
+#  Last modified 2022-09-30 18:09:29
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := main.o
-# automatic
-# % := 
-# automatic
-# * := main
-# automatic
-# + := main.c
-# automatic
-# | := 
-# automatic
-# < := main.c
-# automatic
-# ^ := main.c
-# automatic
-# ? := main.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+utils/utils2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+movement/movement_fun.o: movement/movement_fun.c
+ 
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `movement/movement_fun'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 47):
 	cc $(FLAGS) -c $< -o $@
 	
 
 # Not a target:
-window/create_window.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/getMap_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+parsing/getMap.o: parsing/getMap.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parsing/getMap'
+#  Last modified 2022-10-03 11:52:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+window/starter.o: window/starter.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `window/starter'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
-utils/utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+movement/keymovement.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-02 13:14:15
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+utils/ft_split.o: utils/ft_split.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/ft_split'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+main.o: main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `main'
+#  Last modified 2022-10-03 11:52:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+window/create_window.o: window/create_window.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `window/create_window'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # Not a target:
-utils/gnl/get_next_line_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+parsing/checkMapMap.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-30 18:09:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+creation/put_elements.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-10-03 10:08:36
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+utils/utils.o: utils/utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/utils'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
+
+utils/gnl/get_next_line_utils.o: utils/gnl/get_next_line_utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `utils/gnl/get_next_line_utils'
+#  Last modified 2022-10-03 11:52:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 47):
+	cc $(FLAGS) -c $< -o $@
+	
 
 # files hash-table stats:
-# Load=31/1024=3%, Rehash=0, Collisions=3/76=4%
+# Load=50/1024=5%, Rehash=0, Collisions=6/152=4%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -411,6 +705,6 @@ utils/gnl/get_next_line_utils.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Oct  3 07:16:35 2022
+# Finished Make data base on Mon Oct  3 12:33:36 2022
 
  
