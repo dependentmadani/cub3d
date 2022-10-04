@@ -125,15 +125,34 @@ int	texture_minimap(t_game *game, int x, int y)
 	return (*color);
 }
 
+int	check_player_map(t_game *game, int x, int y)
+{
+	if (y > game->mapp->map_x || x > game->mapp->map_y)
+		return (0);
+	if (game->newestmap[y][x] == 'W')
+		return (1);
+	else if (game->newestmap[y][x] == 'S')
+		return (1);
+	else if (game->newestmap[y][x] == 'N')
+		return (1);
+	else if (game->newestmap[y][x] == 'E')
+		return (1);
+	return (0);
+}
+
 int	color_minimap(t_game *game, int x, int y)
 {
 	int	color;
 
 	color = 0;
-	if (game->newestmap[y/10][x/10] == '0')
+	if (y/10 > game->mapp->map_x || x/10 > game->mapp->map_y)
+		return (0);
+	// printf("the values of x {%d} and y {%d}\n", x/10 ,y/10);
+	if (game->newestmap[(int)(game->minimap->start_y/10) + y/10][(int)(game->minimap->start_x/10) + x/10] == '0' || check_player_map(game, game->minimap->start_x/10 + x/10, game->minimap->start_y/10 + y/10))
 		color = 0x808080;
-	else if (game->newestmap[y/10][x/10] == '1')
-		color = texture_minimap(game, x, y);
+	else if (game->newestmap[(int)(game->minimap->start_y/10) + y/10][(int)(game->minimap->start_x/10) + x/10] == '1')
+		color = 0xff0000;
+	// 	color = texture_minimap(game, x, y);
 	return (color);
 }
 
@@ -141,12 +160,24 @@ void	put_minimap(t_game *game)
 {
 	int	x;
 	int	y;
+	double	start_x;
+	double	start_y;
 	int color;
 
-	y = game->minimap->start_y;
+	start_x = 0;
+	start_y = 0;
+	if (game->minimap->start_x != 0)
+		start_x = 0;
+	else if (game->minimap->start_x == 0)
+		start_x = game->mapp->position_map_x*10 - game->minimap->win_width/2;
+	if (game->minimap->start_y != 0)
+		start_y = 0;
+	else if (game->minimap->start_y == 0)
+		start_y = game->mapp->position_map_y*10 - game->minimap->win_height/2;
+	y = (int)start_y;
 	while (y < game->minimap->win_height)
 	{
-		x = game->minimap->start_x;
+		x = (int)start_x;
 		while (x < game->minimap->win_width)
 		{
 			color = color_minimap(game, x, y);
@@ -155,7 +186,7 @@ void	put_minimap(t_game *game)
 		}
 		y++;
 	}
-	(void)game;
+	// printf("the value of x {%d} and y {%d}\n", x, y);
 }
 
 void	mini_moving_map(t_game *game)
@@ -167,30 +198,24 @@ void	mini_moving_map(t_game *game)
 	i = 0.0;
 	j = 0.0;
 	size_text = 10.0;
-	if ((game->minimap->win_width/2 - game->mapp->position_map_x*size_text) <= 0)
+	if ((game->minimap->win_width/2 - game->mapp->position_map_x*size_text) > 0)
+		i = fabs(game->minimap->win_width/2 - game->mapp->position_map_x*size_text);
+	else if ((game->minimap->win_width/2 - game->mapp->position_map_x*size_text) <= 0)
 		i = 0.0;
-	else if ((game->minimap->win_width/2 - game->mapp->position_map_x*size_text) > 0)
-		i = game->minimap->win_width/2 - game->mapp->position_map_x*size_text;
-	if ((game->minimap->win_height/2 - game->mapp->position_map_y*size_text) <= 0)
+	if ((game->minimap->win_height/2 - game->mapp->position_map_y*size_text) > 0)
+		j = fabs(game->minimap->win_height/2 - game->mapp->position_map_y*size_text);
+	else if ((game->minimap->win_height/2 - game->mapp->position_map_y*size_text) <= 0)
 		j = 0.0;
-	else if ((game->minimap->win_height/2 - game->mapp->position_map_y*size_text) > 0)
-		j = game->minimap->win_height/2 - game->mapp->position_map_y*size_text;
 	game->minimap->start_x = i;
 	game->minimap->start_y = j;
-
 	put_minimap(game);
 }
 
 void	create_minimap(t_game *game)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	borders_of_minimap(game);
-	length_of_square_minimap(game);
 	mini_moving_map(game);
+	length_of_square_minimap(game);
 	player_as_circle(game, 0x0000ff);
 	draw_line(game, 0xff0000);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap->new_image, 10,10);
