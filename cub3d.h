@@ -115,6 +115,8 @@ typedef struct	s_minimap
 	int		length_square_height;
 	double	start_x;
 	double	start_y;
+	double	magic_x;
+	double	magic_y;
 	t_map	*map;
 }				t_minimap;
 

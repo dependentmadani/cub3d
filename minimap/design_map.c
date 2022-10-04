@@ -147,10 +147,10 @@ int	color_minimap(t_game *game, int x, int y)
 	color = 0;
 	if (y/10 > game->mapp->map_x || x/10 > game->mapp->map_y)
 		return (0);
-	// printf("the values of x {%d} and y {%d}\n", x/10 ,y/10);
-	if (game->newestmap[(int)(game->minimap->start_y/10) + y/10][(int)(game->minimap->start_x/10) + x/10] == '0' || check_player_map(game, game->minimap->start_x/10 + x/10, game->minimap->start_y/10 + y/10))
+	if (game->newestmap[(int)((game->minimap->start_y - game->minimap->magic_y)/10) + y/10][(int)((game->minimap->start_x - game->minimap->magic_x)/10) + x/10] == '0'
+		|| check_player_map(game, (game->minimap->start_x - game->minimap->magic_x)/10 + x/10, (game->minimap->start_y - game->minimap->magic_y)/10 + y/10))
 		color = 0x808080;
-	else if (game->newestmap[(int)(game->minimap->start_y/10) + y/10][(int)(game->minimap->start_x/10) + x/10] == '1')
+	else if (game->newestmap[(int)((game->minimap->start_y - game->minimap->magic_y)/10) + y/10][(int)((game->minimap->start_x - game->minimap->magic_x)/10) + x/10] == '1')
 		color = 0xff0000;
 	// 	color = texture_minimap(game, x, y);
 	return (color);
@@ -174,6 +174,8 @@ void	put_minimap(t_game *game)
 		start_y = 0;
 	else if (game->minimap->start_y == 0)
 		start_y = game->mapp->position_map_y*10 - game->minimap->win_height/2;
+	game->minimap->magic_x = start_x;
+	game->minimap->magic_y = start_y;
 	y = (int)start_y;
 	while (y < game->minimap->win_height)
 	{
@@ -186,7 +188,6 @@ void	put_minimap(t_game *game)
 		}
 		y++;
 	}
-	// printf("the value of x {%d} and y {%d}\n", x, y);
 }
 
 void	mini_moving_map(t_game *game)
