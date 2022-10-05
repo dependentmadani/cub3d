@@ -104,7 +104,7 @@ void    spread_rays(t_game *game)
 		nTan = -tan(ra);
 		if (ra == 0 || ra==PI) {rx=game->gamer->player_posx; ry=game->gamer->player_posy;fov=13;}
 		if (ra > P2 && ra < P3) {rx =(((int)game->gamer->player_posx/64)*64)+64; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=64; yo=-xo*nTan;}
-		if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/64)*64)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;} // problem need to be fixed here
+		if (ra < P2 || ra > P3) {rx =(((int)game->gamer->player_posx/64)*64)-0.0001; ry=(game->gamer->player_posx-rx)*nTan+game->gamer->player_posy; xo=-64; yo=-xo*nTan;}
 		while (fov < 20)
 		{
 			mx = (int)rx>>6; my = (int)ry>>6; mp = my*game->mapp->map_x+mx;
@@ -114,7 +114,7 @@ void    spread_rays(t_game *game)
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; game->mapp->side_vertical = 1;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; game->mapp->side_vertical = 0;}
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
-		double lineH = (64*415)/(disT); //if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
+		double lineH = (64*415)/(disT);
 		if (game->mapp->side_vertical == 0)
 			game->img->offset = (int)rx;
 		else if (game->mapp->side_vertical == 1)
@@ -123,9 +123,7 @@ void    spread_rays(t_game *game)
 		if (r == 0 || path != game->text->path_img)
 			information_imgs(game, path);
 		game->text->path_img = path;
-
 		draw(game, r, lineH);
-
 		ra += DR/10;
 		if (ra<0) {ra +=2*PI;} if (ra > 2*PI) {ra-=2*PI;};
 	}

@@ -6,7 +6,7 @@
 /*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:13:34 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:13:35 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:40:45 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	put_in_minimap_image(t_game *game, int x, int y, int color)
 {
 	char	*pixel;
 
-	// printf("value x {%d} and y {%d} value of \n", x, y);
 	pixel = game->minimap->addr_img + (y* game->minimap->line_len_mini + ((x)*game->minimap->bpp_mini/8));
 	*(int *)pixel = color;
 }
@@ -44,7 +43,7 @@ void	length_of_square_minimap(t_game *game)
 {
 	int length_width;
 	int	length_height;
-	
+
 	length_width = 10;
 	if (game->mapp->map_x * length_width < game->minimap->win_width)
 		length_width = game->minimap->win_width / game->mapp->map_x;
@@ -88,11 +87,11 @@ void	player_as_circle(t_game *game, int color)
 
 int draw_line(t_game *game, int color)
 {
-	double d_x;
-	double d_y;
-	int pixel;
-	double pixel_dx;
-	double pixel_dy;
+	double	d_x;
+	double	d_y;
+	int		pixel;
+	double	pixel_dx;
+	double	pixel_dy;
 
 	d_x = 0;
 	d_y = 0;
@@ -151,8 +150,7 @@ int	color_minimap(t_game *game, int x, int y)
 		|| check_player_map(game, (game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10, (game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10))
 		color = 0x808080;
 	else if (game->newestmap[(int)((game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10)][(int)((game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10)] == '1')
-		color = 0xff0000;
-	// 	color = texture_minimap(game, x, y);
+		color = 0x339999;
 	return (color);
 }
 

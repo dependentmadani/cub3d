@@ -38,7 +38,7 @@ void    initializer(t_game *game)
     game->minimap->win_height = game->mapp->win_height / 4;
     game->text->path_img = NULL;
     game->gamer->fov = 60.0;
-    game->gamer->speed = 5; ///8 pixels per second
+    game->gamer->speed = 8; ///8 pixels per second
     game->gamer->player_posx = 0; /// depends on his position in the map
     game->gamer->player_posy = 0; /// depends on his position in the map
     game->gamer->moved = 0;
