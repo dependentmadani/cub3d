@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 11:32:16 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 11:41:35 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:31:41 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	**chek_and_fill(char **t, char *s, char c)
 	return (t);
 }
 
-char	**splitRgb(char *s, char c)
+char	**split_rgb(char *s, char c)
 {
 	char	**t;
 	int		count;

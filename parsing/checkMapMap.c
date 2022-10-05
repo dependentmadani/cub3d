@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:41:47 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 16:07:37 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:25:19 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	**check_map_map(t_game *my_game)
 	}
 	while (my_game->map[i])
 	{
-		if (my_game->map[i][0] == '\n' && my_game->map[i][1] == '\0')
+		if (my_game->map[i][0] == '\0' || (my_game->map[i][0] == '\n'
+			&& ft_strlen(my_game->map[i]) >= 1 && my_game->map[i][1] == '\0'))
 			print_error_and_exit("invalid map!");
 		if (my_game->map[i][0] == '\n')
 			t[i] = ft_substr(my_game->map[i], 1, ft_strlen(my_game->map[i])-1);

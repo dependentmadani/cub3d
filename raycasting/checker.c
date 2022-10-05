@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:56:49 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/30 13:48:45 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:17:11 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void    spread_rays(t_game *game)
 		if (disV < disH) {rx = vx; ry =vy; disT = disV; game->mapp->side_vertical = 1;}
 		if (disH < disV) {rx = hx; ry =hy; disT = disH; game->mapp->side_vertical = 0;}
 		double ca = game->gamer->player_angle - ra; if (ca < 0) {ca += 2*PI;} if (ca > 2*PI) {ca -= 2*PI;} disT = disT*cos(ca);
-		double lineH = (64*415)/(disT); if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
+		double lineH = (64*415)/(disT); //if (lineH > game->mapp->win_height) {lineH = game->mapp->win_height;}
 		if (game->mapp->side_vertical == 0)
 			game->img->offset = (int)rx;
 		else if (game->mapp->side_vertical == 1)

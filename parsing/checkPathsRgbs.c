@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:45 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/20 12:56:22 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:35:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ void	rgb_are_valid(t_game *my_game)
 	int	x;
 
 	x = -1;
-	my_game->char_f_rgb = splitRgb(my_game->f_path, ',');
-	my_game->char_c_rgb = splitRgb(my_game->c_path, ',');
+	my_game->char_f_rgb = split_rgb(my_game->f_path, ',');
+	my_game->char_c_rgb = split_rgb(my_game->c_path, ',');
 	if (!my_game->char_f_rgb || !my_game->char_c_rgb)
 		exit(1);
 	while (my_game->char_f_rgb[++x] && my_game->char_c_rgb[x])
-		if (!is_str_digit(my_game->char_f_rgb[x]) || !is_str_digit(my_game->char_c_rgb[x]))
+		if (!is_str_digit(my_game->char_f_rgb[x])
+			|| !is_str_digit(my_game->char_c_rgb[x]))
 			print_error_and_exit("rgb values must be only digits!");
 	if (x != 3)
 		print_error_and_exit("invalid rgb syntax!");
@@ -82,5 +83,4 @@ void	check_map_paths_rgbs(t_game *my_game)
 	paths_are_valid(my_game);
 	rgb_are_valid(my_game);
 	get_rgb_values(my_game);
-	
 }

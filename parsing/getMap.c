@@ -6,11 +6,20 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/30 17:41:47 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:59:27 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	checkline(char *s, char **temp, int i)
+{
+	if (!s && !i)
+	{
+		free(*temp);
+		print_error_and_exit("invalid map");
+	}
+}
 
 char	*getmaplines(int fd)
 {
@@ -26,7 +35,7 @@ char	*getmaplines(int fd)
 	i = 0;
 	while (1)
 	{
-		s = get_next_line(fd); 
+		s = get_next_line(fd);
 		if (!s)
 			break ;
 		t = temp;
@@ -37,11 +46,7 @@ char	*getmaplines(int fd)
 		free(t);
 		i++;
 	}
-	if (!s && !i)
-	{
-		free(temp);
-		print_error_and_exit("invalid map");
-	}
+	checkline(s, &temp, i);
 	return (temp);
 }
 
@@ -57,9 +62,7 @@ int	check_rev_file(char *s)
 	return (0);
 }
 
-
-
-void	get_map(char *av, t_game *my_game/*, t_player *player, t_map *map*/)
+void	get_map(char *av, t_game *my_game)
 {
 	int		fd;
 	char	*temp;
@@ -74,17 +77,16 @@ void	get_map(char *av, t_game *my_game/*, t_player *player, t_map *map*/)
 	if (!my_game->map)
 		print_error_and_exit("invalid map");
 	my_game->newmap = check_map_map(my_game);
-	for(int i=0;my_game->newmap[i];i++)
-		printf("+%s+\n", my_game->newmap[i]);
-	get_longestWidth(my_game);
+	// for(int i=0;my_game->newmap[i];i++)
+	// 	printf("+%s+\n", my_game->newmap[i]);
+	get_longestwidth(my_game);
 	my_game->newestmap = render_new_map(my_game);
 	// printf("sh is good\n");
 	// exit(1);
-	for(int i=0;my_game->newestmap[i];i++)
-		printf("-%s-\n", my_game->newestmap[i]);
+	// for(int i=0;my_game->newestmap[i];i++)
+	// 	printf("-%s-\n", my_game->newestmap[i]);
 	check_map(my_game);
 	check_map_paths_rgbs(my_game);
 	free(temp);
 	close(fd);
-	
 }

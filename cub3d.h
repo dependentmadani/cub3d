@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/30 18:01:17 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:19:15 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,31 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	void	*mlx_text;
 	char	*addr_text;
-	int	    bpp_text;
+	int		bpp_text;
 	int		line_len_text;
 	int		endian;
 	int		img_w;
 	int		img_h;
 	int		text_pos_x;
-	char 	*path_img;
+	char	*path_img;
 }				t_texture;
 
-typedef struct	s_win
+typedef struct s_win
 {
-	void    *mlx_win;
-	char    *addr_win;
-	int     bpp_win; /* bits per pixel */
-	int     line_len_win;
-	int     endian;
+	void	*mlx_win;
+	char	*addr_win;
+	int		bpp_win;
+	int		line_len_win;
+	int		endian;
 	int		scale_resize;
 	int		offset;
 }				t_win;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	double	win_width;
 	double	win_height;
@@ -81,9 +81,9 @@ typedef struct	s_map
 	int		len_wall;
 	double	intersection_wall;
 	int		side_vertical;
-} 				t_map;
+}				t_map;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	int		moved;
 	double	player_posx;
@@ -95,18 +95,18 @@ typedef struct	s_player
 	double	fov;
 }				t_player;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
 	double	win_width;
 	double	win_height;
 	void	*new_image;
 	char	*addr_img;
-	int	    bpp_mini;
+	int		bpp_mini;
 	int		line_len_mini;
 	int		endian_mini;
 	void	*mlx_text;
 	char	*addr_text;
-	int	    bpp_text;
+	int		bpp_text;
 	int		line_len_text;
 	int		endian_text;
 	int		img_w;
@@ -140,7 +140,7 @@ typedef struct s_game
 	int			frame;
 	int			loop;
 	int			gg;
-	int			longestWidth;
+	int			longestwidth;
 	int			num_rows;
 	int			paths_valid;
 	int			colors_valid;
@@ -164,6 +164,8 @@ typedef struct s_game
 	int			f_color;
 	double		min_rad;
 	double		max_rad;
+	int			one_and_only;
+	int			p_valid;
 	t_player	*gamer;
 	t_map		*mapp;
 	t_win		*img;
@@ -177,7 +179,7 @@ void	ft_initializer(t_game *my_game);
 //// -------------- map
 
 // get map
-void	get_map(char *av, t_game *my_game/*, t_player *player, t_map *map*/);
+void	get_map(char *av, t_game *my_game);
 char	**render_new_map(t_game *my_game);
 
 // check paths of the map
@@ -187,11 +189,18 @@ void	check_map_paths_rgbs(t_game *my_game);
 void	check_map(t_game *my_game);
 char	**check_map_map(t_game *my_game);
 
-int	ft_strncmp(char *s1, char *s2, int n);
+int		ft_strncmp(char *s1, char *s2, int n);
 
 // map utils
-void	get_longestWidth(t_game *my_game);
-char	**splitRgb(char *s, char c);
+void	get_longestwidth(t_game *my_game);
+char	**split_rgb(char *s, char c);
+void	fill_em(t_game *game, char *s, int *i);
+void	skip_em(char *s, int *i);
+char	*creat_fill(int x);
+char	*get_space_tab(char *t, char *s, int *j);
+char	*get_other_chars(t_game *game, char *t, char *s, int *j);
+void	check_for_one_and_only(t_game *game, char c);
+void	is_path_color(t_game *game, char *t, char *s, int *i, char c);
 
 //// -------------- utils
 int		check_rev_file(char *s);
@@ -214,46 +223,51 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
 int		ft_atoi(const char	*str);
-
+int		check_only_spaces(char *s);
+void	assign_paths_rgbs(t_game *my_game, char *s);
+int		is_path_rgb(char *s);
+void	deal_with_c(char *s, int *i);
+// void	check_missin_pc(t_game *my_game);
+void	missin_path_color(t_game *my_game, int count);
 // errors
-void print_error_and_exit(char *s);
+void	print_error_and_exit(char *s);
 
 // window
 
-void    initializer(t_game *game);
-void    creation_window(t_game *game);
-void 	create_window(t_game *game);
-void	draw_2d_map(t_game * game);
+void	initializer(t_game *game);
+void	creation_window(t_game *game);
+void	create_window(t_game *game);
+void	draw_2d_map(t_game *game);
 
 // movement of player
 
 int		keyword_move(int keyword, t_game *game);
-void    movement_fun(t_game *game, char axis, int direction);
+void	movement_fun(t_game *game, char axis, int direction);
 int		mouse_move(int button, int x, int y, t_game *game);
 int		exit_function(t_game *game);
 int		winning_function(void);
 
 // creation of elements
 
-void    put_wall(t_game *game);
-int 	draw_line(t_game *game,  int color);
+void	put_wall(t_game *game);
+int		draw_line(t_game *game, int color);
 void	rgb_converter(t_game *game);
-void    check_direction_of_player(t_game *game);
-void    put_player(t_game *game);
-char    *image_path_finder(t_game *game, double deg_rad);
-void    information_imgs(t_game *game, char *filename);
-void    initialize_dx_dy(t_game *game);
+void	check_direction_of_player(t_game *game);
+void	put_player(t_game *game);
+char	*image_path_finder(t_game *game, double deg_rad);
+void	information_imgs(t_game *game, char *filename);
+void	initialize_dx_dy(t_game *game);
 void	put_in_minimap_image(t_game *game, int x, int y, int color);
 
 // check functions for raycasting
 
-int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
-void    spread_rays(t_game *game);
-void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
-void    complete_rays_fov(t_game *game, double player_x, double player_y);
+int		collision_with_wall(t_game *game, double pos_x, double pos_y);
+void	spread_rays(t_game *game);
+void	update_putting_floor(t_game *game, int pos_x, int pos_y);
+void	complete_rays_fov(t_game *game, double player_x, double player_y);
 
 // minimap functions
 
-void    create_minimap(t_game *game);
+void	create_minimap(t_game *game);
 
 #endif

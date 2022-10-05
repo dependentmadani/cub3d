@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:46:25 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/27 18:53:53 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:36:16 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,46 +67,4 @@ void	free_map(t_game *my_game)
 		i++;
 	}
 	free(my_game->map);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned int	i;
-	char			*t;
-
-	i = 0;
-	t = malloc(count * size);
-	if (t == NULL)
-		return (0);
-	while (i < (size * count))
-	{
-		t[i] = '\0';
-		i++;
-	}
-	return (t);
-}
-
-char	*ft_strcat(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*t;
-
-	t = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!t)
-		exit(1);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		t[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		t[i] = s2[j];
-		i++;
-		j++;
-	}
-	return (t);
 }
