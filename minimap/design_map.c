@@ -145,12 +145,12 @@ int	color_minimap(t_game *game, int x, int y)
 	int	color;
 
 	color = 0;
-	if (y/10 > game->mapp->map_x || x/10 > game->mapp->map_y)
+	if ((int)((game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10) >= game->mapp->map_x || (int)((game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10) >= game->mapp->map_y)
 		return (0);
-	if (game->newestmap[(int)((game->minimap->start_y - game->minimap->magic_y)/10) + y/10][(int)((game->minimap->start_x - game->minimap->magic_x)/10) + x/10] == '0'
-		|| check_player_map(game, (game->minimap->start_x - game->minimap->magic_x)/10 + x/10, (game->minimap->start_y - game->minimap->magic_y)/10 + y/10))
+	if (game->newestmap[(int)((game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10)][(int)((game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10)] == '0'
+		|| check_player_map(game, (game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10, (game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10))
 		color = 0x808080;
-	else if (game->newestmap[(int)((game->minimap->start_y - game->minimap->magic_y)/10) + y/10][(int)((game->minimap->start_x - game->minimap->magic_x)/10) + x/10] == '1')
+	else if (game->newestmap[(int)((game->minimap->magic_y)/10 + (y - game->minimap->start_y)/10)][(int)((game->minimap->magic_x)/10 + (x - game->minimap->start_x)/10)] == '1')
 		color = 0xff0000;
 	// 	color = texture_minimap(game, x, y);
 	return (color);
@@ -174,12 +174,12 @@ void	put_minimap(t_game *game)
 		start_y = 0;
 	else if (game->minimap->start_y == 0)
 		start_y = game->mapp->position_map_y*10 - game->minimap->win_height/2;
-	game->minimap->magic_x = start_x;
+	game->minimap->magic_x = start_x; // the variable used to start to map variable
 	game->minimap->magic_y = start_y;
-	y = (int)start_y;
+	y = (int)game->minimap->start_y; // the variable used to start to on the new image
 	while (y < game->minimap->win_height)
 	{
-		x = (int)start_x;
+		x = (int)game->minimap->start_x;
 		while (x < game->minimap->win_width)
 		{
 			color = color_minimap(game, x, y);
