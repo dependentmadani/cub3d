@@ -40,6 +40,29 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
+typedef struct	s_rays
+{
+	double	rx;
+	double	ry;
+	double	hx;
+	double	hy;
+	double	vx;
+	double	vy;
+	int		mp;
+	int		mx;
+	int		my;
+	double	h_x0;
+	double	h_y0;
+	double	v_x0;
+	double	v_y0;
+	int		h_fov;
+	int		v_fov;
+	double	aTan;
+	double	nTan;
+	double	disH;
+	double	disV;
+}				t_rays;
+
 typedef struct	s_texture
 {
 	void	*mlx_text;
@@ -78,7 +101,7 @@ typedef struct	s_map
 	double	dx;
 	double	dy;
 	double	theta;
-	int		len_wall;
+	double	length_wall;
 	double	intersection_wall;
 	int		side_vertical;
 } 				t_map;
@@ -166,6 +189,7 @@ typedef struct s_game
 	double		max_rad;
 	t_player	*gamer;
 	t_map		*mapp;
+	t_rays		*rays;
 	t_win		*img;
 	t_texture	*text;
 	t_minimap	*minimap;
@@ -247,13 +271,16 @@ void	put_in_minimap_image(t_game *game, int x, int y, int color);
 
 // check functions for raycasting
 
+double	dist(double ax, double ay, double bx, double by);
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
-void    spread_rays(t_game *game);
+// void    spread_rays(t_game *game);
 void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
 void    complete_rays_fov(t_game *game, double player_x, double player_y);
+void	dda_algorithm(t_game *game);
 
 // minimap functions
 
 void    create_minimap(t_game *game);
+int		draw(t_game *game, double end_x, double end_y);
 
 #endif

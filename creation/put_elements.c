@@ -175,6 +175,7 @@ void    put_player(t_game *game)
     game->img->addr_win = mlx_get_data_addr(game->img->mlx_win, &game->img->bpp_win, &game->img->line_len_win, &game->img->endian);
     game->minimap->new_image = mlx_new_image(game->mlx, game->minimap->win_width, game->minimap->win_height);
     game->minimap->addr_img = mlx_get_data_addr(game->minimap->new_image, &game->minimap->bpp_mini, &game->minimap->line_len_mini, &game->minimap->endian_mini);
-    spread_rays(game);
+    // spread_rays(game);
+    dda_algorithm(game);
     create_minimap(game);
 }

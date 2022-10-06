@@ -31,12 +31,13 @@ SRC = main.c\
 		movement/keymovement.c \
 		movement/movement_fun.c \
 		creation/put_elements.c \
+		raycasting/raycasting.c \
 		raycasting/checker.c \
 		minimap/design_map.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Imlx #-g -fsanitize=address
 
 all : $(NAME)
 

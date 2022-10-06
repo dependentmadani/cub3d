@@ -31,6 +31,7 @@ void    initializer(t_game *game)
     game->img = ft_calloc(1, sizeof(t_win));
     game->text = ft_calloc(1, sizeof(t_texture));
     game->minimap = ft_calloc(1, sizeof(t_minimap));
+    game->rays = ft_calloc(1, sizeof(t_rays));
     game->minimap->map = game->mapp;
     game->mapp->win_width = 640;
     game->mapp->win_height = 480;
@@ -45,7 +46,7 @@ void    initializer(t_game *game)
     game->mapp->map_x = 0;
     game->mapp->map_y = 0;
     game->mapp->theta = 0;
-    game->mapp->len_wall = 0;
+    game->mapp->length_wall = 0;
     game->mapp->intersection_wall = 0;
     game->mapp->side_vertical = 0;
     game->img->offset = 0;
