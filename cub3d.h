@@ -273,14 +273,26 @@ void	put_in_minimap_image(t_game *game, int x, int y, int color);
 
 double	dist(double ax, double ay, double bx, double by);
 int 	collision_with_wall(t_game *game, double pos_x, double pos_y);
-// void    spread_rays(t_game *game);
 void 	update_putting_floor(t_game *game, int pos_x, int pos_y);
 void    complete_rays_fov(t_game *game, double player_x, double player_y);
 void	dda_algorithm(t_game *game);
+
+// raycasting functions:
+
+void	assign_x0_y0_horizontal(t_game *game, double angle);
+void	check_horizontal_lines(t_game *game, double angle);
+void	assign_x0_y0_vertical(t_game *game, double angle);
+void	check_vertical_lines(t_game *game, double angle);
+void	initializer_rays_struct(t_game *game);
 
 // minimap functions
 
 void    create_minimap(t_game *game);
 int		draw(t_game *game, double end_x, double end_y);
+void	player_as_circle(t_game *game, int color);
+void	borders_of_minimap(t_game *game);
+void	length_of_square_minimap(t_game *game);
+int		texture_minimap(t_game *game, int x, int y);
+int		check_player_map(t_game *game, int x, int y);
 
 #endif

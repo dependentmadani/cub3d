@@ -49,7 +49,7 @@ int	exit_function(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int winning_funtion(void)
+int	winning_funtion(void)
 {
 	printf("I was an intesive game, and you did great!\n");
 	exit(EXIT_SUCCESS);
