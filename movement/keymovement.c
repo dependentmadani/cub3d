@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keymovement.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 19:25:19 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/04 19:25:20 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:02:53 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,21 @@ int	keyword_move(int keyword, t_game *game)
 		movement_fun(game, 'x', RIGHT);
 	if (keyword == A)
 		movement_fun(game, 'x', LEFT);
-	// if (game->map[game->gamer->player_posy][game->gamer->player_posx] == 'E')
-	// 	win_funct(game);
+	if (keyword == LEFT_ARROW)
+		movement_fun(game, 'x', VIEW_LEFT);
+	if (keyword == RIGHT_ARROW)
+		movement_fun(game, 'x', VIEW_RIGHT);
+	return (0);
+}
+
+int	mouse_move(int button, int x, int y, t_game *game)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+		movement_fun(game, 'x', VIEW_LEFT);
+	if (button == 2)
+		movement_fun(game, 'x', VIEW_RIGHT);
 	return (0);
 }
 
@@ -36,7 +49,7 @@ int	exit_function(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int winning_funtion(void)
+int	winning_funtion(void)
 {
 	printf("I was an intesive game, and you did great!\n");
 	exit(EXIT_SUCCESS);

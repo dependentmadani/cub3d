@@ -67,6 +67,7 @@ void	assign_paths_rgbs(t_game *my_game, char *s)
 	{
 		my_game->no_path = ft_substrzwina(s, 3, ft_strlen(s));
 		my_game->is_no = 1;
+		
 	}
 	else if (!ft_strncmp(s, "SO ", 3))
 	{
@@ -142,6 +143,7 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 	if (my_game->is_no != 1 || my_game->is_so != 1 || my_game->is_we != 1 || my_game->is_ea != 1 || my_game->is_f != 1 || my_game->is_c != 1)
 		print_error_and_exit("missing paths or colors!");
 	my_game->num_rows = count;
+	
 	return (t);
 }
 

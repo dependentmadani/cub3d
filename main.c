@@ -29,7 +29,8 @@ int	main(int ac, char **av)
 		get_map(av[1], &tg/*, py, mp*/);
 		tg.mapp = mp;
 		tg.gamer = py;
-		printf("sh is good\n");
+		// printf("shhhh is good %s\n", tg.no_path);
+		// exit(1);
 		creation_window(&tg);
 		// for(int i=0;tg.newmap[i];i++)
 		// 	printf("-%s-\n", tg.newmap[i]);

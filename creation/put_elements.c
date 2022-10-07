@@ -6,154 +6,110 @@
 /*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:15:21 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/04 22:15:22 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:49:14 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3d.h"
+#include "../cub3d.h"
 
-void update_putting_floor(t_game *game, int pos_x, int pos_y)
+int	check_for_direction(t_game *game, char c)
 {
-    int estimation_x;
-    int estimation_y;
-    int width;
-    int height;
-    void *wall;
-    int diff_x;
-    int diff_y;
+	int	i;
 
-    estimation_x = (pos_x) / IMG_H;
-    estimation_y = (pos_y) / IMG_W;
-    diff_x = (pos_x + 10) / IMG_H;
-    diff_y = (pos_y + 10) / IMG_W;
-    if (game->newestmap[estimation_y] && (game->newestmap[estimation_y][estimation_x] == '0'
-        || game->newestmap[estimation_y][estimation_x] == 'N'  || game->newestmap[estimation_y][estimation_x] == 'S'
-        || game->newestmap[estimation_y][estimation_x] == 'E' || game->newestmap[estimation_y][estimation_x] == 'W'))
-    {
-        wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
-        mlx_put_image_to_window(game->mlx, game->win, wall, estimation_x*IMG_W, estimation_y*IMG_H);
-    }
-    if (diff_x != estimation_x || diff_y != estimation_y)
-    {
-        if (game->newestmap[diff_y][diff_x] == '1')
-        {
-            wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
-            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H);
-        }
-        else
-        {
-            wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
-            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H); 
-        }
-    }
-    diff_x = (pos_x - 10) / IMG_H;
-    diff_y = (pos_y - 10) / IMG_W;
-    if (diff_x != estimation_x || diff_y != estimation_y)
-    {
-        if (game->newestmap[diff_y][diff_x] == '1')
-        {
-            wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
-            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H);
-        }
-        else
-        {
-            wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
-            mlx_put_image_to_window(game->mlx, game->win, wall, diff_x*IMG_W, diff_y*IMG_H); 
-        }
-    }
+	i = 0;
+	if (c == 'E')
+	{
+		game->gamer->player_angle = M_PI;
+		i = 1;
+	}
+	else if (c == 'N')
+	{
+		game->gamer->player_angle = M_PI_2;
+		i = 1;
+	}
+	else if (c == 'W')
+	{
+		game->gamer->player_angle = 0;
+		i = 1;
+	}
+	else if (c == 'S')
+	{
+		game->gamer->player_angle = 3 * M_PI_2;
+		i = 1;
+	}
+	return (i);
 }
 
-void    circle(t_game *game, int color)
+void	check_direction_of_player(t_game *game)
 {
-    int i;
-    int j;
-    int r;
-    int x;
-    int y;
-    int d;
-    int a;
+	int	i;
+	int	j;
 
-    r = 5;
-    x = 0;
-    y = 0;
-    i = -r;
-    while(i<IMG_H)
-    {
-        j = -r;
-        while(j<IMG_W)
-        {
-            a=((i-x)*(i-x))+((j-y)*(j-y));
-            d=sqrt(a);
-            if(r>=d)
-                mlx_pixel_put(game->mlx, game->win, game->gamer->player_posx + i,game->gamer->player_posy + j, color);
-            j++;
-        }
-        i++;
-    }
- }
-
-void    put_wall(t_game *game)
-{
-    int i;
-    int j;
-    int width;
-    int height;
-    void *wall;
-
-    i = 0;
-    while (game->newestmap[i])
-    {
-        j = 0;
-        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
-        {
-            if (game->newestmap[i][j] == '1')
-            {
-                wall = mlx_xpm_file_to_image(game->mlx, game->no_path, &width, &height);
-                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
-            }
-            j++;
-        }
-        i++;
-    }
+	i = 0;
+	while (game->newestmap[i])
+	{
+		j = 0;
+		while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
+		{
+			if (check_for_direction(game, game->newestmap[i][j]))
+			{
+				i = -1;
+				break ;
+			}
+			j++;
+		}
+		if (i == -1)
+			break ;
+		i++;
+	}
 }
 
-void    put_floor(t_game *game)
+char	*image_path_finder(t_game *game, double deg_rad)
 {
-    int i;
-    int j;
-    int width;
-    int height;
-    void *wall;
-
-    i = 0;
-    while (game->newestmap[i])
-    {
-        j = 0;
-        while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
-        {
-            if (game->newestmap[i][j] == '0' || game->newestmap[i][j] == 'N' 
-                || game->newestmap[i][j] == 'S' || game->newestmap[i][j] == 'E'
-                || game->newestmap[i][j] == 'W')
-            {
-                wall = mlx_xpm_file_to_image(game->mlx, game->so_path, &width, &height);
-                mlx_put_image_to_window(game->mlx, game->win, wall, j*IMG_W, i*IMG_H);
-            }
-            j++;
-        }
-        i++;
-    }
+	if ((deg_rad <= M_PI_2|| deg_rad >= 3 * M_PI_2)
+		&& game->mapp->side_vertical == 1)
+		return (game->ea_path);
+	else if (deg_rad <= M_PI && game->mapp->side_vertical == 0)
+		return (game->no_path);
+	else if ((deg_rad <= 3 * M_PI_2 || deg_rad >= M_PI_2)
+		&& game->mapp->side_vertical == 1)
+		return (game->we_path);
+	else if (deg_rad > M_PI && game->mapp->side_vertical == 0)
+		return (game->so_path);
+	return (NULL);
 }
 
-void    put_player(t_game *game, int color)
+void	information_imgs(t_game *game, char *filename)
 {
-    if (game->gamer->moved)
-    {
-        mlx_clear_window(game->mlx, game->win);
-        // draw_2d_map(game);
-    }
-    (void)color;
-    // put_wall(game);
-    // put_floor(game);
-    // circle(game, color);
-    spread_rays(game);
+	game->text->mlx_text = mlx_xpm_file_to_image(game->mlx, filename, \
+		&game->text->img_w, &game->text->img_h);
+	if (!game->text->mlx_text)
+	{
+		perror("Error\n");
+		printf("The image path \"%s\" is not correct\n", filename);
+		exit(EXIT_FAILURE);
+	}
+	game->text->addr_text = mlx_get_data_addr(game->text->mlx_text, \
+		&game->text->bpp_text, &game->text->line_len_text, &game->text->endian);
+}
+
+void	put_player(t_game *game)
+{
+	if (game->gamer->moved)
+	{
+		mlx_destroy_image(game->mlx, game->img->mlx_win);
+		mlx_destroy_image(game->mlx, game->minimap->new_image);
+		mlx_clear_window(game->mlx, game->win);
+	}
+	game->img->mlx_win = mlx_new_image(game->mlx, game->mapp->win_width, \
+		game->mapp->win_height);
+	game->img->addr_win = mlx_get_data_addr(game->img->mlx_win, \
+		&game->img->bpp_win, &game->img->line_len_win, &game->img->endian);
+	game->minimap->new_image = mlx_new_image(game->mlx, \
+		game->minimap->win_width, game->minimap->win_height);
+	game->minimap->addr_img = mlx_get_data_addr(game->minimap->new_image, \
+		&game->minimap->bpp_mini, &game->minimap->line_len_mini, \
+		&game->minimap->endian_mini);
+	dda_algorithm(game);
+	create_minimap(game);
 }

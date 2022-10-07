@@ -28,7 +28,7 @@ int ft_realstrlen(char *s)
 	return (len);
 }
 
-void get_longestWidth(t_game *my_game)
+void get_longest_width(t_game *my_game)
 {
 	int	i;
 	int	temp;
@@ -46,5 +46,5 @@ void get_longestWidth(t_game *my_game)
 		}
 		i++;
 	}
-	my_game->longestWidth = temp;
+	my_game->longest_width = temp;
 }

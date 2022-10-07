@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializer.c                                      :+:      :+:    :+:   */
+/*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 12:10:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/13 12:13:25 by ael-asri         ###   ########.fr       */
+/*   Created: 2022/10/06 12:31:18 by mbadaoui          #+#    #+#             */
+/*   Updated: 2022/10/06 12:31:18 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	ft_initializer(t_game *my_game)
+void	rgb_converter(t_game *game)
 {
-	my_game->is_no = 0;
-	my_game->is_so = 0;
-	my_game->is_we = 0;
-	my_game->is_ea = 0;
-	my_game->is_f = 0;
-	my_game->is_c = 0;
-	my_game->min_rad = (-1 * M_PI / 2) - 1500;
-	my_game->min_rad = (-1 * M_PI / 2) + 1500;
+	game->c_color = ((game->c_rgb[0] << 16) + (game->c_rgb[1] << 8) + \
+		(game->c_rgb[2]));
+	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + \
+		(game->f_rgb[2]));
 }

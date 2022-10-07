@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/09/13 12:10:53 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/10/04 16:37:21 by mbadaoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,17 @@ SRC = main.c\
 		movement/keymovement.c \
 		movement/movement_fun.c \
 		creation/put_elements.c \
+		creation/rgb.c \
+		raycasting/raycasting.c \
+		raycasting/raycasting_helper.c \
 		raycasting/checker.c \
+		minimap/design_map.c \
+		minimap/minimap_helper.c \
+		minimap/minimap_helper_2.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx
+FLAGS = -Wall -Wextra -Werror -Imlx #-g -fsanitize=address
 
 all : $(NAME)
 

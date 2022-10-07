@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:24:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/15 12:04:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:13:39 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fill_em(char *s, int *i)
 {
-	while ((s[*i] == '0' || s[*i] == '1' || s[*i] == 'S' || s[*i] == 'N') && s[*i] != '\n')
+	while ((s[*i] == '0' || s[*i] == '1' || s[*i] == 'S' || s[*i] == 'N' || s[*i] == 'E' || s[*i] == 'W') && s[*i] != '\n')
 		(*i)++;
 }
 
@@ -61,17 +61,17 @@ char	*get_other_chars(char *t, char *s, int *j)
 
 int	other_chars_condition(char c)
 {
-	if (c == '1' || c == '0' || c == 'S' || c == 'N'|| c == 'A' || c == 'E')
+	if (c == '1' || c == '0' || c == 'S' || c == 'N' || c == 'W' || c == 'E')
 		return (1);
 	return (0);
 }
 
-char	*filling_countinues(char *t, int *j, int longestWidth)
+char	*filling_countinues(char *t, int *j, int longest_width)
 {
 	int	start;
 
 	start = *j;
-	while (*j < longestWidth)
+	while (*j < longest_width)
 		(*j)++;
 	t = ft_strjoin(t, creat_fill(*j - start));
 	return (t);
@@ -100,8 +100,8 @@ char	**render_new_map(t_game *my_game)
 			else
 				print_error_and_exit("invalid character!");
 		}
-		if (j < my_game->longestWidth)
-			t[x] = filling_countinues(t[x], &j, my_game->longestWidth);
+		if (j < my_game->longest_width)
+			t[x] = filling_countinues(t[x], &j, my_game->longest_width);
 		x++;
 		i++;
 	}

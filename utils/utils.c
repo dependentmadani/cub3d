@@ -60,8 +60,8 @@ char	*ft_substrzwina(char	*s, int start, int end)
 		return (0);
 	// if (len >= ft_strlen(s))
 	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (tab == NULL)
-		return (0);
+	if (!tab)
+		exit(1);
 	// else if (len < ft_strlen(s))
 	// 	tab = malloc(sizeof(char) * (len + 1));
 	i = 0;
