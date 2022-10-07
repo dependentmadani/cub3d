@@ -76,23 +76,6 @@ void	showing_3d_game(t_game *game)
 	}
 }
 
-void	texture_wall_minimap(t_game *game)
-{
-	char	*path;
-
-	path = "./images/brick.xpm";
-	game->minimap->mlx_text = mlx_xpm_file_to_image(game->mlx, path, \
-		&game->minimap->img_w, &game->minimap->img_h);
-	if (!game->minimap->mlx_text)
-	{
-		printf("Path of file not found \"%s\"\n", path);
-		exit(EXIT_FAILURE);
-	}
-	game->minimap->addr_text = mlx_get_data_addr(game->mlx, \
-		&game->minimap->bpp_text, &game->minimap->line_len_text, \
-		&game->minimap->endian_text);
-}
-
 void	create_window(t_game *game)
 {
 	count_the_map(game);
@@ -103,7 +86,6 @@ void	create_window(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 	rgb_converter(game);
-	texture_wall_minimap(game);
 	check_direction_of_player(game);
 	initialize_dx_dy(game);
 	assign_max_fov(game);

@@ -92,7 +92,7 @@ void	dda_algorithm(t_game *game)
 			information_imgs(game, path);
 		game->text->path_img = path;
 		draw(game, r, game->mapp->length_wall);
-		ra += DR / (game->mapp->win_width/60);
+		ra += DR / (game->mapp->win_width / 60);
 		ra = check_angle(ra);
 		r++;
 	}

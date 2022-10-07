@@ -1,0 +1,13 @@
+WE ./images/red_wall.xpm
+NO ./images/blue_wall.xpm
+EA ./images/fchkel_wall.xpm
+SO ./images/grey_wall.xpm
+F 220,111,119
+C 225,111,0
+
+          
+     11111  
+    100S001
+     10001
+      101
+       1
