@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:24:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 18:37:47 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:05:42 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*filling_countinues(char *t, int *j, int longestWidth)
 	start = *j;
 	while (*j < longestWidth)
 		(*j)++;
-	t = ft_strjoin(t, creat_fill(*j - start));
+	t = ft_strjoin(t, create_fill(*j - start));
 	return (t);
 }
 
@@ -40,37 +40,52 @@ void	check_for_one_and_only(t_game *game, char c)
 	}
 }
 
-void	check_cases(t_game *my_game, char **t, int i, int *j, int x)
+char	*check_cases(t_game *my_game, int i, int *j)
 {
+	char *temp=NULL;
+	// temp = ft_strdup("");
 	check_for_one_and_only(my_game, my_game->newmap[i][*j]);
 	if (my_game->newmap[i][*j] == ' ' || my_game->newmap[i][*j] == '\t')
-		t[x] = get_space_tab(t[x], my_game->newmap[i], j);
+	{	
+		temp = get_space_tab(my_game->newmap[i], j);
+	}
 	else if (other_chars_condition(my_game->newmap[i][*j]))
-		t[x] = get_other_chars(my_game, t[x], my_game->newmap[i], j);
+		{
+			temp = get_other_chars(my_game, my_game->newmap[i], j);
+		}
 	else
 		print_error_and_exit("invalid character!");
+	printf("mal mok\n");
+	system("leaks cub3D");
+	exit(1);
+	return temp;
 }
 
 char	**render_new_map(t_game *my_game)
 {
-	char	**t;
+	char	**t=NULL;
 	int		i;
 	int		x;
 	int		j;
 
 	i = 6;
 	x = 0;
-	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
+	// t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
 	while (my_game->newmap[i] != '\0')
 	{
 		j = 0;
 		while (my_game->newmap[i][j] != '\0')
-			check_cases(my_game, t, i, &j, x);
+			t[x] = ft_strjoin(t[x], check_cases(my_game, i, &j));
 		if (j < my_game->longestwidth)
 			t[x] = filling_countinues(t[x], &j, my_game->longestwidth);
 		x++;
 		i++;
 	}
 	t[x] = 0;
+	// printf("malawa mok\n");
+	// system("leaks cub3D");
+	// exit(1);
+	// my_game->newestmap = t;
+	
 	return (t);
 }

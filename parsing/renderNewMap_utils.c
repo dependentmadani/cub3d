@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 13:41:51 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 14:34:01 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:02:09 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,94 @@ void	skip_em(char *s, int *i)
 		(*i)++;
 }
 
-char	*creat_fill(int x)
+char	*strcat_hash(int x)
+{
+	// if (dstsize == 0)
+	// 	return (src_len);
+	int i = 0;
+	char *t = malloc(999);
+	while (x > 0)
+	{
+		t[i] = '#';
+		i++;
+		x--;
+	}
+	t[i] = '\0';
+	// printf("malawa mok\n");
+	// system("leaks cub3D");
+	// exit(1);
+	return (t);
+}
+
+char	*create_fill(int x)
 {
 	char	*s;
 	int		i;
 
 	i = 0;
-	s = ft_strdup("");
-	while (i < x)
-	{
-		s = ft_strjoin(s, "#");
-		i++;
-	}
+	// s = NULL;
+//	s = ft_strdup("");
+	// s = malloc(99);
+	// char *c = ft_strdup("#");
+	// while (i < x)
+	// {
+	// 	s = ft_strjoin(s, c);
+	// 	i++;
+	// }
+	s = strcat_hash(x);
+	// printf("malawa mok\n");
+	// system("leaks cub3D");
+	// exit(1);
+	// printf("s %s\n", s);
+	
 	return (s);
 }
 
-char	*get_space_tab(char *t, char *s, int *j)
+char	*get_space_tab(char *s, int *j)
 {
-	int	start;
+	char *t=NULL;
+	char	*temp;
+	int		start;
 
 	start = *j;
 	skip_em(s, j);
-	t = ft_strjoin(t, creat_fill(*j - start));
+	temp = create_fill(*j - start);
+	// system("leaks cub3D");
+	// free(temp);
+	// exit(1);
+	// t = ft_strdup("");
+	t = ft_strjoin(t, temp);
+	free(temp);
+	// printf("mal mok\n");
+	// printf("malawa mok\n");
+	// system("leaks cub3D");
+	// exit(1);
 	return (t);
 }
 
-char	*get_other_chars(t_game *game, char *t, char *s, int *j)
+char	*get_other_chars(t_game *game, char *s, int *j)
 {
-	int	start;
+	char *t=NULL;
+	char	*temp;
+	int		start;
 
 	start = *j;
+	// printf("mall mok\n");
+	// system("leaks cub3D");
+	// exit(1);
 	fill_em(game, s, j);
-	t = ft_strjoin(t, ft_substr(s, start, *j - start));
+	temp = ft_substr(s, start, *j - start);
+	// t = ft_strdup("");
+	t = ft_strjoin(t, temp);
+	// free(t);
+	free(temp);
+	
+	// for (int i=0; my_game->newestmap[i];i++)
+	// {
+	// 	free(my_game->newestmap[i]);
+	// 	my_game->newestmap[i] = NULL;
+	// }
+	// free(my_game->newestmap);
+	// free(s);
 	return (t);
 }

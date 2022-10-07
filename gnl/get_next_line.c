@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:38:11 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/08/27 15:13:09 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:29:52 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ char	*get_next_line(int fd)
 	line = get_chyata(line);
 	// if (buffer[0] == '\n')
 	// 	ft_putstr_error_exit("invalid map\n");
+	printf("mal mok\n");
+		system("leaks cub3D");
+		exit(1);
 	return (buffer);
 }

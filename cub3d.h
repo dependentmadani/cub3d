@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 18:19:15 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:59:50 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,9 @@ void	get_longestwidth(t_game *my_game);
 char	**split_rgb(char *s, char c);
 void	fill_em(t_game *game, char *s, int *i);
 void	skip_em(char *s, int *i);
-char	*creat_fill(int x);
-char	*get_space_tab(char *t, char *s, int *j);
-char	*get_other_chars(t_game *game, char *t, char *s, int *j);
+char	*create_fill(int x);
+char	*get_space_tab(char *s, int *j);
+char	*get_other_chars(t_game *game, char *s, int *j);
 void	check_for_one_and_only(t_game *game, char c);
 void	is_path_color(t_game *game, char *t, char *s, int *i, char c);
 

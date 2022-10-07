@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 17:59:27 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:09:54 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*getmaplines(int fd)
 	char	*s;
 	int		i;
 
-	s = ft_strdup("");
 	temp = ft_strdup("");
 	if (!temp)
 		exit(1);
@@ -62,6 +61,25 @@ int	check_rev_file(char *s)
 	return (0);
 }
 
+char	**generate_newestmap(t_game *game)
+{
+	char	**t;
+	int		i;
+	int		j;
+
+	i = 6;
+	j = 0;
+	t = (char **)ft_calloc(sizeof(char *), game->num_rows + 1);
+	while (game->newmap[i])
+	{
+		t[j] = ft_strdup(game->newmap[i]);
+		j++;
+		i++;
+	}
+	t[j] = NULL;
+	return (t);
+}
+
 void	get_map(char *av, t_game *my_game)
 {
 	int		fd;
@@ -77,16 +95,10 @@ void	get_map(char *av, t_game *my_game)
 	if (!my_game->map)
 		print_error_and_exit("invalid map");
 	my_game->newmap = check_map_map(my_game);
-	// for(int i=0;my_game->newmap[i];i++)
-	// 	printf("+%s+\n", my_game->newmap[i]);
 	get_longestwidth(my_game);
-	my_game->newestmap = render_new_map(my_game);
-	// printf("sh is good\n");
-	// exit(1);
-	// for(int i=0;my_game->newestmap[i];i++)
-	// 	printf("-%s-\n", my_game->newestmap[i]);
 	check_map(my_game);
 	check_map_paths_rgbs(my_game);
+	my_game->newestmap = generate_newestmap(my_game);
 	free(temp);
 	close(fd);
 }

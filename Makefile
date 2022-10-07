@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/10/05 17:54:19 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/10/07 19:37:37 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ SRC = main.c\
 		parsing/checkMap.c\
 		parsing/checkMapMap.c\
 		parsing/checkPathsRgbs.c\
-		parsing/renderNewMap.c\
-		parsing/renderNewMap_utils.c\
 		parsing/splitRgb.c\
 		utils/initializer.c\
 		utils/utils.c\
@@ -40,7 +38,7 @@ SRC = main.c\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Imlx -g #-fsanitize=address
 
 all : $(NAME)
 

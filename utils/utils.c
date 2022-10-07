@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:10:10 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 17:36:43 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:49:11 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*t;
 	int		len;
+	int		lock;
 
 	i = 0;
 	j = 0;
+	lock = 0;
 	if (!s1)
 		s1 = ft_strdup("");
-	if (!s2)
-		s2 = ft_strdup("");
 	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
 	t = malloc(sizeof(char) * len);
 	if (!t)
