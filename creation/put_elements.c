@@ -66,7 +66,7 @@ void	check_direction_of_player(t_game *game)
 
 char	*image_path_finder(t_game *game, double deg_rad)
 {
-	if ((deg_rad <= M_PI_2|| deg_rad >= 3 * M_PI_2)
+	if ((deg_rad <= M_PI_2 || deg_rad >= 3 * M_PI_2)
 		&& game->mapp->side_vertical == 1)
 		return (game->ea_path);
 	else if (deg_rad <= M_PI && game->mapp->side_vertical == 0)

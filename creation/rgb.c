@@ -19,3 +19,11 @@ void	rgb_converter(t_game *game)
 	game->f_color = ((game->f_rgb[0] << 16) + (game->f_rgb[1] << 8) + \
 		(game->f_rgb[2]));
 }
+
+void	assign_max_fov(t_game *game)
+{
+	if (game->mapp->map_x > game->mapp->map_y)
+		game->mapp->max_fov = game->mapp->map_x + 1;
+	else
+		game->mapp->max_fov = game->mapp->map_y + 1;
+}

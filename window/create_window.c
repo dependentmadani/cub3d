@@ -52,7 +52,7 @@ void	count_the_map(t_game *game)
 	game->mapp->map_size = game->mapp->map_x * game->mapp->map_y;
 }
 
-void	put_map_2d(t_game *game)
+void	showing_3d_game(t_game *game)
 {
 	int	i;
 	int	j;
@@ -106,9 +106,10 @@ void	create_window(t_game *game)
 	texture_wall_minimap(game);
 	check_direction_of_player(game);
 	initialize_dx_dy(game);
+	assign_max_fov(game);
 	game->win = mlx_new_window(game->mlx, game->mapp->win_width, \
 		game->mapp->win_height, "cub3D");
-	put_map_2d(game);
+	showing_3d_game(game);
 	mlx_hook(game->win, 2, 1L << 0, keyword_move, game);
 	mlx_hook(game->win, 4, 1L << 2, mouse_move, game);
 	mlx_hook(game->win, 17, 1L << 0, exit_function, game);

@@ -40,7 +40,7 @@ void	assign_x0_y0_horizontal(t_game *game, double angle)
 	{
 		game->rays->rx = game->gamer->player_posx;
 		game->rays->ry = game->gamer->player_posy;
-		game->rays->h_fov = 20;
+		game->rays->h_fov = game->mapp->max_fov;
 	}
 	if (angle < M_PI)
 	{
@@ -64,7 +64,7 @@ void	check_horizontal_lines(t_game *game, double angle)
 {
 	game->rays->atan = -1 / tan(angle);
 	assign_x0_y0_horizontal(game, angle);
-	while (game->rays->h_fov < 20)
+	while (game->rays->h_fov < game->mapp->max_fov)
 	{
 		game->rays->mx = (int)game->rays->rx >> 6;
 		game->rays->my = (int)game->rays->ry >> 6;
@@ -77,7 +77,7 @@ void	check_horizontal_lines(t_game *game, double angle)
 			game->rays->hy = game->rays->ry;
 			game->rays->dish = dist(game->gamer->player_posx, \
 				game->gamer->player_posy, game->rays->hx, game->rays->hy);
-			game->rays->h_fov = 20;
+			game->rays->h_fov = game->mapp->max_fov;
 		}
 		else
 		{
@@ -95,7 +95,7 @@ void	assign_x0_y0_vertical(t_game *game, double angle)
 	{
 		game->rays->rx = game->gamer->player_posx;
 		game->rays->ry = game->gamer->player_posy;
-		game->rays->v_fov = 20;
+		game->rays->v_fov = game->mapp->max_fov;
 	}
 	if (angle > M_PI_2 && angle < 3 * M_PI_2)
 	{
@@ -119,7 +119,7 @@ void	check_vertical_lines(t_game *game, double angle)
 {
 	game->rays->ntan = -tan(angle);
 	assign_x0_y0_vertical(game, angle);
-	while (game->rays->v_fov < 20)
+	while (game->rays->v_fov < game->mapp->max_fov)
 	{
 		game->rays->mx = (int)game->rays->rx >> 6;
 		game->rays->my = (int)game->rays->ry >> 6;
@@ -132,7 +132,7 @@ void	check_vertical_lines(t_game *game, double angle)
 			game->rays->vy = game->rays->ry;
 			game->rays->disv = dist(game->gamer->player_posx, \
 				game->gamer->player_posy, game->rays->vx, game->rays->vy);
-			game->rays->v_fov = 20;
+			game->rays->v_fov = game->mapp->max_fov;
 		}
 		else
 		{

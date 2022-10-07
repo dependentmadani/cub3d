@@ -21,7 +21,8 @@ void	initialize_dx_dy(t_game *game)
 		game->gamer->player_dy = sin(game->gamer->player_angle) * \
 			game->gamer->speed;
 	}
-	else if (game->gamer->player_angle == M_PI_2 || game->gamer->player_angle == 3 * M_PI_2)
+	else if (game->gamer->player_angle == M_PI_2
+		|| game->gamer->player_angle == 3 * M_PI_2)
 	{
 		game->gamer->player_dx = cos(game->gamer->player_angle) * \
 			game->gamer->speed;

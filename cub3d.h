@@ -101,6 +101,7 @@ typedef struct s_map
 	double	length_wall;
 	double	intersection_wall;
 	int		side_vertical;
+	int		max_fov;
 }				t_map;
 
 typedef struct s_player
@@ -265,6 +266,7 @@ char	*image_path_finder(t_game *game, double deg_rad);
 void	information_imgs(t_game *game, char *filename);
 void	initialize_dx_dy(t_game *game);
 void	put_in_minimap_image(t_game *game, int x, int y, int color);
+void	assign_max_fov(t_game *game);
 
 // check functions for raycasting
 

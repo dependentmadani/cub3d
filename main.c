@@ -23,18 +23,12 @@ int	main(int ac, char **av)
 		if (!check_rev_file(av[1]))
 			print_error_and_exit("invalid file!");
 		ft_initializer(&tg);
-		// py = ft_calloc(sizeof(t_player), 1);
 		py = ft_calloc(sizeof(t_player), 1);
 		mp = ft_calloc(sizeof(t_map), 1);
-		get_map(av[1], &tg/*, py, mp*/);
+		get_map(av[1], &tg);
 		tg.mapp = mp;
 		tg.gamer = py;
-		// printf("shhhh is good %s\n", tg.no_path);
-		// exit(1);
 		creation_window(&tg);
-		// for(int i=0;tg.newmap[i];i++)
-		// 	printf("-%s-\n", tg.newmap[i]);
-		// printf("yo?\n");
 	}
 	else
 		printf("invalid number of arguments!\n");
