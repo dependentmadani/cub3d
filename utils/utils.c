@@ -65,7 +65,6 @@ char	*ft_substrzwina(char	*s, int start, int end)
 	j = 0;
 	while (s[i] == ' ')
 		i++;
-	printf("hi s[%d]: %c\n", i, s[i]);
 	while (s[i] != '\0')
 	{
 		if (i >= start && i < end)
@@ -73,7 +72,6 @@ char	*ft_substrzwina(char	*s, int start, int end)
 		i++;
 	}
 	tab[j] = '\0';
-	printf("t %s\n", tab);
 	return (tab);
 }
 

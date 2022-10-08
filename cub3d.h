@@ -317,5 +317,6 @@ void	borders_of_minimap(t_game *game);
 void	length_of_square_minimap(t_game *game);
 int		texture_minimap(t_game *game, int x, int y);
 int		check_player_map(t_game *game, int x, int y);
+void	check_file_paths_images(t_game *game);
 
 #endif

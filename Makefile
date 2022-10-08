@@ -43,7 +43,7 @@ SRC = main.c\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx #-g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 
 all : $(NAME)
 

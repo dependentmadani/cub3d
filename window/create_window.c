@@ -85,6 +85,7 @@ void	create_window(t_game *game)
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
+	check_file_paths_images(game);
 	rgb_converter(game);
 	check_direction_of_player(game);
 	initialize_dx_dy(game);

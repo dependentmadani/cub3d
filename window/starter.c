@@ -12,6 +12,48 @@
 
 #include "../cub3d.h"
 
+void	check_file_paths_images_2(t_game *game, int *i)
+{
+	if (!mlx_xpm_file_to_image(game->mlx, game->we_path, \
+		&game->text->img_w, &game->text->img_h))
+	{
+		perror("Error\n");
+		printf("The image path \"%s\" is not correct\n", game->we_path);
+		*i = -1;
+	}
+	if (!mlx_xpm_file_to_image(game->mlx, game->ea_path, \
+		&game->text->img_w, &game->text->img_h))
+	{
+		perror("Error\n");
+		printf("The image path \"%s\" is not correct\n", game->ea_path);
+		*i = -1;
+	}
+}
+
+void	check_file_paths_images(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (!mlx_xpm_file_to_image(game->mlx, game->no_path, \
+		&game->text->img_w, &game->text->img_h))
+	{
+		perror("Error\n");
+		printf("The image path \"%s\" is not correct\n", game->no_path);
+		i = -1;
+	}
+	if (!mlx_xpm_file_to_image(game->mlx, game->so_path, \
+		&game->text->img_w, &game->text->img_h))
+	{
+		perror("Error\n");
+		printf("The image path \"%s\" is not correct\n", game->so_path);
+		i = -1;
+	}
+	check_file_paths_images_2(game, &i);
+	if (i == -1)
+		exit(EXIT_FAILURE);
+}
+
 void	initialize_dx_dy(t_game *game)
 {
 	if (game->gamer->player_angle == 0 || game->gamer->player_angle == M_PI)
