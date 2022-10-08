@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/07 18:09:54 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:42:45 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	get_map(char *av, t_game *my_game)
 
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
-		exit(1);
+		print_error_and_exit("invalid file");
 	temp = getmaplines(fd);
 	if (!temp)
 		print_error_and_exit("invalid map");

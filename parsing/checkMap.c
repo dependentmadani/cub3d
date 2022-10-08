@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/07 18:54:50 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:13:24 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	print_error_and_exit(char *s)
 
 void	check_surroundings(char **s, int i, int j)
 {
+	if (j > ft_strlen(s[i - 1]) || j > ft_strlen(s[i + 1]))
+		print_error_and_exit("invalid map i-1 or i+1");
 	if (s[i][j - 1] != '1' && s[i][j - 1] != 'S'
 		&& s[i][j - 1] != 'N' && s[i][j - 1] != 'E'
 		&& s[i][j - 1] != 'W' && s[i][j - 1] != '0')
@@ -53,6 +55,9 @@ void	check_firs_last(t_game *my_game, int i, int j)
 	if (my_game->newmap[i][0] == '0'
 	|| my_game->newmap[i][ft_strlen(my_game->newmap[i]) - 1] == '0')
 		print_error_and_exit("invalid map j0 or jn");
+	if (my_game->newmap[i][j] == '0' && (my_game->newmap[i - 1][j] == 0
+		|| my_game->newmap[i + 1][j] == 0))
+		print_error_and_exit("invalid map j+1");
 	if (my_game->newmap[i][j] == '0')
 		check_surroundings(my_game->newmap, i, j);
 }

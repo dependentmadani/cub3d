@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 09:57:03 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:31:44 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,11 +249,12 @@ char	*ft_sstrcpy(char *dst, char *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int start, int end);
-int		ft_atoi(const char	*str);
+int		ft_atoi(char *str);
 int		check_only_spaces(char *s);
 void	assign_paths_rgbs(t_game *my_game, char *s);
 int		is_path_rgb(char *s);
 void	deal_with_c(char *s, int *i);
+int		is_str_digit(char *s);
 
 // void	check_missin_pc(t_game *my_game);
 

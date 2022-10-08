@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:45 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 13:35:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:32:27 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,6 @@ void	check_map_paths_rgbs(t_game *my_game)
 	paths_are_valid(my_game);
 	rgb_are_valid(my_game);
 	get_rgb_values(my_game);
+	if (my_game->one_and_only != 1)
+		print_error_and_exit("player not found x_x");
 }

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:42 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 09:56:53 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:31:07 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char	*str)
+int	ft_atoi(char	*str)
 {
 	int	i;
 	int	sign;
 	int	res;
+	int	temp;
 
 	i = 0;
 	res = 0;
@@ -46,16 +47,17 @@ int	ft_atoi(const char	*str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-		{
-			printf("rgb values must be digits!\n");
-			exit(1);
-		}
+			print_error_and_exit("rgb values must be digits!");
 		i++;
 	}
 	i = 0;
+	temp = -1;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - '0';
+		if (res <= temp)
+			print_error_and_exit("invalid rgbbb values");
+		temp = res;
 		i++;
 	}
 	return (res * sign);
