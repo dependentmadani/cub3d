@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 13:52:43 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:09:09 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	check_firs_last(t_game *my_game, int i, int j)
 	if (my_game->newmap[i][j] == '0' && (my_game->newmap[i - 1][j] == 0
 		|| my_game->newmap[i + 1][j] == 0))
 		print_error_and_exit("invalid map");
-	if (my_game->newmap[i][j] == '0')
+	if (my_game->newmap[i][j] == 'N' || my_game->newmap[i][j] == 'S'
+		||my_game->newmap[i][j] == '0'
+		|| my_game->newmap[i][j] == 'E' || my_game->newmap[i][j] == 'W')
 		check_surroundings(my_game->newmap, i, j);
 }
 

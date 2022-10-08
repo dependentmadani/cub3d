@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:42 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 13:50:14 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:45:04 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_atoi(char	*str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - '0';
-		if (res <= temp)
+		if (res < temp)
 			print_error_and_exit("invalid rgb values");
 		temp = res;
 		i++;
@@ -65,6 +65,8 @@ int	ft_atoi(char	*str)
 
 void	is_path_color(t_game *game, char *t, char *s, int *i)
 {
+	int	temp;
+
 	if (is_path_rgb(t))
 	{
 		assign_paths_rgbs(game, t);
@@ -72,6 +74,15 @@ void	is_path_color(t_game *game, char *t, char *s, int *i)
 		{
 			while (s[*i] == '\n' && s[*i] != '\0')
 				(*i)++;
+			temp = *i;
+			while (s[temp] != '\0')
+			{
+				if (s[temp] == '\n')
+					print_error_and_exit("invalid map");
+				if (s[temp] == '1')
+					break ;
+				temp++;
+			}
 		}
 		game->p_valid++;
 	}

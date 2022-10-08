@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:10:10 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/07 16:49:11 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:53:10 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ char	*ft_substrzwina(char	*s, int start, int end)
 	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!tab)
 		exit(1);
-	i = 0;
+	i = start;
 	j = 0;
+	while (s[i] == ' ')
+		i++;
+	printf("hi s[%d]: %c\n", i, s[i]);
 	while (s[i] != '\0')
 	{
 		if (i >= start && i < end)
@@ -70,6 +73,7 @@ char	*ft_substrzwina(char	*s, int start, int end)
 		i++;
 	}
 	tab[j] = '\0';
+	printf("t %s\n", tab);
 	return (tab);
 }
 
