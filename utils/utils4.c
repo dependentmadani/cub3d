@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:42 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 18:18:51 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 09:56:53 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int	ft_atoi(const char	*str)
 	return (res * sign);
 }
 
-void	is_path_color(t_game *game, char *t, char *s, int *i, char c)
+void	is_path_color(t_game *game, char *t, char *s, int *i)
 {
 	if (is_path_rgb(t))
 	{
 		assign_paths_rgbs(game, t);
 		if (game->p_valid == 5)
 		{
-			while (s[*i] == c && s[*i] != '\0')
+			while (s[*i] == '\n' && s[*i] != '\0')
 				(*i)++;
 		}
 		game->p_valid++;

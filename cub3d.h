@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/09/30 18:01:17 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 09:57:03 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ char	*create_fill(int x);
 char	*get_space_tab(char *s, int *j);
 char	*get_other_chars(t_game *game, char *s, int *j);
 void	check_for_one_and_only(t_game *game, char c);
-void	is_path_color(t_game *game, char *t, char *s, int *i, char c);
+void	is_path_color(t_game *game, char *t, char *s, int *i);
 
 //// -------------- utils
 

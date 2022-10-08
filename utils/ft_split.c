@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:56:30 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 18:19:24 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 09:57:24 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**chek_and_fill(t_game *my_game, char **t, char *s, char c)
 		t[count] = ft_substr(s, temp, i - temp);
 		if (t[count] == NULL)
 			return (ft_del(t, count));
-		is_path_color(my_game, t[count], s, &i, c);
+		is_path_color(my_game, t[count], s, &i);
 		count++;
 	}
 	t[count] = 0;
