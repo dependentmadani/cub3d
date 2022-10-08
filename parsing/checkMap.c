@@ -66,7 +66,6 @@ void	check_map(t_game *my_game)
 	j = 0;
 	while (my_game->newmap[i])
 	{
-		// printf("hadi i %d, %s\n", i, my_game->newmap[i]);
 		j = 0;
 		while (my_game->newmap[i][j])
 		{
@@ -77,11 +76,8 @@ void	check_map(t_game *my_game)
 				if (my_game->newmap[i][j] == '0')
 					print_error_and_exit("invalid map i_0");
 			if (i == (my_game->num_rows - 1))
-			{
-				// printf("hello mr %s\n", my_game->newmap[i]);
 				if (my_game->newmap[i][j] == '0')
 					print_error_and_exit("invalid map i_n");
-				}
 			check_firs_last(my_game, i, j);
 			j++;
 		}

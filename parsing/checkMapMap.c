@@ -30,7 +30,8 @@ char	**check_map_map(t_game *my_game)
 			&& ft_strlen(my_game->map[i]) >= 1 && my_game->map[i][1] == '\0'))
 			print_error_and_exit("invalid map!");
 		if (my_game->map[i][0] == '\n')
-			t[i] = ft_substr(my_game->map[i], 1, ft_strlen(my_game->map[i])-1);
+			t[i] = ft_substr(my_game->map[i], 1, \
+				ft_strlen(my_game->map[i]) - 1);
 		else
 			t[i] = ft_substr(my_game->map[i], 0, ft_strlen(my_game->map[i]));
 		i++;

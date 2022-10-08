@@ -26,15 +26,8 @@ int	main(int ac, char **av)
 		py = ft_calloc(sizeof(t_player), 1);
 		mp = ft_calloc(sizeof(t_map), 1);
 		get_map(av[1], &tg);
-		// printf("mal mok\n");
-		// system("leaks cub3D");
-		// exit(1);
 		tg.mapp = mp;
 		tg.gamer = py;
-		// printf("shhhh is good %s\n", tg.no_path);
-	// 	printf("mal mok\n");
-	// system("leaks cub3D");
-	// exit(1);
 		creation_window(&tg);
 	}
 	else
