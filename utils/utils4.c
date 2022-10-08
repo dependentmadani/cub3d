@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:42 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 13:31:07 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/08 13:50:14 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_atoi(char	*str)
 	{
 		res = res * 10 + str[i] - '0';
 		if (res <= temp)
-			print_error_and_exit("invalid rgbbb values");
+			print_error_and_exit("invalid rgb values");
 		temp = res;
 		i++;
 	}
