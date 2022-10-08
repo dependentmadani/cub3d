@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:56:49 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/30 13:48:45 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:33:20 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	collision_with_wall(t_game *game, double pos_x, double pos_y)
 	if (ft_strlen(game->newestmap[estimation_posy]) < estimation_posx)
 		return (0);
 	if (game->newestmap[estimation_posy]
-		&& game->newestmap[estimation_posy][estimation_posx] == '1')
+		&& (game->newestmap[estimation_posy][estimation_posx] == '1'
+		|| game->newestmap[estimation_posy][estimation_posx] == ' '
+		|| game->newestmap[estimation_posy][estimation_posx] == '\n'
+		|| game->newestmap[estimation_posy][estimation_posx] == '\0'))
 		return (1);
 	return (0);
 }
