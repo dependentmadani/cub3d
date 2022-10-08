@@ -44,12 +44,15 @@ int	mouse_move(int button, int x, int y, t_game *game)
 
 int	exit_function(t_game *game)
 {
+	mlx_destroy_image(game->mlx, game->img->mlx_win);
+	mlx_destroy_image(game->mlx, game->minimap->new_image);
+	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
 	printf("Enough of gaming for this moment!\n");
 	exit(EXIT_SUCCESS);
 }
 
-int winning_funtion(void)
+int	winning_funtion(void)
 {
 	printf("I was an intesive game, and you did great!\n");
 	exit(EXIT_SUCCESS);

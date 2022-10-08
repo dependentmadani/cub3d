@@ -1,0 +1,37 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/mbadaoui/Desktop/cursus/cub3d'
+cc -Wall -Wextra -Werror -Imlx  -c main.c -o main.o
+cc -Wall -Wextra -Werror -Imlx  -c parsing/getMap.c -o parsing/getMap.o
+ 
+cc -Wall -Wextra -Werror -Imlx  -c parsing/getMap_utils.c -o parsing/getMap_utils.o
+cc -Wall -Wextra -Werror -Imlx  -c parsing/checkMap.c -o parsing/checkMap.o
+cc -Wall -Wextra -Werror -Imlx  -c parsing/checkMapMap.c -o parsing/checkMapMap.o
+cc -Wall -Wextra -Werror -Imlx  -c parsing/checkPathsRgbs.c -o parsing/checkPathsRgbs.o
+cc -Wall -Wextra -Werror -Imlx  -c parsing/splitRgb.c -o parsing/splitRgb.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/initializer.c -o utils/initializer.o
+ 
+cc -Wall -Wextra -Werror -Imlx  -c utils/utils.c -o utils/utils.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/utils2.c -o utils/utils2.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/utils3.c -o utils/utils3.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/utils4.c -o utils/utils4.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/ft_split.c -o utils/ft_split.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/split_utils.c -o utils/split_utils.o
+ 
+cc -Wall -Wextra -Werror -Imlx  -c utils/gnl/get_next_line.c -o utils/gnl/get_next_line.o
+cc -Wall -Wextra -Werror -Imlx  -c utils/gnl/get_next_line_utils.c -o utils/gnl/get_next_line_utils.o
+cc -Wall -Wextra -Werror -Imlx  -c window/starter.c -o window/starter.o
+cc -Wall -Wextra -Werror -Imlx  -c window/create_window.c -o window/create_window.o
+cc -Wall -Wextra -Werror -Imlx  -c movement/keymovement.c -o movement/keymovement.o
+cc -Wall -Wextra -Werror -Imlx  -c movement/movement_fun.c -o movement/movement_fun.o
+ 
+cc -Wall -Wextra -Werror -Imlx  -c creation/put_elements.c -o creation/put_elements.o
+cc -Wall -Wextra -Werror -Imlx  -c creation/rgb.c -o creation/rgb.o
+cc -Wall -Wextra -Werror -Imlx  -c raycasting/checker.c -o raycasting/checker.o
+cc -Wall -Wextra -Werror -Imlx  -c raycasting/raycasting_helper.c -o raycasting/raycasting_helper.o
+cc -Wall -Wextra -Werror -Imlx  -c raycasting/raycasting.c -o raycasting/raycasting.o
+cc -Wall -Wextra -Werror -Imlx  -c minimap/design_map.c -o minimap/design_map.o
+cc -Wall -Wextra -Werror -Imlx  -c minimap/minimap_helper.c -o minimap/minimap_helper.o
+cc -Wall -Wextra -Werror -Imlx  -c minimap/minimap_helper_2.c -o minimap/minimap_helper_2.o
+cc -Wall -Wextra -Werror -Imlx  main.o parsing/getMap.o parsing/getMap_utils.o parsing/checkMap.o parsing/checkMapMap.o parsing/checkPathsRgbs.o parsing/splitRgb.o utils/initializer.o utils/utils.o utils/utils2.o utils/utils3.o utils/utils4.o utils/ft_split.o utils/split_utils.o utils/gnl/get_next_line.o utils/gnl/get_next_line_utils.o window/starter.o window/create_window.o movement/keymovement.o movement/movement_fun.o creation/put_elements.o creation/rgb.o raycasting/checker.o raycasting/raycasting_helper.o raycasting/raycasting.o minimap/design_map.o minimap/minimap_helper.o minimap/minimap_helper_2.o -lmlx -framework OpenGL -framework AppKit -o cub3D
+make: Leaving directory `/Users/mbadaoui/Desktop/cursus/cub3d'
+ 
