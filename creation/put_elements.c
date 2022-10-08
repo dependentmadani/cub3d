@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:15:21 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/30 13:49:14 by mbadaoui         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:06:20 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ char	*image_path_finder(t_game *game, double deg_rad)
 {
 	if ((deg_rad <= M_PI_2 || deg_rad >= 3 * M_PI_2)
 		&& game->mapp->side_vertical == 1)
-		return (game->ea_path);
+		return (game->we_path);
 	else if (deg_rad <= M_PI && game->mapp->side_vertical == 0)
 		return (game->no_path);
 	else if ((deg_rad <= 3 * M_PI_2 || deg_rad >= M_PI_2)
 		&& game->mapp->side_vertical == 1)
-		return (game->we_path);
+		return (game->ea_path);
 	else if (deg_rad > M_PI && game->mapp->side_vertical == 0)
 		return (game->so_path);
 	return (NULL);
