@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:32:28 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 13:49:50 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:47:52 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	**generate_newestmap(t_game *game)
 		i++;
 	}
 	t[j] = NULL;
+	if (j == 6)
+		return (NULL);
 	return (t);
 }
 
@@ -95,10 +97,14 @@ void	get_map(char *av, t_game *my_game)
 	if (!my_game->map)
 		print_error_and_exit("invalid map");
 	my_game->newmap = check_map_map(my_game);
+	if (!my_game->newmap)
+		print_error_and_exit("invalid map");
 	get_longestwidth(my_game);
 	check_map(my_game);
 	check_map_paths_rgbs(my_game);
 	my_game->newestmap = generate_newestmap(my_game);
+	if (!my_game->newestmap)
+		print_error_and_exit("invalid map");
 	free(temp);
 	close(fd);
 }

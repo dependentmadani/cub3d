@@ -6,11 +6,20 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:41:47 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 18:25:19 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:52:33 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	skippp_cp(t_game *my_game, char **t, int *i)
+{
+	while ((*i) < 6)
+	{
+		t[*i] = ft_substr(my_game->map[*i], 0, ft_strlen(my_game->map[*i]));
+		(*i)++;
+	}
+}
 
 char	**check_map_map(t_game *my_game)
 {
@@ -19,11 +28,7 @@ char	**check_map_map(t_game *my_game)
 
 	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
 	i = 0;
-	while (i < 6)
-	{
-		t[i] = ft_substr(my_game->map[i], 0, ft_strlen(my_game->map[i]));
-		i++;
-	}
+	skippp_cp(my_game, t, &i);
 	while (my_game->map[i])
 	{
 		if (my_game->map[i][0] == '\0' || (my_game->map[i][0] == '\n'
@@ -37,5 +42,7 @@ char	**check_map_map(t_game *my_game)
 		i++;
 	}
 	t[i] = 0;
+	if (i == 6)
+		return (NULL);
 	return (t);
 }
