@@ -42,7 +42,7 @@ void	get_longestwidth(t_game *my_game)
 		{
 			temp = ft_strlen(my_game->newmap[i]);
 			x = 0;
-			while (my_game->newmap[i][x] != '1')
+			while (my_game->newmap[i][x] && my_game->newmap[i][x] != '1')
 				x++;
 		}
 		i++;

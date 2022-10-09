@@ -100,6 +100,8 @@ typedef struct s_map
 	double	theta;
 	double	length_wall;
 	double	intersection_wall;
+	double	new_pos_x;
+	double	new_pos_y;
 	int		side_vertical;
 	int		max_fov;
 }				t_map;
@@ -278,6 +280,11 @@ void	movement_fun(t_game *game, char axis, int direction);
 int		mouse_move(int button, int x, int y, t_game *game);
 int		exit_function(t_game *game);
 int		winning_function(void);
+void	movement_mouse_fun(t_game *game, char axis, int direction);
+void	movement_x_left_axis_fun(t_game *game, char axis, int direction);
+void	movement_x_right_axis_fun(t_game *game, char axis, int direction);
+void	movement_y_up_axis_fun(t_game *game, char axis, int direction);
+void	movement_y_down_axis_fun(t_game *game, char axis, int direction);
 
 // creation of elements
 
@@ -318,5 +325,6 @@ void	length_of_square_minimap(t_game *game);
 int		texture_minimap(t_game *game, int x, int y);
 int		check_player_map(t_game *game, int x, int y);
 void	check_file_paths_images(t_game *game);
+int		collision_special_case(t_game *game, double posx, double posy, int dir);
 
 #endif

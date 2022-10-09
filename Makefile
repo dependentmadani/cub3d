@@ -32,9 +32,11 @@ SRC = main.c\
 		window/create_window.c \
 		movement/keymovement.c \
 		movement/movement_fun.c \
+		movement/movement_fun_2.c \
 		creation/put_elements.c \
 		creation/rgb.c \
 		raycasting/checker.c \
+		raycasting/check_collision.c \
 		raycasting/raycasting_helper.c \
 		raycasting/raycasting.c \
 		minimap/design_map.c \
@@ -43,7 +45,7 @@ SRC = main.c\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx #-g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Imlx -g -fsanitize=address
 
 all : $(NAME)
 

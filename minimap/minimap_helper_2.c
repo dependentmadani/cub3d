@@ -28,7 +28,6 @@ int	texture_minimap(t_game *game, int x, int y)
 
 int	check_player_map(t_game *game, int x, int y)
 {
-
 	if (game->newestmap[y][x] == 'W')
 		return (1);
 	else if (game->newestmap[y][x] == 'S')
