@@ -6,11 +6,17 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:10:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 15:00:45 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/09 13:29:44 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	print_error_and_exit(char *s)
+{
+	printf("%s\n", s);
+	exit(1);
+}
 
 void	ft_initializer(t_game *my_game)
 {
