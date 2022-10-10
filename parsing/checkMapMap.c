@@ -6,11 +6,18 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:41:47 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/09 16:52:33 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/10 10:16:07 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	check_alone(char **s, int i, int j)
+{
+	if ((j > ft_strlen(s[i - 1]) && s[i - 1])
+		|| (s[i + 1] && j > ft_strlen(s[i + 1])))
+		print_error_and_exit("invalid map");
+}
 
 void	skippp_cp(t_game *my_game, char **t, int *i)
 {
