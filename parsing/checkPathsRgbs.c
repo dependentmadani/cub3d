@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:45 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/08 13:32:27 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:54:35 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,10 @@ int	is_str_digit(char *s)
 
 void	rgb_are_valid(t_game *my_game)
 {
-	int	x;
-
-	x = -1;
 	my_game->char_f_rgb = split_rgb(my_game->f_path, ',');
 	my_game->char_c_rgb = split_rgb(my_game->c_path, ',');
 	if (!my_game->char_f_rgb || !my_game->char_c_rgb)
 		exit(1);
-	while (my_game->char_f_rgb[++x] && my_game->char_c_rgb[x])
-		if (!is_str_digit(my_game->char_f_rgb[x])
-			|| !is_str_digit(my_game->char_c_rgb[x]))
-			print_error_and_exit("rgb values must be only digits!");
-	if (x != 3)
-		print_error_and_exit("invalid rgb syntax!");
 }
 
 void	get_rgb_values(t_game *my_game)
