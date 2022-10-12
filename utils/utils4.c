@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:37:42 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/10 18:57:28 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/12 21:22:58 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ int	ft_atoi(char	*str)
 		return (0);
 	while (str[i] == '+' && str[i] != '\0')
 		i++;
-	while (str[i])
-		if (!ft_isdigit(str[i++]))
-			print_error_and_exit("rgb values must be digits!");
 	temp = -1;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
