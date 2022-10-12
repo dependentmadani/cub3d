@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/10 10:16:20 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:49:09 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void	assign_paths_rgbs(t_game *my_game, char *s);
 int		is_path_rgb(char *s);
 void	deal_with_c(char *s, int *i);
 int		is_str_digit(char *s);
+void	chack_char(char c);
 
 // void	check_missin_pc(t_game *my_game);
 

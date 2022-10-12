@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/10 10:15:35 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:48:44 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_for_one_and_only(t_game *game, char c)
 void	checkkk(char c)
 {
 	if (c == '0' || c == 'N' || c == 'S' || c == 'W'
-		||c == 'E')
+		|| c == 'E')
 		print_error_and_exit("invalid map");
 }
 
@@ -74,6 +74,7 @@ void	check_map(t_game *my_game)
 		while (my_game->newmap[i][j])
 		{
 			check_for_one_and_only(my_game, my_game->newmap[i][j]);
+			chack_char(my_game->newmap[i][j]);
 			if (my_game->newmap[i][0] == '\n')
 				print_error_and_exit("invalid map");
 			if (i == 6)

@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:22:33 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/05 14:09:24 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:48:51 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void	get_longestwidth(t_game *my_game)
 		i++;
 	}
 	my_game->longestwidth = temp;
+}
+
+void	chack_char(char c)
+{
+	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W'
+		&& c != 'E' && c != ' ')
+		print_error_and_exit("invalid character");
 }
