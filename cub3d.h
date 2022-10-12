@@ -329,4 +329,7 @@ int		check_player_map(t_game *game, int x, int y);
 void	check_file_paths_images(t_game *game);
 int		collision_special_case(t_game *game, double posx, double posy, int dir);
 
+// exit function
+void	exit_error(t_game *game);
+
 #endif

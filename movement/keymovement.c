@@ -52,8 +52,11 @@ int	exit_function(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int	winning_funtion(void)
+void	exit_error(t_game *game)
 {
-	printf("I was an intesive game, and you did great!\n");
-	exit(EXIT_SUCCESS);
+	mlx_destroy_image(game->mlx, game->img->mlx_win);
+	mlx_destroy_image(game->mlx, game->minimap->new_image);
+	mlx_clear_window(game->mlx, game->win);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(EXIT_FAILURE);
 }

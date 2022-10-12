@@ -87,7 +87,7 @@ void	information_imgs(t_game *game, char *filename)
 	{
 		perror("Error\n");
 		printf("The image path \"%s\" is not correct\n", filename);
-		exit(EXIT_FAILURE);
+		exit_error(game);
 	}
 	game->text->addr_text = mlx_get_data_addr(game->text->mlx_text, \
 		&game->text->bpp_text, &game->text->line_len_text, &game->text->endian);

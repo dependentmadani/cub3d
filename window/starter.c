@@ -51,7 +51,10 @@ void	check_file_paths_images(t_game *game)
 	}
 	check_file_paths_images_2(game, &i);
 	if (i == -1)
+	{
+		free(game->mlx);
 		exit(EXIT_FAILURE);
+	}
 }
 
 void	initialize_dx_dy(t_game *game)
