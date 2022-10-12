@@ -3,8 +3,8 @@ SO ./images/red_wall.xpm
 WE ./images/blue_wall.xpm
 EA ./images/grey_wall.xpm
 
-F 10,+100,10
-C +225,-30,0
+F 10,+100,+0
+C +225,30,-0
 
         1111111111111111111111111
         1000000000110000000000001
