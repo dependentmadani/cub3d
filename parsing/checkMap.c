@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 10:23:24 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/12 14:48:44 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/13 09:49:56 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void	check_firs_last(t_game *my_game, int i, int j)
 		|| my_game->newmap[i][j] == 'W')
 		check_alone(my_game->newmap, i, j);
 	if (my_game->newmap[i][j] == '0')
+		check_surroundings(my_game->newmap, i, j);
+	if (my_game->newmap[i][j] == 'N'
+		|| my_game->newmap[i][j] == 'S' || my_game->newmap[i][j] == 'E'
+		|| my_game->newmap[i][j] == 'W')
 		check_surroundings(my_game->newmap, i, j);
 }
 

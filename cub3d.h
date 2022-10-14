@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/12 14:49:09 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:47:38 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,10 @@ void	ft_initializer(t_game *my_game);
 void	get_map(char *av, t_game *my_game);
 char	**render_new_map(t_game *my_game);
 
-// check paths of the map
+// check paths and rgb of the map
 
 void	check_map_paths_rgbs(t_game *my_game);
+int		is_path_rgb(char *s);
 
 // check map
 
@@ -287,6 +288,7 @@ void	movement_x_left_axis_fun(t_game *game, char axis, int direction);
 void	movement_x_right_axis_fun(t_game *game, char axis, int direction);
 void	movement_y_up_axis_fun(t_game *game, char axis, int direction);
 void	movement_y_down_axis_fun(t_game *game, char axis, int direction);
+int		ft_specialstrncmp(char *s1, char *s2, int n);
 
 // creation of elements
 
