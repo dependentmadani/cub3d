@@ -1,8 +1,8 @@
 
-NO                              ./images/fchkel_wall.xpm
-SO              ./images/red_wall.xpm
+        NO                              ./images/fchkel_wall.xpm
+ SO              ./images/red_wall.xpm
 WE      ./images/blue_wall.xpm
-                                EA             ./images/grey_wall.xpm
+ EA             ./images/grey_wall.xpm
 
 F       220 ,               100,0
 C                       225, 30,0

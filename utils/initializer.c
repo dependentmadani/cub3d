@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:10:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/14 14:47:07 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:26:18 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	print_error_and_exit(char *s)
 
 int	is_path_rgb(char *s)
 {
-	if (!ft_strncmp(s, "NO", 2) || !ft_strncmp(s, "SO", 2)
-		|| !ft_strncmp(s, "WE", 2) || !ft_specialstrncmp(s, "EA", 2)
-		|| !ft_strncmp(s, "F", 1) || !ft_strncmp(s, "C", 1))
+	if (!ft_specialstrncmp(s, "NO", 2) || !ft_specialstrncmp(s, "SO", 2)
+		|| !ft_specialstrncmp(s, "WE", 2) || !ft_specialstrncmp(s, "EA", 2)
+		|| !ft_specialstrncmp(s, "F", 1) || !ft_specialstrncmp(s, "C", 1))
 		return (1);
 	return (0);
 }
