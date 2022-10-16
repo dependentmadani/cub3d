@@ -111,10 +111,8 @@ char	*ft_substrzwina(char *s, int *startend, int index)
 	while (i <= ft_strlen(s) && s[i] == ' ')
 		i++;
 	t_nsht = assign_nsht(i, &j);
-	if (index)
-		tab = with_index(s, t_nsht, startend);
-	else
-		tab = without_index(s, t_nsht, startend);
+	(void)index;
+	tab = without_index(s, t_nsht, startend);
 	free(t_nsht);
 	return (tab);
 }

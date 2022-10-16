@@ -79,13 +79,13 @@ void	showing_3d_game(t_game *game)
 void	create_window(t_game *game)
 {
 	count_the_map(game);
+	check_file_paths_images(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
-	check_file_paths_images(game);
 	rgb_converter(game);
 	check_direction_of_player(game);
 	initialize_dx_dy(game);

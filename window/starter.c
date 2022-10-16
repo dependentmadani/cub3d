@@ -14,47 +14,54 @@
 
 void	check_file_paths_images_2(t_game *game, int *i)
 {
-	if (!mlx_xpm_file_to_image(game->mlx, game->we_path, \
-		&game->text->img_w, &game->text->img_h))
+	int	j;
+
+	j = open(game->we_path, O_RDONLY);
+	if (j == -1)
 	{
 		perror("Error\n");
 		printf("The image path \"%s\" is not correct\n", game->we_path);
 		*i = -1;
 	}
-	if (!mlx_xpm_file_to_image(game->mlx, game->ea_path, \
-		&game->text->img_w, &game->text->img_h))
+	if (j != -1)
+		close(j);
+	j = open(game->ea_path, O_RDONLY);
+	if (j == -1)
 	{
 		perror("Error\n");
 		printf("The image path \"%s\" is not correct\n", game->ea_path);
 		*i = -1;
 	}
+	if (j == -1)
+		close(j);
 }
 
 void	check_file_paths_images(t_game *game)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	if (!mlx_xpm_file_to_image(game->mlx, game->no_path, \
-		&game->text->img_w, &game->text->img_h))
+	j = open(game->no_path, O_RDONLY);
+	if (j == -1)
 	{
 		perror("Error\n");
 		printf("The image path \"%s\" is not correct\n", game->no_path);
 		i = -1;
 	}
-	if (!mlx_xpm_file_to_image(game->mlx, game->so_path, \
-		&game->text->img_w, &game->text->img_h))
+	if (j != -1)
+		close(j);
+	j = open(game->so_path, O_RDONLY);
+	if (j == -1)
 	{
 		perror("Error\n");
 		printf("The image path \"%s\" is not correct\n", game->so_path);
 		i = -1;
 	}
+	if (j != -1)
+		close(i);
 	check_file_paths_images_2(game, &i);
 	if (i == -1)
-	{
-		free(game->mlx);
 		exit(EXIT_FAILURE);
-	}
 }
 
 void	initialize_dx_dy(t_game *game)
