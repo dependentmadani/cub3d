@@ -6,21 +6,11 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:10:10 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/14 10:42:53 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:44:35 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
 
 char	*ft_substr(char	*s, int start, int len)
 {
@@ -49,77 +39,82 @@ char	*ft_substr(char	*s, int start, int len)
 	return (tab);
 }
 
-char	*ft_substrzwina(char	*s, int start, int end)
+char	*with_index(char *s, t_normsht *t_nsht, int *startend)
 {
 	char	*tab;
-	int		i;
-	int		j;
 
-	tab = NULL;
-	if (s == 0)
-		return (0);
 	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!tab)
 		exit(1);
-	i = 0;
-	while (i <= ft_strlen(s) && s[i] == ' ')
-		i++;
-	i += start;
-	j = 0;
-	while (i <= ft_strlen(s) && s[i] == ' ')
-		i++;
-	while (i <= ft_strlen(s) && s[i] != '\0')
+	while (s[t_nsht->i] != '\0' && s[t_nsht->i] != ' ')
 	{
-		if (i >= start && i < end)
-			tab[j++] = s[i];
-		i++;
+		if (t_nsht->i >= startend[0] && t_nsht->i < startend[1])
+		{
+			tab[*(t_nsht->j)] = s[t_nsht->i];
+			*(t_nsht->j) += 1;
+		}
+		t_nsht->i++;
 	}
-	tab[j] = '\0';
+	tab[*(t_nsht->j)] = 0;
 	return (tab);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*without_index(char *s, t_normsht *t_nsht, int *startend)
 {
-	int		i;
-	int		j;
+	char	*tab;
 	char	*t;
-	int		len;
-	int		lock;
 
-	i = 0;
-	j = 0;
-	lock = 0;
-	if (!s1)
-		s1 = ft_strdup("");
-	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
-	t = malloc(sizeof(char) * len);
-	if (!t)
-		return (NULL);
-	while (s1[i] != '\0')
+	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!tab)
+		exit(1);
+	while (s[t_nsht->i] != '\0')
 	{
-		t[i] = s1[i];
-		i++;
+		if (t_nsht->i >= startend[0] && t_nsht->i < startend[1])
+		{
+			tab[*(t_nsht->j)] = s[t_nsht->i];
+			*(t_nsht->j) += 1;
+		}
+		t_nsht->i++;
 	}
-	while (s2[j] != '\0')
-		t[i++] = s2[j++];
-	t[i] = '\0';
+	tab[*(t_nsht->j)] = 0;
+	t = trim_last_spaces(tab);
+	free(tab);
 	return (t);
 }
 
-char	*ft_strdup(char *s1)
+t_normsht	*assign_nsht(int i, int *j)
 {
-	int		i;
-	char	*p;
+	t_normsht	*t_nsht;
 
-	p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (p == NULL)
-		return (NULL);
+	t_nsht = malloc(sizeof(t_normsht));
+	if (!t_nsht)
+		exit(1);
+	t_nsht->i = i;
+	t_nsht->j = j;
+	return (t_nsht);
+}
+
+char	*ft_substrzwina(char *s, int *startend, int index)
+{
+	t_normsht	*t_nsht;
+	char		*tab;
+	int			i;
+	int			j;
+
+	if (s == 0)
+		return (0);
 	i = 0;
-	while (s1[i])
-	{
-		p[i] = s1[i];
+	while (i <= ft_strlen(s) && s[i] == ' ')
 		i++;
-	}
-	p[i] = '\0';
-	return (p);
+	i += startend[0];
+	j = 0;
+	while (i <= ft_strlen(s) && s[i] == ' ')
+		i++;
+	t_nsht = assign_nsht(i, &j);
+	if (index)
+		tab = with_index(s, t_nsht, startend);
+	else
+		tab = without_index(s, t_nsht, startend);
+	free(t_nsht);
+	return (tab);
 }

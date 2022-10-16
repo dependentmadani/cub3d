@@ -6,7 +6,7 @@
 #    By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 12:16:05 by ael-asri          #+#    #+#              #
-#    Updated: 2022/10/09 13:08:10 by ael-asri         ###   ########.fr        #
+#    Updated: 2022/10/16 13:59:28 by ael-asri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = main.c\
 		utils/utils2.c\
 		utils/utils3.c\
 		utils/utils4.c\
+		utils/utils5.c\
 		utils/ft_split.c\
 		utils/split_utils.c\
 		utils/gnl/get_next_line.c\

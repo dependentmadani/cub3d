@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/14 14:47:38 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:58:07 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,12 @@ typedef struct s_minimap
 	t_map	*map;
 }				t_minimap;
 
+typedef struct s_normsht
+{
+	int	i;
+	int	*j;
+}				t_normsht;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -212,6 +218,7 @@ char	**render_new_map(t_game *my_game);
 
 void	check_map_paths_rgbs(t_game *my_game);
 int		is_path_rgb(char *s);
+void	assign_paths_rgbs(t_game *my_game, char *s);
 
 // check map
 
@@ -252,7 +259,7 @@ int		ft_strlcpy(char *dst, char *src, int dstsize);
 char	*ft_sstrcpy(char *dst, char *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
-char	*ft_substrzwina(char	*s, int start, int end);
+char	*ft_substrzwina(char	*s, int *startend, int index);
 int		ft_atoi(char *str);
 int		check_only_spaces(char *s);
 void	assign_paths_rgbs(t_game *my_game, char *s);
@@ -260,6 +267,7 @@ int		is_path_rgb(char *s);
 void	deal_with_c(char *s, int *i);
 int		is_str_digit(char *s);
 void	chack_char(char c);
+char	*trim_last_spaces(char *s);
 
 // void	check_missin_pc(t_game *my_game);
 

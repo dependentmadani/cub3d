@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:36:06 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/09 13:28:58 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/16 13:36:39 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	ft_rev_strncmp(char *s1, char *s2)
 
 	i = ft_strlen(s1)-1;
 	j = 0;
+	while (s1[i] == ' ')
+		i--;
 	while (s2[j])
 	{
 		if (s1[i] != s2[j])

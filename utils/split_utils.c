@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:18:56 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/15 17:54:49 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/16 15:45:19 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,44 +26,16 @@ int	check_only_spaces(char *s)
 	return (0);
 }
 
-void	assign_paths_rgbs2(t_game *my_game, char *s)
+char	*trim_last_spaces(char *s)
 {
-	if (!ft_specialstrncmp(s, "EA", 2))
-	{
-		my_game->ea_path = ft_substrzwina(s, 2, ft_strlen(s));
-		my_game->is_ea = 1;
-	}
-	else if (!ft_specialstrncmp(s, "F", 1))
-	{
-		my_game->f_path = ft_substrzwina(s, 1, ft_strlen(s));
-		my_game->is_f = 1;
-	}
-	else if (!ft_specialstrncmp(s, "C", 1))
-	{
-		my_game->c_path = ft_substrzwina(s, 1, ft_strlen(s));
-		my_game->is_c = 1;
-	}
-}
+	char	*t;
+	int		i;
 
-void	assign_paths_rgbs(t_game *my_game, char *s)
-{
-	if (!ft_specialstrncmp(s, "NO", 2))
-	{
-		my_game->no_path = ft_substrzwina(s, 2, ft_strlen(s));
-		my_game->is_no = 1;
-	}
-	else if (!ft_specialstrncmp(s, "SO", 2))
-	{
-		my_game->so_path = ft_substrzwina(s, 2, ft_strlen(s));
-		my_game->is_so = 1;
-	}
-	else if (!ft_specialstrncmp(s, "WE", 2))
-	{
-		my_game->we_path = ft_substrzwina(s, 2, ft_strlen(s));
-		my_game->is_we = 1;
-	}
-	else
-		assign_paths_rgbs2(my_game, s);
+	i = ft_strlen(s) - 1;
+	while (s[i] == ' ')
+		i--;
+	t = ft_substr(s, 0, i + 1);
+	return (t);
 }
 
 int	ft_specialstrncmp(char *s1, char *s2, int n)

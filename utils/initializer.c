@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:10:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/15 20:26:18 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/16 14:58:02 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	is_path_rgb(char *s)
 		|| !ft_specialstrncmp(s, "F", 1) || !ft_specialstrncmp(s, "C", 1))
 		return (1);
 	return (0);
+}
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 void	ft_initializer(t_game *my_game)
