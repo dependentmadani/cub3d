@@ -62,13 +62,13 @@ char	*ft_substrzwina(char	*s, int start, int end)
 	if (!tab)
 		exit(1);
 	i = 0;
-	while (s[i] == ' ')
+	while (i <= ft_strlen(s) && s[i] == ' ')
 		i++;
 	i += start;
 	j = 0;
-	while (s[i] == ' ')
+	while (i <= ft_strlen(s) && s[i] == ' ')
 		i++;
-	while (s[i] != '\0')
+	while (i <= ft_strlen(s) && s[i] != '\0')
 	{
 		if (i >= start && i < end)
 			tab[j++] = s[i];
