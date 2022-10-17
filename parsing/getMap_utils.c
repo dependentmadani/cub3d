@@ -28,7 +28,7 @@ int	ft_realstrlen(char *s)
 	return (len);
 }
 
-void	get_longestwidth(t_game *my_game)
+void	ft_get_longestwidth(t_game *my_game)
 {
 	int	i;
 	int	temp;
@@ -50,9 +50,9 @@ void	get_longestwidth(t_game *my_game)
 	my_game->longestwidth = temp;
 }
 
-void	chack_char(char c)
+void	ft_chack_char(char c)
 {
 	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W'
 		&& c != 'E' && c != ' ')
-		print_error_and_exit("invalid character");
+		ft_print_error_and_exit("invalid character");
 }

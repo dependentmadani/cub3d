@@ -37,6 +37,7 @@ SRC = main.c\
 		creation/put_elements.c \
 		creation/rgb.c \
 		raycasting/checker.c \
+		raycasting/path_checker.c \
 		raycasting/check_collision.c \
 		raycasting/raycasting_helper.c \
 		raycasting/raycasting.c \
@@ -46,7 +47,7 @@ SRC = main.c\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -Imlx
+FLAGS = -Wall -Wextra -Werror -Imlx -g
 
 all : $(NAME)
 

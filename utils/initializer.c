@@ -12,13 +12,13 @@
 
 #include "../cub3d.h"
 
-void	print_error_and_exit(char *s)
+void	ft_print_error_and_exit(char *s)
 {
 	printf("%s\n", s);
 	exit(1);
 }
 
-int	is_path_rgb(char *s)
+int	ft_is_path_rgb(char *s)
 {
 	if (!ft_specialstrncmp(s, "NO", 2) || !ft_specialstrncmp(s, "SO", 2)
 		|| !ft_specialstrncmp(s, "WE", 2) || !ft_specialstrncmp(s, "EA", 2)

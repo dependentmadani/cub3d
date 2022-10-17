@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-int	texture_minimap(t_game *game, int x, int y)
+int	ft_texture_minimap(t_game *game, int x, int y)
 {
 	int	*color;
 	int	x_start;
@@ -26,7 +26,7 @@ int	texture_minimap(t_game *game, int x, int y)
 	return (*color);
 }
 
-int	check_player_map(t_game *game, int x, int y)
+int	ft_check_player_map(t_game *game, int x, int y)
 {
 	if (game->newestmap[y][x] == 'W')
 		return (1);

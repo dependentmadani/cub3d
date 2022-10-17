@@ -24,6 +24,6 @@ int		ft_strchr(char	*s);
 size_t	ft_strle(const char	*s);
 char	*ft_substr2(char	*s, unsigned int start, size_t	len);
 char	*ft_strdup2(char *s1);
-char	*get_next_line(int fd);
+char	*ft_get_next_line(int fd);
 
 #endif

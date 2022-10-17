@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*get_chyata(char *line)
+char	*ft_get_chyata(char *line)
 {
 	char	*chyata;
 	int		i;
@@ -26,7 +26,7 @@ char	*get_chyata(char *line)
 	return (chyata);
 }
 
-char	*get_line(char	**line)
+char	*ft_get_line(char	**line)
 {
 	int		i;
 	char	*temp;
@@ -44,7 +44,7 @@ char	*get_line(char	**line)
 	return (temp);
 }
 
-char	*read_line(int fd, char *line)
+char	*ft_read_line(int fd, char *line)
 {
 	char		*buffer;
 	ssize_t		n;
@@ -72,19 +72,19 @@ char	*read_line(int fd, char *line)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_next_line(int fd)
 {
 	static char		*line;
 	char			*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = read_line(fd, line);
+	line = ft_read_line(fd, line);
 	if (line == NULL)
 		return (NULL);
-	buffer = get_line(&line);
+	buffer = ft_get_line(&line);
 	if (buffer == NULL)
 		return (NULL);
-	line = get_chyata(line);
+	line = ft_get_chyata(line);
 	return (buffer);
 }

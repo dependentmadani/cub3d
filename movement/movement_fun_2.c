@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	movement_mouse_fun(t_game *game, char axis, int direction)
+void	ft_movement_mouse_fun(t_game *game, char axis, int direction)
 {
 	if (axis == 'x' && direction == VIEW_RIGHT)
 	{
@@ -24,7 +24,7 @@ void	movement_mouse_fun(t_game *game, char axis, int direction)
 		game->gamer->player_dy = sin(game->gamer->player_angle) * \
 			game->gamer->speed;
 		game->gamer->moved++;
-		put_player(game);
+		ft_put_player(game);
 	}
 	else if (axis == 'x' && direction == VIEW_LEFT)
 	{
@@ -36,11 +36,11 @@ void	movement_mouse_fun(t_game *game, char axis, int direction)
 		game->gamer->player_dy = sin(game->gamer->player_angle) * \
 			game->gamer->speed;
 		game->gamer->moved++;
-		put_player(game);
+		ft_put_player(game);
 	}
 }
 
-void	movement_x_left_axis_fun(t_game *game, char axis, int direction)
+void	ft_movement_x_left_axis_fun(t_game *game, char axis, int direction)
 {
 	if (axis == 'x' && direction == LEFT)
 	{
@@ -48,20 +48,20 @@ void	movement_x_left_axis_fun(t_game *game, char axis, int direction)
 			game->gamer->player_dy;
 		game->mapp->new_pos_y = game->gamer->player_posy + \
 			game->gamer->player_dx;
-		if (!collision_with_wall(game, game->mapp->new_pos_x, \
+		if (!ft_collision_with_wall(game, game->mapp->new_pos_x, \
 			game->mapp->new_pos_y)
-			&& !collision_special_case(game, game->mapp->new_pos_x, \
+			&& !ft_collision_special_case(game, game->mapp->new_pos_x, \
 			game->mapp->new_pos_y, 1))
 		{
 			game->gamer->player_posx -= game->gamer->player_dy;
 			game->gamer->player_posy += game->gamer->player_dx;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		ft_put_player(game);
 	}
 }
 
-void	movement_x_right_axis_fun(t_game *game, char axis, int direction)
+void	ft_movement_x_right_axis_fun(t_game *game, char axis, int direction)
 {
 	if (axis == 'x' && direction == RIGHT)
 	{
@@ -69,15 +69,15 @@ void	movement_x_right_axis_fun(t_game *game, char axis, int direction)
 			game->gamer->player_dy;
 		game->mapp->new_pos_y = game->gamer->player_posy - \
 			game->gamer->player_dx;
-		if (!collision_with_wall(game, game->mapp->new_pos_x, \
+		if (!ft_collision_with_wall(game, game->mapp->new_pos_x, \
 			game->mapp->new_pos_y)
-			&& !collision_special_case(game, game->mapp->new_pos_x, \
+			&& !ft_collision_special_case(game, game->mapp->new_pos_x, \
 				game->mapp->new_pos_y, 2))
 		{
 			game->gamer->player_posx += game->gamer->player_dy;
 			game->gamer->player_posy -= game->gamer->player_dx;
 		}
 		game->gamer->moved++;
-		put_player(game);
+		ft_put_player(game);
 	}
 }

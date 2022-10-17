@@ -23,7 +23,7 @@ char	*ft_substr(char	*s, int start, int len)
 		return (0);
 	if (len >= ft_strlen(s))
 		tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	else if (len < ft_strlen(s))
+	else
 		tab = malloc(sizeof(char) * (len + 1));
 	if (tab == NULL)
 		return (0);
@@ -39,7 +39,7 @@ char	*ft_substr(char	*s, int start, int len)
 	return (tab);
 }
 
-char	*with_index(char *s, t_normsht *t_nsht, int *startend)
+char	*ft_with_index(char *s, t_normsht *t_nsht, int *startend)
 {
 	char	*tab;
 
@@ -59,7 +59,7 @@ char	*with_index(char *s, t_normsht *t_nsht, int *startend)
 	return (tab);
 }
 
-char	*without_index(char *s, t_normsht *t_nsht, int *startend)
+char	*ft_without_index(char *s, t_normsht *t_nsht, int *startend)
 {
 	char	*tab;
 	char	*t;
@@ -77,12 +77,12 @@ char	*without_index(char *s, t_normsht *t_nsht, int *startend)
 		t_nsht->i++;
 	}
 	tab[*(t_nsht->j)] = 0;
-	t = trim_last_spaces(tab);
+	t = ft_trim_last_spaces(tab);
 	free(tab);
 	return (t);
 }
 
-t_normsht	*assign_nsht(int i, int *j)
+t_normsht	*ft_assign_nsht(int i, int *j)
 {
 	t_normsht	*t_nsht;
 
@@ -110,9 +110,9 @@ char	*ft_substrzwina(char *s, int *startend, int index)
 	j = 0;
 	while (i <= ft_strlen(s) && s[i] == ' ')
 		i++;
-	t_nsht = assign_nsht(i, &j);
+	t_nsht = ft_assign_nsht(i, &j);
 	(void)index;
-	tab = without_index(s, t_nsht, startend);
+	tab = ft_without_index(s, t_nsht, startend);
 	free(t_nsht);
 	return (tab);
 }

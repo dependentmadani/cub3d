@@ -12,60 +12,60 @@
 
 #include "../cub3d.h"
 
-void	check_surroundings(char **s, int i, int j)
+void	ft_check_surroundings(char **s, int i, int j)
 {
 	if (s[i][j - 1] != '1' && s[i][j - 1] != 'S'
 		&& s[i][j - 1] != 'N' && s[i][j - 1] != 'E'
 		&& s[i][j - 1] != 'W' && s[i][j - 1] != '0')
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 	if (s[i][j + 1] != '1' && s[i][j + 1] != 'S'
 		&& s[i][j + 1] != 'N' && s[i][j + 1] != 'E'
 		&& s[i][j + 1] != 'W' && s[i][j + 1] != '0')
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 	if (s[i - 1][j] != '1' && s[i - 1][j] != 'S'
 		&& s[i - 1][j] != 'N' && s[i - 1][j] != 'E'
 		&& s[i - 1][j] != 'W' && s[i - 1][j] != '0')
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 	if (s[i + 1][j] != '1' && s[i + 1][j] != 'S'
 		&& s[i + 1][j] != 'N' && s[i + 1][j] != 'E'
 		&& s[i + 1][j] != 'W' && s[i + 1][j] != '0')
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 }
 
-void	check_for_one_and_only(t_game *game, char c)
+void	ft_check_for_one_and_only(t_game *game, char c)
 {
 	if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
 	{
 		game->one_and_only++;
 		if (game->one_and_only > 1)
-			print_error_and_exit("Must go only with one player!");
+			ft_print_error_and_exit("Must go only with one player!");
 	}
 }
 
-void	checkkk(char c)
+void	ft_checkkk(char c)
 {
 	if (c == '0' || c == 'N' || c == 'S' || c == 'W'
 		|| c == 'E')
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 }
 
-void	check_firs_last(t_game *my_game, int i, int j)
+void	ft_check_firs_last(t_game *my_game, int i, int j)
 {
-	checkkk(my_game->newmap[i][0]);
-	checkkk(my_game->newmap[i][ft_strlen(my_game->newmap[i]) - 1]);
+	ft_checkkk(my_game->newmap[i][0]);
+	ft_checkkk(my_game->newmap[i][ft_strlen(my_game->newmap[i]) - 1]);
 	if (my_game->newmap[i][j] == '0' || my_game->newmap[i][j] == 'N'
 		|| my_game->newmap[i][j] == 'S' || my_game->newmap[i][j] == 'E'
 		|| my_game->newmap[i][j] == 'W')
-		check_alone(my_game->newmap, i, j);
+		ft_check_alone(my_game->newmap, i, j);
 	if (my_game->newmap[i][j] == '0')
-		check_surroundings(my_game->newmap, i, j);
+		ft_check_surroundings(my_game->newmap, i, j);
 	if (my_game->newmap[i][j] == 'N'
 		|| my_game->newmap[i][j] == 'S' || my_game->newmap[i][j] == 'E'
 		|| my_game->newmap[i][j] == 'W')
-		check_surroundings(my_game->newmap, i, j);
+		ft_check_surroundings(my_game->newmap, i, j);
 }
 
-void	check_map(t_game *my_game)
+void	ft_check_map(t_game *my_game)
 {
 	int	i;
 	int	j;
@@ -77,15 +77,15 @@ void	check_map(t_game *my_game)
 		j = 0;
 		while (my_game->newmap[i][j])
 		{
-			check_for_one_and_only(my_game, my_game->newmap[i][j]);
-			chack_char(my_game->newmap[i][j]);
+			ft_check_for_one_and_only(my_game, my_game->newmap[i][j]);
+			ft_chack_char(my_game->newmap[i][j]);
 			if (my_game->newmap[i][0] == '\n')
-				print_error_and_exit("invalid map");
+				ft_print_error_and_exit("invalid map");
 			if (i == 6)
-				checkkk(my_game->newmap[i][j]);
+				ft_checkkk(my_game->newmap[i][j]);
 			if (i == (my_game->num_rows - 1))
-				checkkk(my_game->newmap[i][j]);
-			check_firs_last(my_game, i, j);
+				ft_checkkk(my_game->newmap[i][j]);
+			ft_check_firs_last(my_game, i, j);
 			j++;
 		}
 		i++;

@@ -6,43 +6,43 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 19:25:19 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/09/30 18:02:53 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/17 07:01:43 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	keyword_move(int keyword, t_game *game)
+int	ft_keyword_move(int keyword, t_game *game)
 {
 	if (keyword == ESC)
-		exit_function(game);
+		ft_exit_function(game);
 	if (keyword == W)
-		movement_fun(game, 'y', UP);
+		ft_movement_fun(game, 'y', UP);
 	if (keyword == S)
-		movement_fun(game, 'y', DOWN);
+		ft_movement_fun(game, 'y', DOWN);
 	if (keyword == D)
-		movement_fun(game, 'x', RIGHT);
+		ft_movement_fun(game, 'x', RIGHT);
 	if (keyword == A)
-		movement_fun(game, 'x', LEFT);
+		ft_movement_fun(game, 'x', LEFT);
 	if (keyword == LEFT_ARROW)
-		movement_fun(game, 'x', VIEW_LEFT);
+		ft_movement_fun(game, 'x', VIEW_LEFT);
 	if (keyword == RIGHT_ARROW)
-		movement_fun(game, 'x', VIEW_RIGHT);
+		ft_movement_fun(game, 'x', VIEW_RIGHT);
 	return (0);
 }
 
-int	mouse_move(int button, int x, int y, t_game *game)
+int	ft_mouse_move(int button, int x, int y, t_game *game)
 {
 	(void)x;
 	(void)y;
 	if (button == 1)
-		movement_fun(game, 'x', VIEW_LEFT);
+		ft_movement_fun(game, 'x', VIEW_LEFT);
 	if (button == 2)
-		movement_fun(game, 'x', VIEW_RIGHT);
+		ft_movement_fun(game, 'x', VIEW_RIGHT);
 	return (0);
 }
 
-int	exit_function(t_game *game)
+int	ft_exit_function(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img->mlx_win);
 	mlx_destroy_image(game->mlx, game->minimap->new_image);
@@ -52,7 +52,7 @@ int	exit_function(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-void	exit_error(t_game *game)
+void	ft_exit_error(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img->mlx_win);
 	mlx_destroy_image(game->mlx, game->minimap->new_image);

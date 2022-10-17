@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-static int	set_count(char *s, char c)
+static int	ft_set_count(char *s, char c)
 {
 	int	i;
 	int	count;
@@ -47,7 +47,7 @@ static char	**ft_del(char **t, int count)
 	return (NULL);
 }
 
-static char	**chek_and_fill(char **t, char *s, char c)
+static char	**ft_chek_and_fill(char **t, char *s, char c)
 {
 	int	i;
 	int	count;
@@ -59,7 +59,7 @@ static char	**chek_and_fill(char **t, char *s, char c)
 	{
 		temp = i;
 		if ((s[i] == c && s[i + 1] == c) || !is_str_digit(&s[ft_strlen(s) - 1]))
-			print_error_and_exit("invalid rgb form");
+			ft_print_error_and_exit("invalid rgb form");
 		if (s[i] == c || s[i] == ' ')
 		{
 			i++;
@@ -76,16 +76,16 @@ static char	**chek_and_fill(char **t, char *s, char c)
 	return (t);
 }
 
-char	**split_rgb(char *s, char c)
+char	**ft_split_rgb(char *s, char c)
 {
 	char	**t;
 	int		count;
 
 	if (s == 0)
 		return (0);
-	count = set_count(s, c);
+	count = ft_set_count(s, c);
 	t = (char **)malloc(sizeof(char *) * (count + 1));
 	if (t == NULL)
 		return (0);
-	return (chek_and_fill(t, s, c));
+	return (ft_chek_and_fill(t, s, c));
 }

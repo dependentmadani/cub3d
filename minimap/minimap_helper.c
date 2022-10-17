@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	player_as_circle(t_game *game, int color)
+void	ft_player_as_circle(t_game *game, int color)
 {
 	int	i;
 	int	j;
@@ -30,7 +30,7 @@ void	player_as_circle(t_game *game, int color)
 			a = (i * i) + (j * j);
 			d = sqrt(a);
 			if (r >= d)
-				put_in_minimap_image(game, game->minimap->win_width / 2 + i, \
+				ft_put_in_minimap_image(game, game->minimap->win_width / 2 + i, \
 					game->minimap->win_height / 2 + j, \
 					color);
 			j++;
@@ -39,7 +39,7 @@ void	player_as_circle(t_game *game, int color)
 	}
 }
 
-int	draw_line(t_game *game, int color)
+int	ft_draw_line(t_game *game, int color)
 {
 	double	d_x;
 	double	d_y;
@@ -58,7 +58,7 @@ int	draw_line(t_game *game, int color)
 	pixel_dy = game->minimap->win_height / 2;
 	while (pixel > 0)
 	{
-		put_in_minimap_image(game, pixel_dx, pixel_dy, color);
+		ft_put_in_minimap_image(game, pixel_dx, pixel_dy, color);
 		pixel_dx -= d_x;
 		pixel_dy -= d_y;
 		pixel--;
@@ -66,7 +66,7 @@ int	draw_line(t_game *game, int color)
 	return (0);
 }
 
-void	put_in_minimap_image(t_game *game, int x, int y, int color)
+void	ft_put_in_minimap_image(t_game *game, int x, int y, int color)
 {
 	char	*pixel;
 
@@ -75,7 +75,7 @@ void	put_in_minimap_image(t_game *game, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-void	borders_of_minimap(t_game *game)
+void	ft_borders_of_minimap(t_game *game)
 {
 	int	i;
 	int	j;
@@ -88,14 +88,14 @@ void	borders_of_minimap(t_game *game)
 		{
 			if ((i == 0) || (i == game->minimap->win_width - 1) || (j == 0)
 				|| (j == game->minimap->win_height - 1))
-				put_in_minimap_image(game, i, j, 0x1100ff00);
+				ft_put_in_minimap_image(game, i, j, 0x1100ff00);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	length_of_square_minimap(t_game *game)
+void	ft_length_of_square_minimap(t_game *game)
 {
 	int	length_width;
 	int	length_height;

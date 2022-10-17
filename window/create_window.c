@@ -6,13 +6,13 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:07:58 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/10/08 11:40:40 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/17 07:01:15 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	empty_line(char *line)
+int	ft_empty_line(char *line)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	empty_line(char *line)
 	return (0);
 }
 
-void	count_the_map(t_game *game)
+void	ft_count_the_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ void	count_the_map(t_game *game)
 	game->mapp->map_size = game->mapp->map_x * game->mapp->map_y;
 }
 
-void	showing_3d_game(t_game *game)
+void	ft_showing_3d_game(t_game *game)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ void	showing_3d_game(t_game *game)
 			{
 				game->gamer->player_posx = IMG_H * j + IMG_H / 2;
 				game->gamer->player_posy = IMG_W * i + IMG_W / 2;
-				put_player(game);
+				ft_put_player(game);
 			}
 			j++;
 		}
@@ -76,27 +76,28 @@ void	showing_3d_game(t_game *game)
 	}
 }
 
-void	create_window(t_game *game)
+void	ft_create_window(t_game *game)
 {
-	count_the_map(game);
-	check_file_paths_images(game);
+	ft_count_the_map(game);
+	ft_check_file_paths_images(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
 		perror("Error\nFailed to create connection of display and software\n");
 		exit(EXIT_FAILURE);
 	}
-	rgb_converter(game);
-	check_direction_of_player(game);
-	initialize_dx_dy(game);
-	assign_max_fov(game);
+	ft_information_imgs(game);
+	ft_rgb_converter(game);
+	ft_check_direction_of_player(game);
+	ft_initialize_dx_dy(game);
+	ft_assign_max_fov(game);
 	game->win = mlx_new_window(game->mlx, game->mapp->win_width, \
 		game->mapp->win_height, "cub3D");
-	showing_3d_game(game);
-	mlx_hook(game->win, 2, 1L << 0, keyword_move, game);
-	mlx_hook(game->win, 4, 1L << 2, mouse_move, game);
-	mlx_hook(game->win, 17, 1L << 0, exit_function, game);
-	mlx_key_hook(game->win, keyword_move, game);
-	mlx_mouse_hook(game->win, mouse_move, game);
+	ft_showing_3d_game(game);
+	mlx_hook(game->win, 2, 1L << 0, ft_keyword_move, game);
+	mlx_hook(game->win, 4, 1L << 2, ft_mouse_move, game);
+	mlx_hook(game->win, 17, 1L << 0, ft_exit_function, game);
+	mlx_key_hook(game->win, ft_keyword_move, game);
+	mlx_mouse_hook(game->win, ft_mouse_move, game);
 	mlx_loop(game->mlx);
 }

@@ -56,7 +56,7 @@ void	ft_putnbr(int n)
 	ft_putchar((i % 10) + '0');
 }
 
-void	free_map(t_game *my_game)
+void	ft_free_map(t_game *my_game)
 {
 	int	i;
 

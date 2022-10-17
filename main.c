@@ -12,6 +12,20 @@
 
 #include "cub3d.h"
 
+void	ft_free_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	arr = NULL;
+}
+
 int	main(int ac, char **av)
 {
 	t_game		tg;
@@ -20,17 +34,17 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		if (!check_rev_file(av[1]))
-			print_error_and_exit("invalid file!");
+		if (!ft_check_rev_file(av[1]))
+			ft_print_error_and_exit("invalid file!");
 		ft_initializer(&tg);
 		py = ft_calloc(sizeof(t_player), 1);
 		mp = ft_calloc(sizeof(t_map), 1);
-		get_map(av[1], &tg);
+		ft_get_map(av[1], &tg);
 		tg.mapp = mp;
 		tg.gamer = py;
-		creation_window(&tg);
+		ft_creation_window(&tg);
 	}
 	else
 		printf("invalid number of arguments!\n");
-	return (0);
+	exit(0);
 }

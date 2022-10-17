@@ -6,13 +6,13 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:15:21 by mbadaoui          #+#    #+#             */
-/*   Updated: 2022/10/08 10:06:20 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/17 07:00:52 by mbadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_for_direction(t_game *game, char c)
+int	ft_check_for_direction(t_game *game, char c)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ int	check_for_direction(t_game *game, char c)
 	return (i);
 }
 
-void	check_direction_of_player(t_game *game)
+void	ft_check_direction_of_player(t_game *game)
 {
 	int	i;
 	int	j;
@@ -51,7 +51,7 @@ void	check_direction_of_player(t_game *game)
 		j = 0;
 		while (game->newestmap[i][j] && game->newestmap[i][j] != '\n')
 		{
-			if (check_for_direction(game, game->newestmap[i][j]))
+			if (ft_check_for_direction(game, game->newestmap[i][j]))
 			{
 				i = -1;
 				break ;
@@ -64,7 +64,7 @@ void	check_direction_of_player(t_game *game)
 	}
 }
 
-char	*image_path_finder(t_game *game, double deg_rad)
+char	*ft_image_path_finder(t_game *game, double deg_rad)
 {
 	if ((deg_rad <= M_PI_2 || deg_rad >= 3 * M_PI_2)
 		&& game->mapp->side_vertical == 1)
@@ -79,27 +79,37 @@ char	*image_path_finder(t_game *game, double deg_rad)
 	return (NULL);
 }
 
-void	information_imgs(t_game *game, char *filename)
+void	ft_information_imgs(t_game *game)
 {
-	game->text->mlx_text = mlx_xpm_file_to_image(game->mlx, filename, \
-		&game->text->img_w, &game->text->img_h);
-	if (!game->text->mlx_text)
-	{
-		perror("Error\n");
-		printf("The image path \"%s\" is not correct\n", filename);
-		exit_error(game);
-	}
-	game->text->addr_text = mlx_get_data_addr(game->text->mlx_text, \
-		&game->text->bpp_text, &game->text->line_len_text, &game->text->endian);
+	game->path->mlx_text_so = mlx_xpm_file_to_image(game->mlx, game->so_path, \
+		&game->path->img_w_so, &game->path->img_h_so);
+	game->path->addr_text_so = mlx_get_data_addr(game->path->mlx_text_so, \
+		&game->path->bpp_text_so, &game->path->line_len_text_so, \
+		&game->path->endian_so);
+	game->path->mlx_text_no = mlx_xpm_file_to_image(game->mlx, game->no_path, \
+		&game->path->img_w_no, &game->path->img_h_no);
+	game->path->addr_text_no = mlx_get_data_addr(game->path->mlx_text_no, \
+		&game->path->bpp_text_no, &game->path->line_len_text_no, \
+		&game->path->endian_no);
+	game->path->mlx_text_ea = mlx_xpm_file_to_image(game->mlx, game->ea_path, \
+		&game->path->img_w_ea, &game->path->img_h_ea);
+	game->path->addr_text_ea = mlx_get_data_addr(game->path->mlx_text_ea, \
+		&game->path->bpp_text_ea, &game->path->line_len_text_ea, \
+		&game->path->endian_ea);
+	game->path->mlx_text_we = mlx_xpm_file_to_image(game->mlx, game->we_path, \
+		&game->path->img_w_we, &game->path->img_h_we);
+	game->path->addr_text_we = mlx_get_data_addr(game->path->mlx_text_we, \
+		&game->path->bpp_text_we, &game->path->line_len_text_we, \
+		&game->path->endian_we);
 }
 
-void	put_player(t_game *game)
+void	ft_put_player(t_game *game)
 {
 	if (game->gamer->moved)
 	{
+		mlx_clear_window(game->mlx, game->win);
 		mlx_destroy_image(game->mlx, game->img->mlx_win);
 		mlx_destroy_image(game->mlx, game->minimap->new_image);
-		mlx_clear_window(game->mlx, game->win);
 	}
 	game->img->mlx_win = mlx_new_image(game->mlx, game->mapp->win_width, \
 		game->mapp->win_height);
@@ -110,6 +120,6 @@ void	put_player(t_game *game)
 	game->minimap->addr_img = mlx_get_data_addr(game->minimap->new_image, \
 		&game->minimap->bpp_mini, &game->minimap->line_len_mini, \
 		&game->minimap->endian_mini);
-	dda_algorithm(game);
-	create_minimap(game);
+	ft_dda_algorithm(game);
+	ft_create_minimap(game);
 }

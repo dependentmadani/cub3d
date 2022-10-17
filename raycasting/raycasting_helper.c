@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	initializer_rays_struct(t_game *game)
+void	ft_initializer_rays_struct(t_game *game)
 {
 	game->rays->rx = 0;
 	game->rays->ry = 0;
@@ -33,7 +33,7 @@ void	initializer_rays_struct(t_game *game)
 	game->rays->disv = 1000000;
 }
 
-void	assign_x0_y0_horizontal(t_game *game, double angle)
+void	ft_assign_x0_y0_horizontal(t_game *game, double angle)
 {
 	game->rays->h_fov = 0;
 	if (angle == 0 || angle == M_PI)
@@ -60,10 +60,10 @@ void	assign_x0_y0_horizontal(t_game *game, double angle)
 	}
 }
 
-void	check_horizontal_lines(t_game *game, double angle)
+void	ft_check_horizontal_lines(t_game *game, double angle)
 {
 	game->rays->atan = -1 / tan(angle);
-	assign_x0_y0_horizontal(game, angle);
+	ft_assign_x0_y0_horizontal(game, angle);
 	while (game->rays->h_fov < game->mapp->max_fov)
 	{
 		game->rays->mx = (int)game->rays->rx >> 6;
@@ -71,11 +71,11 @@ void	check_horizontal_lines(t_game *game, double angle)
 		game->rays->mp = game->rays->my * game->mapp->map_x + game->rays->mx;
 		if (game->rays->mp > 0
 			&& game->rays->mp < game->mapp->map_x * game->mapp->map_y
-			&& collision_with_wall(game, game->rays->rx, game->rays->ry))
+			&& ft_collision_with_wall(game, game->rays->rx, game->rays->ry))
 		{
 			game->rays->hx = game->rays->rx;
 			game->rays->hy = game->rays->ry;
-			game->rays->dish = dist(game->gamer->player_posx, \
+			game->rays->dish = ft_dist(game->gamer->player_posx, \
 				game->gamer->player_posy, game->rays->hx, game->rays->hy);
 			game->rays->h_fov = game->mapp->max_fov;
 		}
@@ -88,7 +88,7 @@ void	check_horizontal_lines(t_game *game, double angle)
 	}
 }
 
-void	assign_x0_y0_vertical(t_game *game, double angle)
+void	ft_assign_x0_y0_vertical(t_game *game, double angle)
 {
 	game->rays->v_fov = 0;
 	if (angle == 0 || angle == M_PI)
@@ -115,10 +115,10 @@ void	assign_x0_y0_vertical(t_game *game, double angle)
 	}
 }
 
-void	check_vertical_lines(t_game *game, double angle)
+void	ft_check_vertical_lines(t_game *game, double angle)
 {
 	game->rays->ntan = -tan(angle);
-	assign_x0_y0_vertical(game, angle);
+	ft_assign_x0_y0_vertical(game, angle);
 	while (game->rays->v_fov < game->mapp->max_fov)
 	{
 		game->rays->mx = (int)game->rays->rx >> 6;
@@ -126,11 +126,11 @@ void	check_vertical_lines(t_game *game, double angle)
 		game->rays->mp = game->rays->my * game->mapp->map_x + game->rays->mx;
 		if (game->rays->mp > 0
 			&& game->rays->mp < game->mapp->map_x * game->mapp->map_y
-			&& collision_with_wall(game, game->rays->rx, game->rays->ry))
+			&& ft_collision_with_wall(game, game->rays->rx, game->rays->ry))
 		{
 			game->rays->vx = game->rays->rx;
 			game->rays->vy = game->rays->ry;
-			game->rays->disv = dist(game->gamer->player_posx, \
+			game->rays->disv = ft_dist(game->gamer->player_posx, \
 				game->gamer->player_posy, game->rays->vx, game->rays->vy);
 			game->rays->v_fov = game->mapp->max_fov;
 		}

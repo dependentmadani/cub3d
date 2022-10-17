@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	assign_paths_rgbs2(t_game *my_game, char *s)
+void	ft_assign_paths_rgbs2(t_game *my_game, char *s)
 {
 	int	startend[2];
 
@@ -30,17 +30,17 @@ void	assign_paths_rgbs2(t_game *my_game, char *s)
 	}
 }
 
-void	assign_startend(int *startend, char *s)
+void	ft_assign_startend(int *startend, char *s)
 {
 	startend[0] = 2;
 	startend[1] = ft_strlen(s);
 }
 
-void	assign_paths_rgbs(t_game *my_game, char *s)
+void	ft_assign_paths_rgbs(t_game *my_game, char *s)
 {
 	int	startend[2];
 
-	assign_startend(startend, s);
+	ft_assign_startend(startend, s);
 	if (!ft_specialstrncmp(s, "NO", 2))
 	{
 		my_game->no_path = ft_substrzwina(s, startend, 1);
@@ -62,7 +62,7 @@ void	assign_paths_rgbs(t_game *my_game, char *s)
 		my_game->is_ea = 1;
 	}
 	else
-		assign_paths_rgbs2(my_game, s);
+		ft_assign_paths_rgbs2(my_game, s);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

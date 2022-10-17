@@ -60,6 +60,38 @@ typedef struct s_rays
 	double	disv;
 }				t_rays;
 
+typedef struct s_path_text
+{
+	void	*mlx_text_so;
+	char	*addr_text_so;
+	int		bpp_text_so;
+	int		line_len_text_so;
+	int		endian_so;
+	int		img_w_so;
+	int		img_h_so;
+	void	*mlx_text_no;
+	char	*addr_text_no;
+	int		bpp_text_no;
+	int		line_len_text_no;
+	int		endian_no;
+	int		img_w_no;
+	int		img_h_no;
+	void	*mlx_text_ea;
+	char	*addr_text_ea;
+	int		bpp_text_ea;
+	int		line_len_text_ea;
+	int		endian_ea;
+	int		img_w_ea;
+	int		img_h_ea;
+	void	*mlx_text_we;
+	char	*addr_text_we;
+	int		bpp_text_we;
+	int		line_len_text_we;
+	int		endian_we;
+	int		img_w_we;
+	int		img_h_we;
+}				t_path_text;
+
 typedef struct s_texture
 {
 	void	*mlx_text;
@@ -140,7 +172,6 @@ typedef struct s_minimap
 	double	start_y;
 	double	magic_x;
 	double	magic_y;
-	t_map	*map;
 }				t_minimap;
 
 typedef struct s_normsht
@@ -201,47 +232,48 @@ typedef struct s_game
 	t_win		*img;
 	t_texture	*text;
 	t_minimap	*minimap;
+	t_path_text	*path;
 }	t_game;
 
 // initializer
 
-void	ft_initializer(t_game *my_game);
+void	ft_initialize(t_game *my_game);
 
 //// -------------- map
 
 // get map
 
-void	get_map(char *av, t_game *my_game);
-char	**render_new_map(t_game *my_game);
+void	ft_get_map(char *av, t_game *my_game);
+char	**ft_render_new_map(t_game *my_game);
 
 // check paths and rgb of the map
 
-void	check_map_paths_rgbs(t_game *my_game);
-int		is_path_rgb(char *s);
-void	assign_paths_rgbs(t_game *my_game, char *s);
+void	ft_check_map_paths_rgbs(t_game *my_game);
+int		ft_is_path_rgb(char *s);
+void	ft_assign_paths_rgbs(t_game *my_game, char *s);
 
 // check map
 
-void	check_map(t_game *my_game);
-char	**check_map_map(t_game *my_game);
+void	ft_check_map(t_game *my_game);
+char	**ft_check_map_map(t_game *my_game);
 int		ft_strncmp(char *s1, char *s2, int n);
 
 // map utils
 
-void	get_longestwidth(t_game *my_game);
-char	**split_rgb(char *s, char c);
-void	fill_em(t_game *game, char *s, int *i);
-void	skip_em(char *s, int *i);
-char	*create_fill(int x);
-char	*get_space_tab(char *s, int *j);
-char	*get_other_chars(t_game *game, char *s, int *j);
-void	check_for_one_and_only(t_game *game, char c);
-void	is_path_color(t_game *game, char *t, char *s, int *i);
-void	check_alone(char **s, int i, int j);
+void	ft_get_longestwidth(t_game *my_game);
+char	**ft_split_rgb(char *s, char c);
+void	ft_fill_em(t_game *game, char *s, int *i);
+void	ft_skip_em(char *s, int *i);
+char	*ft_create_fill(int x);
+char	*ft_get_space_tab(char *s, int *j);
+char	*ft_get_other_chars(t_game *game, char *s, int *j);
+void	ft_check_for_one_and_only(t_game *game, char c);
+void	ft_is_path_color(t_game *game, char *t, char *s, int *i);
+void	ft_check_alone(char **s, int i, int j);
 
 //// -------------- utils
 
-int		check_rev_file(char *s);
+int		ft_check_rev_file(char *s);
 char	**ft_split(t_game *my_game, char *s, char c);
 int		ft_strlen(char *s);
 char	*ft_substr(char	*s, int start, int len);
@@ -254,92 +286,94 @@ void	ft_putstr_error_exit(char *s);
 void	ft_putnbr(int n);
 void	ft_putchar(char c);
 char	*ft_itoa(int n);
-void	free_map(t_game *my_game);
+void	ft_free_map(t_game *my_game);
 int		ft_strlcpy(char *dst, char *src, int dstsize);
 char	*ft_sstrcpy(char *dst, char *src);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcat(char *s1, char *s2);
 char	*ft_substrzwina(char	*s, int *startend, int index);
 int		ft_atoi(char *str);
-int		check_only_spaces(char *s);
-void	assign_paths_rgbs(t_game *my_game, char *s);
-int		is_path_rgb(char *s);
-void	deal_with_c(char *s, int *i);
+int		ft_check_only_spaces(char *s);
+void	ft_assign_paths_rgbs(t_game *my_game, char *s);
+int		ft_is_path_rgb(char *s);
+void	ft_deal_with_c(char *s, int *i);
 int		is_str_digit(char *s);
-void	chack_char(char c);
-char	*trim_last_spaces(char *s);
+void	ft_chack_char(char c);
+char	*ft_trim_last_spaces(char *s);
 
 // void	check_missin_pc(t_game *my_game);
 
-void	missin_path_color(t_game *my_game, int count);
+void	ft_missin_path_color(t_game *my_game, int count);
+void	ft_path_checker(t_game *game, char *path);
 
 // errors
 
-void	print_error_and_exit(char *s);
+void	ft_print_error_and_exit(char *s);
 
 // window
 
-void	initializer(t_game *game);
-void	creation_window(t_game *game);
-void	create_window(t_game *game);
-void	draw_2d_map(t_game *game);
+void	ft_initializer(t_game *game);
+void	ft_creation_window(t_game *game);
+void	ft_create_window(t_game *game);
+void	ft_draw_2d_map(t_game *game);
 
 // movement of player
 
-int		keyword_move(int keyword, t_game *game);
-void	movement_fun(t_game *game, char axis, int direction);
-int		mouse_move(int button, int x, int y, t_game *game);
-int		exit_function(t_game *game);
-int		winning_function(void);
-void	movement_mouse_fun(t_game *game, char axis, int direction);
-void	movement_x_left_axis_fun(t_game *game, char axis, int direction);
-void	movement_x_right_axis_fun(t_game *game, char axis, int direction);
-void	movement_y_up_axis_fun(t_game *game, char axis, int direction);
-void	movement_y_down_axis_fun(t_game *game, char axis, int direction);
+int		ft_keyword_move(int keyword, t_game *game);
+void	ft_movement_fun(t_game *game, char axis, int direction);
+int		ft_mouse_move(int button, int x, int y, t_game *game);
+int		ft_exit_function(t_game *game);
+int		ft_winning_function(void);
+void	ft_movement_mouse_fun(t_game *game, char axis, int direction);
+void	ft_movement_x_left_axis_fun(t_game *game, char axis, int direction);
+void	ft_movement_x_right_axis_fun(t_game *game, char axis, int direction);
+void	ft_movement_y_up_axis_fun(t_game *game, char axis, int direction);
+void	ft_movement_y_down_axis_fun(t_game *game, char axis, int direction);
 int		ft_specialstrncmp(char *s1, char *s2, int n);
 
 // creation of elements
 
-void	put_wall(t_game *game);
-int		draw_line(t_game *game, int color);
-void	rgb_converter(t_game *game);
-void	check_direction_of_player(t_game *game);
-void	put_player(t_game *game);
-char	*image_path_finder(t_game *game, double deg_rad);
-void	information_imgs(t_game *game, char *filename);
-void	initialize_dx_dy(t_game *game);
-void	put_in_minimap_image(t_game *game, int x, int y, int color);
-void	assign_max_fov(t_game *game);
+void	ft_put_wall(t_game *game);
+int		ft_draw_line(t_game *game, int color);
+void	ft_rgb_converter(t_game *game);
+void	ft_check_direction_of_player(t_game *game);
+void	ft_put_player(t_game *game);
+char	*ft_image_path_finder(t_game *game, double deg_rad);
+void	ft_information_imgs(t_game *game);
+void	ft_initialize_dx_dy(t_game *game);
+void	ft_put_in_minimap_image(t_game *game, int x, int y, int color);
+void	ft_assign_max_fov(t_game *game);
 
 // check functions for raycasting
 
-double	dist(double ax, double ay, double bx, double by);
-int		collision_with_wall(t_game *game, double pos_x, double pos_y);
-void	update_putting_floor(t_game *game, int pos_x, int pos_y);
-void	complete_rays_fov(t_game *game, double player_x, double player_y);
-void	dda_algorithm(t_game *game);
+double	ft_dist(double ax, double ay, double bx, double by);
+int		ft_collision_with_wall(t_game *game, double pos_x, double pos_y);
+void	ft_update_putting_floor(t_game *game, int pos_x, int pos_y);
+void	ft_complete_rays_fov(t_game *game, double player_x, double player_y);
+void	ft_dda_algorithm(t_game *game);
 
 // raycasting functions:
 
-void	assign_x0_y0_horizontal(t_game *game, double angle);
-void	check_horizontal_lines(t_game *game, double angle);
-void	assign_x0_y0_vertical(t_game *game, double angle);
-void	check_vertical_lines(t_game *game, double angle);
-void	initializer_rays_struct(t_game *game);
+void	ft_assign_x0_y0_horizontal(t_game *game, double angle);
+void	ft_check_horizontal_lines(t_game *game, double angle);
+void	ft_assign_x0_y0_vertical(t_game *game, double angle);
+void	ft_check_vertical_lines(t_game *game, double angle);
+void	ft_initializer_rays_struct(t_game *game);
 
 // minimap functions
 
-void	create_minimap(t_game *game);
-int		draw(t_game *game, double end_x, double end_y);
-void	player_as_circle(t_game *game, int color);
-void	borders_of_minimap(t_game *game);
-void	length_of_square_minimap(t_game *game);
-int		texture_minimap(t_game *game, int x, int y);
-int		check_player_map(t_game *game, int x, int y);
-void	check_file_paths_images(t_game *game);
-int		collision_special_case(t_game *game, double posx, double posy, int dir);
+void	ft_create_minimap(t_game *game);
+int		ft_draw(t_game *game, double end_x, double end_y);
+void	ft_player_as_circle(t_game *game, int color);
+void	ft_borders_of_minimap(t_game *game);
+void	ft_length_of_square_minimap(t_game *game);
+int		ft_texture_minimap(t_game *game, int x, int y);
+int		ft_check_player_map(t_game *game, int x, int y);
+void	ft_check_file_paths_images(t_game *game);
+int		ft_collision_special_case(t_game *game, double posx, double posy, \
+			int dir);
 
 // exit function
-void	exit_error(t_game *game);
+void	ft_exit_error(t_game *game);
 
 #endif

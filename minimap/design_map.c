@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-int	color_minimap(t_game *game, int x, int y)
+int	ft_color_minimap(t_game *game, int x, int y)
 {
 	int	color;
 
@@ -29,7 +29,7 @@ int	color_minimap(t_game *game, int x, int y)
 	if (game->newestmap[(int)((game->minimap->magic_y) / 10 + \
 		(y - game->minimap->start_y) / 10)][(int)((game->minimap->magic_x) / \
 		10 + (x - game->minimap->start_x) / 10)] == '0' \
-		|| check_player_map(game, (game->minimap->magic_x) / 10 + \
+		|| ft_check_player_map(game, (game->minimap->magic_x) / 10 + \
 		(x - game->minimap->start_x) / 10, (game->minimap->magic_y) / 10 + \
 		(y - game->minimap->start_y) / 10))
 		color = 0x808080;
@@ -40,7 +40,7 @@ int	color_minimap(t_game *game, int x, int y)
 	return (color);
 }
 
-void	put_minimap(t_game *game)
+void	ft_put_minimap(t_game *game)
 {
 	int		x;
 	int		y;
@@ -60,15 +60,15 @@ void	put_minimap(t_game *game)
 		x = (int)game->minimap->start_x;
 		while (x < game->minimap->win_width)
 		{
-			color = color_minimap(game, x, y);
-			put_in_minimap_image(game, x, y, color);
+			color = ft_color_minimap(game, x, y);
+			ft_put_in_minimap_image(game, x, y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	mini_moving_map(t_game *game)
+void	ft_mini_moving_map(t_game *game)
 {
 	double	i;
 	double	j;
@@ -93,16 +93,16 @@ void	mini_moving_map(t_game *game)
 		j = 0.0;
 	game->minimap->start_x = i;
 	game->minimap->start_y = j;
-	put_minimap(game);
+	ft_put_minimap(game);
 }
 
-void	create_minimap(t_game *game)
+void	ft_create_minimap(t_game *game)
 {
-	borders_of_minimap(game);
-	mini_moving_map(game);
-	length_of_square_minimap(game);
-	player_as_circle(game, 0x0000ff);
-	draw_line(game, 0xff0000);
+	ft_borders_of_minimap(game);
+	ft_mini_moving_map(game);
+	ft_length_of_square_minimap(game);
+	ft_player_as_circle(game, 0x0000ff);
+	ft_draw_line(game, 0xff0000);
 	mlx_put_image_to_window(game->mlx, game->win, \
 		game->minimap->new_image, 10, 10);
 }

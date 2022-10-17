@@ -12,14 +12,14 @@
 
 #include "../cub3d.h"
 
-void	check_alone(char **s, int i, int j)
+void	ft_check_alone(char **s, int i, int j)
 {
 	if ((j >= ft_strlen(s[i - 1]) && s[i - 1])
 		|| (s[i + 1] && j >= ft_strlen(s[i + 1])))
-		print_error_and_exit("invalid map");
+		ft_print_error_and_exit("invalid map");
 }
 
-void	skippp_cp(t_game *my_game, char **t, int *i)
+void	ft_skippp_cp(t_game *my_game, char **t, int *i)
 {
 	while ((*i) < 6)
 	{
@@ -28,19 +28,19 @@ void	skippp_cp(t_game *my_game, char **t, int *i)
 	}
 }
 
-char	**check_map_map(t_game *my_game)
+char	**ft_check_map_map(t_game *my_game)
 {
 	char	**t;
 	int		i;
 
 	t = (char **)ft_calloc(sizeof(char *), my_game->num_rows + 1);
 	i = 0;
-	skippp_cp(my_game, t, &i);
+	ft_skippp_cp(my_game, t, &i);
 	while (my_game->map[i])
 	{
 		if (my_game->map[i][0] == '\0' || (my_game->map[i][0] == '\n'
 			&& ft_strlen(my_game->map[i]) >= 1 && my_game->map[i][1] == '\0'))
-			print_error_and_exit("invalid map!");
+			ft_print_error_and_exit("invalid map!");
 		if (my_game->map[i][0] == '\n')
 			t[i] = ft_substr(my_game->map[i], 1, \
 				ft_strlen(my_game->map[i]) - 1);

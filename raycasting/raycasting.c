@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-double	check_angle(double angle)
+double	ft_check_angle(double angle)
 {
 	if (angle < 0)
 		angle += 2 * M_PI;
@@ -21,7 +21,7 @@ double	check_angle(double angle)
 	return (angle);
 }
 
-double	distance_player_wall(t_game *game)
+double	ft_distance_player_wall(t_game *game)
 {
 	double	dis_t;
 
@@ -42,7 +42,7 @@ double	distance_player_wall(t_game *game)
 	return (dis_t);
 }
 
-void	get_wall_length(t_game *game, double disT, double angle)
+void	ft_get_wall_length(t_game *game, double disT, double angle)
 {
 	double	ca;
 	double	ratio;
@@ -63,38 +63,34 @@ void	get_wall_length(t_game *game, double disT, double angle)
 	game->rays->dish = 1000000;
 }
 
-void	create_image_in_window(t_game *game)
+void	ft_create_image_in_window(t_game *game)
 {
 	game->mapp->position_map_x = game->gamer->player_posx / 64;
 	game->mapp->position_map_y = game->gamer->player_posy / 64;
 	mlx_put_image_to_window(game->mlx, game->win, game->img->mlx_win, 0, 0);
 }
 
-void	dda_algorithm(t_game *game)
+void	ft_dda_algorithm(t_game *game)
 {
 	int		r;
 	double	ra;
 	double	dis_t;
-	char	*path;
 
-	initializer_rays_struct(game);
+	ft_initializer_rays_struct(game);
 	ra = game->gamer->player_angle - DR * 30;
-	ra = check_angle(ra);
+	ra = ft_check_angle(ra);
 	r = 0;
 	while (r < game->mapp->win_width)
 	{
-		check_horizontal_lines(game, ra);
-		check_vertical_lines(game, ra);
-		dis_t = distance_player_wall(game);
-		get_wall_length(game, dis_t, ra);
-		path = image_path_finder(game, ra);
-		if (r == 0 || path != game->text->path_img)
-			information_imgs(game, path);
-		game->text->path_img = path;
-		draw(game, r, game->mapp->length_wall);
+		ft_check_horizontal_lines(game, ra);
+		ft_check_vertical_lines(game, ra);
+		dis_t = ft_distance_player_wall(game);
+		ft_get_wall_length(game, dis_t, ra);
+		ft_path_checker(game, ft_image_path_finder(game, ra));
+		ft_draw(game, r, game->mapp->length_wall);
 		ra += DR / (game->mapp->win_width / 60);
-		ra = check_angle(ra);
+		ra = ft_check_angle(ra);
 		r++;
 	}
-	create_image_in_window(game);
+	ft_create_image_in_window(game);
 }

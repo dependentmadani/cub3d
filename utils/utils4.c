@@ -53,20 +53,20 @@ int	ft_atoi(char	*str)
 	{
 		res = res * 10 + str[i] - '0';
 		if (res < temp)
-			print_error_and_exit("invalid rgb values");
+			ft_print_error_and_exit("invalid rgb values");
 		temp = res;
 		i++;
 	}
 	return (res * sign);
 }
 
-void	is_path_color(t_game *game, char *t, char *s, int *i)
+void	ft_is_path_color(t_game *game, char *t, char *s, int *i)
 {
 	int	temp;
 
-	if (is_path_rgb(t))
+	if (ft_is_path_rgb(t))
 	{
-		assign_paths_rgbs(game, t);
+		ft_assign_paths_rgbs(game, t);
 		if (game->p_valid == 5)
 		{
 			while (s[*i] == '\n' && s[*i] != '\0')
@@ -75,7 +75,7 @@ void	is_path_color(t_game *game, char *t, char *s, int *i)
 			while (s[temp] != '\0')
 			{
 				if (s[temp] == '\n')
-					print_error_and_exit("invalid map");
+					ft_print_error_and_exit("invalid map");
 				if (s[temp] == '1')
 					break ;
 				temp++;
@@ -85,7 +85,7 @@ void	is_path_color(t_game *game, char *t, char *s, int *i)
 	}
 }
 
-void	deal_with_c(char *s, int *i)
+void	ft_deal_with_c(char *s, int *i)
 {
 	if (s[*i + 1] != '\0')
 		*i += 2;

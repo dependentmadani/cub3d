@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-int	check_only_spaces(char *s)
+int	ft_check_only_spaces(char *s)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	check_only_spaces(char *s)
 	return (0);
 }
 
-char	*trim_last_spaces(char *s)
+char	*ft_trim_last_spaces(char *s)
 {
 	char	*t;
 	int		i;
@@ -64,10 +64,10 @@ int	ft_specialstrncmp(char *s1, char *s2, int n)
 	return (0);
 }
 
-void	missin_path_color(t_game *my_game, int count)
+void	ft_missin_path_color(t_game *my_game, int count)
 {
 	if (my_game->is_no != 1 || my_game->is_so != 1 || my_game->is_we != 1
 		|| my_game->is_ea != 1 || my_game->is_f != 1 || my_game->is_c != 1)
-		print_error_and_exit("missing paths or colors!");
+		ft_print_error_and_exit("missing paths or colors!");
 	my_game->num_rows = count;
 }

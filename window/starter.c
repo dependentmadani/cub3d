@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	check_file_paths_images_2(t_game *game, int *i)
+void	ft_check_file_paths_images_2(t_game *game, int *i)
 {
 	int	j;
 
@@ -36,11 +36,12 @@ void	check_file_paths_images_2(t_game *game, int *i)
 		close(j);
 }
 
-void	check_file_paths_images(t_game *game)
+void	ft_check_file_paths_images(t_game *game)
 {
 	int	i;
 	int	j;
 
+	i = 0;
 	j = open(game->no_path, O_RDONLY);
 	if (j == -1)
 	{
@@ -58,13 +59,13 @@ void	check_file_paths_images(t_game *game)
 		i = -1;
 	}
 	if (j != -1)
-		close(i);
-	check_file_paths_images_2(game, &i);
+		close(j);
+	ft_check_file_paths_images_2(game, &i);
 	if (i == -1)
 		exit(EXIT_FAILURE);
 }
 
-void	initialize_dx_dy(t_game *game)
+void	ft_initialize_dx_dy(t_game *game)
 {
 	if (game->gamer->player_angle == 0 || game->gamer->player_angle == M_PI)
 	{
@@ -83,13 +84,13 @@ void	initialize_dx_dy(t_game *game)
 	}
 }
 
-void	initializer(t_game *game)
+void	ft_initialize(t_game *game)
 {
 	game->img = ft_calloc(1, sizeof(t_win));
 	game->text = ft_calloc(1, sizeof(t_texture));
 	game->minimap = ft_calloc(1, sizeof(t_minimap));
 	game->rays = ft_calloc(1, sizeof(t_rays));
-	game->minimap->map = game->mapp;
+	game->path = ft_calloc(1, sizeof(t_path_text));
 	game->mapp->win_width = 1200;
 	game->mapp->win_height = 800;
 	game->minimap->win_width = game->mapp->win_width / 4;
@@ -111,8 +112,8 @@ void	initializer(t_game *game)
 	game->mapp->map_size = 0;
 }
 
-void	creation_window(t_game *game)
+void	ft_creation_window(t_game *game)
 {
-	initializer(game);
-	create_window(game);
+	ft_initialize(game);
+	ft_create_window(game);
 }
