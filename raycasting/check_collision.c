@@ -26,7 +26,7 @@ int	ft_collision_special_case_1(t_game *game, int pos_x, int pos_y, int direct)
 			|| (game->gamer->player_angle > 3 * M_PI_2 && direct == 2))
 			return (1);
 	}
-	else if (game->newestmap[pos_y + 1][pos_x] == '1'
+	if (game->newestmap[pos_y + 1][pos_x] == '1'
 		&& game->newestmap[pos_y][pos_x - 1] == '1')
 	{
 		if ((game->gamer->player_angle < M_PI_2 && direct == 2)
@@ -55,7 +55,7 @@ int	ft_collision_special_case_2(t_game *game, int pos_x, int pos_y, int direct)
 			|| (game->gamer->player_angle > 3 * M_PI_2 && direct == 1))
 			return (1);
 	}
-	else if (game->newestmap[pos_y - 1][pos_x] == '1'
+	if (game->newestmap[pos_y - 1][pos_x] == '1'
 		&& game->newestmap[pos_y][pos_x + 1] == '1')
 	{
 		if ((game->gamer->player_angle < M_PI_2 && direct == 1)
