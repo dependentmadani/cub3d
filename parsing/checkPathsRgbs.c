@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:45 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/16 13:22:51 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:02:12 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_rgb_are_valid(t_game *my_game)
 	int	x;
 
 	x = -1;
+	check_vis(my_game->f_path, my_game->c_path);
 	my_game->char_f_rgb = ft_split_rgb(my_game->f_path, ',');
 	my_game->char_c_rgb = ft_split_rgb(my_game->c_path, ',');
 	if (!my_game->char_f_rgb || !my_game->char_c_rgb)

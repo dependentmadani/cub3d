@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:10:08 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/16 14:58:02 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:02:28 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,32 @@ int	ft_is_path_rgb(char *s)
 		|| !ft_specialstrncmp(s, "F", 1) || !ft_specialstrncmp(s, "C", 1))
 		return (1);
 	return (0);
+}
+
+void	check_vis(char *sf, char *sc)
+{
+	int	i;
+	int	sfv;
+	int	scv;
+
+	i = 0;
+	sfv = 0;
+	scv = 0;
+	while (sf[i])
+	{
+		if (sf[i] == ',')
+			sfv++;
+		i++;
+	}
+	i = 0;
+	while (sc[i])
+	{
+		if (sc[i] == ',')
+			scv++;
+		i++;
+	}
+	if (sfv != 2 || scv != 2)
+		ft_print_error_and_exit("invalid rgb syntax!");
 }
 
 int	ft_strlen(char *s)

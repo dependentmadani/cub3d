@@ -6,7 +6,7 @@
 /*   By: ael-asri <ael-asri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:13:03 by ael-asri          #+#    #+#             */
-/*   Updated: 2022/10/16 14:58:07 by ael-asri         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:02:44 by ael-asri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ char	**ft_render_new_map(t_game *my_game);
 void	ft_check_map_paths_rgbs(t_game *my_game);
 int		ft_is_path_rgb(char *s);
 void	ft_assign_paths_rgbs(t_game *my_game, char *s);
+void	check_vis(char *sf, char *sc);
 
 // check map
 
